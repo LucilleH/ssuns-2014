@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Delegate list and scholarship applications</h2>
+
+<table>
+	<thead>
+		<tr>
+			<th>Delegate name</th>
+			<th>School</th>
+			<th>Scholarship application</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for ass, sch in scholarship_list %}
+		<tr>
+			<td>{{ ass.delegate_name }}</td>
+			<td>{{ ass.school }}</td>
+			<td><strong><a href="/{{ sch.scholarship_individual }}" target="_blank">view</a></strong></td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+{% endblock %}

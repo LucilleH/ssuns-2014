@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form method="post" action="{% url submit_signup %}">
+	<fieldset>
+		<p>Interested in attending SSUNS? Sign up for our listserv here:</p>
+		<p>For further details please contact our Charge d'Affairs at <a href="mailto:schools@ssuns.org">schools@ssuns.org.</a></p>
+		<dl>
+			<dt>
+				<label for="id_name">Name :</label>
+				{% csrf_token %}
+				{{ form.name }}
+				{% if form.name.errors %}
+					<p class="errors">Please enter your name.</p>
+				{% endif %}
+			</dt>
+			<dd>
+				<label for="id_email"><b>Email :</b></label>
+				{{ form.email }}
+				{% if form.email.errors %}
+					<p class="errors">Please enter an unique email.</p>
+				{% endif %}
+			<input type="submit" name="submit" value="Sign up" />
+			</dd>
+		</dl>
+	</fieldset>
+</form>
+
+</div>
+{% endblock %}

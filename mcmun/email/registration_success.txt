@@ -1,0 +1,9 @@
+Dear %(first_name)s,
+
+Thank you for registering for SSUNS 2013! Once your registration for %(school_name)s has been approved by our Chargee d'Affaires, Serena Wang, you will promptly receive an email containing your invoice as well as payment instructions on the method you selected. 
+
+If you have any questions about the registration process, require a visa/invitation letter, or wish to correct an error in your registration, please contact schools@ssuns.org.
+
+Looking forward to seeing you in November,
+
+the SSUNS 2013 Secretariat

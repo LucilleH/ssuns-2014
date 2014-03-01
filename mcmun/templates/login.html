@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Log in</h1>
+
+<p>When your registration has been approved, you will receive an email containing your username (the email you entered when registering) and a randomly-generated password. You will not be able to log in until you have received such an email.</p>
+
+<form method="post" action="{% url "login" %}">
+	{% if form.errors %}
+	<fieldset class="errors">
+		<p>Your username and password didn't match. Please try again.</p>
+	</fieldset>
+	{% endif %}
+
+	{% csrf_token %}
+	<table style="width:400px">
+	<tr>
+		<td style="width:200px"><label for="id_username">Email address</label></td>
+		<td style="width:200px">{{ form.username }}</td>
+	</tr>
+	<tr>
+		<td>{{ form.password.label_tag }}</td>
+		<td>{{ form.password }}</td>
+	</tr>
+	</table>
+
+	<input type="submit" value="login" />
+	<input type="hidden" name="next" value="{{ next }}" />
+</form>
+
+{% endblock %}

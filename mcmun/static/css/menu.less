@@ -1,0 +1,48 @@
+#menu {
+	z-index: 4;
+	position:relative;
+	margin-bottom:20px;
+	width:100%;
+	height:35px;
+	margin-left:auto; 
+	margin-right:auto;
+	.grey-bg(@menuBgRgb, @menuBgAlpha);
+	text-align: center;
+	color: @menuText;
+	ul {
+		list-style-type: none;
+	}
+	> ul li {
+		.inline-block;
+		a {
+			display: block;
+			height: 35px;
+			padding: 0 20px;
+			font-size: 1.5em;
+			line-height: 35px;
+			#raleway;
+			font-weight: bold;
+			text-transform: lowercase;
+			text-decoration: none;
+			color: #FFF;
+			&:hover {
+				.grey-bg(@menuHoverBgRgb, @menuHoverBgAlpha);
+			}
+		}
+		ul {
+			display: none;
+		}
+		&:hover > ul, > ul:hover {
+			display: block;
+			position: absolute;
+			top: 35px;
+		}
+		> ul li {
+			display: block;
+			background: @menuDropdownBg;
+			text-align: left;
+			font-size: 9px;
+			margin-left: -40px;	
+		}
+	}
+}

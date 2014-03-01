@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ page.long_name }}</h1>
+
+<p>Thank you for applying. We will contact you with the results of your application once it has been reviewed.</p>
+
+<p><a href="{{ committee.get_absolute_url }}">Return to committee page</a></p>
+
+{% endblock %}

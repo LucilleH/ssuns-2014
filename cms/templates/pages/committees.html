@@ -1,0 +1,43 @@
+<div id="carousel">
+	<div class="slideshow" style="position:relative">
+		<img src="{{ STATIC_URL }}img/rsz_front1.jpg" style="position:relative" />
+		<img src="{{ STATIC_URL }}img/rsz_front2.jpg" style="display:none;position:relative"/>
+		<img src="{{ STATIC_URL }}img/rsz_front3.jpg" style="display:none;position:relative"/>
+
+	</div>
+</div>
+<div class="twitter">
+	<a class="twitter-timeline" href="https://twitter.com/search?q=%23SSUNS" width="250px" height="300px" data-widget-id="321114393083518976">Tweets about "#SSUNS"</a>
+	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</div>
+<div>
+	{% for page in pages %}
+		{% if page.short_name = "committees" %}
+			{% if page.subpages.all %}
+			<ul>
+				{% for subpage in page.subpages.all %}
+				<li>
+					<a href="/{{ subpage.short_name }}">{{ subpage.long_name }}</a>
+				</li>
+				{% endfor %}
+			</ul>
+		{% endif %}
+	{% endif %}
+{% endfor %}
+</div>
+<div class="announcement">
+	<div id="staffing-signup">
+		<p><b>Any announcement goes here</b></p>
+		<p>Interested in staffing for SSUNS? Sign up for our staff listserv here:</p>
+		<p>For further details please contact our Chief of Staff at staff@ssuns.org.</p>
+		<p/>
+		<form method="post" action="{% url submit_signup 'staff' %}">
+			{% csrf_token %}
+			<input type="text" name="email" placeholder="example@example.com" />
+			<input type="text" name="name" placeholder="First Last" />
+			<input type="submit" name="submit" value="Sign up" />
+		</form>
+
+	</div>
+</div>
+

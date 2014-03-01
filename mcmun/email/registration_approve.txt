@@ -1,0 +1,5 @@
+%(school_name)s has been registered by %(first_name)s %(last_name)s (%(email)s).
+
+You can approve this school's registration at:
+
+%(admin_url)smcmun/registeredschool/%(school_id)s/

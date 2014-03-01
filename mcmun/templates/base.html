@@ -1,0 +1,62 @@
+<doctype html>
+<html>
+<head>
+	<meta name="description" content="Secondary Schools' United Nations Symposium, November 6th - 9th. Organised by McGill international relations organisation (IRSAM)." />
+	<meta name="og:image" content="{{ STATIC_URL }}img/logoWhiteLeaves.png" />
+
+	{% if debug %}
+	<link rel="stylesheet/less" type="text/css" href="{{ STATIC_URL }}css/mcmun.less" />
+	<script src="{{ STATIC_URL }}js/less.min.js"></script>
+	{% else %}
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/mcmun.css" />
+	{% endif %}
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script src="{{ STATIC_URL }}js/jquery.cycle.all.js"></script>
+	<script src="{{ STATIC_URL }}js/mcmun.js"></script>
+	<title>SSUNS 2014 :: {{ page.long_name }}</title>
+	<!-- make sure facebook has the right title and webpage description -->
+	<!-- You can view this repository's source on Github:
+	https://github.com/LucilleH/ssuns-2014 -->
+</head>
+<body>
+	<div id="header">
+		<div id="masthead">
+			<img class="logoImg" src="{{ STATIC_URL }}img/logoWhiteLeaves.png" width="200px"/>
+			<center>
+				<div class="title">
+					<span class="top">Secondary Schools' United Nations Symposium</span><br />
+					<span class="middle">SSUNS 2014</span><br />
+					<span class="bottom">November 6th - 9th, Montreal</span>
+				</div>
+			<div class="social-media">
+				<a href="https://twitter.com/ssuns_mtl" target="_blank" class="twitter" title="Find us on Twitter">&nbsp;</a>
+				<a href="https://facebook.com/officialssuns" target="_blank" class="facebook" title="Find us on Facebook">&nbsp;</a>
+				<a href="mailto:info@ssuns.org" class="email" title="Email us at info@ssuns.org">&nbsp;</a>&nbsp;
+			</div>
+
+			</center>
+		</div>
+	
+
+	</div>
+	<div id="menu">
+		<ul>
+			{% for p in pages %}
+				<li><a href="/{{ p.short_name }}">{{ p.long_name }}</a>
+					{% if p.subpages.all %}
+						<ul>
+							{% for subpage in p.subpages.all %}
+								<li><a href="/{{ subpage.short_name }}">{{ subpage.long_name }}</a></li>
+							{% endfor %}
+						</ul>
+					{% endif %}
+				</li>
+			{% endfor %}
+		</ul>
+	</div>
+
+	<div id="content">
+		{% block content %}{% endblock %}
+	</div>
+</body>
+</html>

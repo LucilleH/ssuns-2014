@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Survey Results</h1>
+<table>
+	<thead>
+		<tr>
+			<th>Correct Answers (from Q1 to Q40)</th>
+			{% for answer in survey_answer %}
+				<th>Q{{ forloop.counter }}<br />{{ answer }}</th>
+			{% endfor %}
+			<th>Correct answers (out of 40)</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for sur in survey_result %}
+		<tr>
+			<td>{{ sur.first_name }}, {{ sur.last_name }}</td>
+			<td>{{ sur.q1 }}</td>
+			<td>{{ sur.q2 }}</td>
+			<td>{{ sur.q3 }}</td>
+			<td>{{ sur.q4 }}</td>
+			<td>{{ sur.q5 }}</td>
+			<td>{{ sur.q6 }}</td>
+			<td>{{ sur.q7 }}</td>
+			<td>{{ sur.q8 }}</td>
+			<td>{{ sur.q9 }}</td>
+			<td>{{ sur.q10 }}</td>
+			<td>{{ sur.q11 }}</td>
+			<td>{{ sur.q12 }}</td>
+			<td>{{ sur.q13 }}</td>
+			<td>{{ sur.q14 }}</td>
+			<td>{{ sur.q15 }}</td>
+			<td>{{ sur.q16 }}</td>
+			<td>{{ sur.q17 }}</td>
+			<td>{{ sur.q18 }}</td>
+			<td>{{ sur.q19 }}</td>
+			<td>{{ sur.q20 }}</td>
+			<td>{{ sur.q21 }}</td>
+			<td>{{ sur.q22 }}</td>
+			<td>{{ sur.q23 }}</td>
+			<td>{{ sur.q24 }}</td>
+			<td>{{ sur.q25 }}</td>
+			<td>{{ sur.q26 }}</td>
+			<td>{{ sur.q27 }}</td>
+			<td>{{ sur.q28 }}</td>
+			<td>{{ sur.q29 }}</td>
+			<td>{{ sur.q30 }}</td>
+			<td>{{ sur.q31 }}</td>
+			<td>{{ sur.q32 }}</td>
+			<td>{{ sur.q33 }}</td>
+			<td>{{ sur.q34 }}</td>
+			<td>{{ sur.q35 }}</td>
+			<td>{{ sur.q36 }}</td>
+			<td>{{ sur.q37 }}</td>
+			<td>{{ sur.q38 }}</td>
+			<td>{{ sur.q39 }}</td>
+			<td>{{ sur.q40 }}</td>
+			<td>{{ sur.num_correct }}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+{% endblock %} 

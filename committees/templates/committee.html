@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% load markup %}
+
+{% block content %}
+<a href="/committees-list">Go back</a>
+<div class="center-align">
+	<img src="{{ STATIC_URL }}img/committees/{{ committee.slug }}.jpg" />
+</div>
+
+<br />
+
+<h1>{{ committee.name }}</h1>
+
+{% if is_dais %}
+<div class="center-align">
+	<big><a href="{% url list_papers committee.slug %}">View position papers</a></big>
+</div>
+{% endif %}
+
+{{ committee.description|markdown:"footnotes,def_list,tables" }}
+
+<h2>Dais</h2>
+
+<table>
+	<tr>
+		{% for dais in committee.committee_dais_set.all %}
+		<td>
+			<b>{{ dais.name }}</b><p />
+			{{ dais.position }} <p />
+			<img src="{{ STATIC_URL }}img/dais/{{ committee.slug }}/{{ dais.pic_name }}" width="150px" height="225px"/>
+		</td>
+		{% endfor %}
+	</tr>
+</table>
+
+{% if bg_uploaded %}
+	<h2>Background Guide</h2>
+	{% for bg in bgset %}
+		<a href="{{ STATIC_URL }}files/bg/{{ bg.bg_link }}.pdf" target="_blank">Download {{ bg.bg_name }}</a><br />
+	{% endfor %}
+{% endif %}
+{% endblock %}

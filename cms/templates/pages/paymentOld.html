@@ -1,0 +1,115 @@
+{% load extras %}
+
+<ul class="horizontal">
+	<li>Navigation:</li>
+	<li><a href="#registration-fee">Registration fee</a> ::</li>
+	<li><a href="#payment-options">Payment options</a> ::</li>
+	<li><a href="#payment-methods">Payment methods</a> ::</li>
+	<li><a href="#refund-policy">Refund policy</a></li>
+</ul>
+
+<h2 id="registration-fee">Registration fee</h2>
+
+<p>The McMUN registration fee consists of two parts: the club registration fee, and the per-delegate fee.</p>
+
+<h3 id="club-registration-fee">Club registration fee</h3>
+
+<p>A one-time, non-refundable fee of $75 per delegation, regardless of delegation size.</p>
+
+<h3>Per-delegate fee</h3>
+
+<table>
+	<thead>
+		<tr>
+			<th>Priority North American registration</th>
+			<th>Regular North American registration</th>
+			<th>International registration</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>September 1 - October 1</td>
+			<td>October 2 - November 18</td>
+			<td>August 1 - November 18</td>
+		</tr>
+		<tr>
+			<td>$80</td>
+			<td>$95</td>
+			<td>$50</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>Please note that both American and overseas schools pay in USD and Canadian schools pay in Canadian dollars. Only schools located outside the US and Canada are considered to be international.</p>
+
+<h3>Fee calculator</h3>
+
+<p>Select the number of delegates you have, and when you will be registering, to find out your total fees. (See the chart above for the difference between priority and regular registration)</p>
+
+<br />
+<form method="post" action="" id="fee-calculator">
+	<label for="num-delegates">Number of delegates</label>
+	<select id="num-delegates">
+		<option value="0">Select a number</option>
+		{% for i in 60|get_range %}
+			<option value="{{ i }}">{{ i }}</option>
+		{% endfor %}
+	</select>
+	<label for="registration-type">Registration type</label>
+	<select id="registration-type">
+		<option value="">Select a registration type</option>
+		<option value="priority">Priority North American registration</option>
+		<option value="regular">Regular North American registration</option>
+		<option value="international">International registration</option>
+	</select>
+</form>
+<p id="fee-information"></p>
+<noscript>
+	<p>Please enable Javascript.</p>
+</noscript>
+
+<h2 id="payment-options">Payment options</h2>
+
+<p>Delegations may pay either in full or in a tiered system, consisting of a deposit payment and remainder payment.</p>
+
+<p>The deposit includes the club registration fee and 50% of the total per-delegate fee (75 + 0.5*[per-delegate fee]*[number of delegates]).</p>
+
+<p><strong>Priority registration</strong>: deposit received by October 1<sup>st</sup>.</p>
+
+<p><strong>Regular and international registration</strong>: deposit received by November 18<sup>th</sup>.</p>
+
+<p>All remainder payments must be received by December 1<sup>st</sup>.</p>
+
+<h2 id="payment-methods">Payment methods</h2>
+
+<p>The preferred payment method is through online payment (via Payment). You can choose your desired payment method when registering. Note that there is a 3% convenience fee for online payment for schools that have registered after September 1st. We also accept cheques sent via courier delivery or regular mail, at the following addresses:</p>
+
+<table>
+	<thead>
+		<tr>
+			<th>Courier delivery</th>
+			<th>Regular mail</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>McGill Model United Nations Assembly<br />c/o IRSAM Inc.<br />3480 rue McTavish, Suite 410<br />Montreal, Quebec, Canada<br />H3A 1X9</td>
+			<td>IRSAM<br />PO Box 55 Montreal Succursale B<br />Montreal, Quebec H3B 3J5</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>Please make all funds payable to IRSAM (International Relations Students’ Association of McGill).</p>
+
+<h2 id="refund-policy">Refund policy</h2>
+
+<p>The $75 club registration fee is a one-time non-refundable fee per delegation.</p>
+
+<p>If you decide not to join us at McMUN 2013:</p>
+
+<ul>
+	<li>Before November 18th, your refund will be the payment received minus the <a href="#club-registration-fee">club registration fee</a>.</li>
+	<li>Before January 1st, your refund will be the payment received minus the deposit.</li>
+</ul>
+
+<p>Please note that after January 1st there are no refunds under any circumstances.</p>

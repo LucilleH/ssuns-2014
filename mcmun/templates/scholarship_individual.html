@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<p>The deadline for this scholarship application is <strong>November 1<sup>st</sup></strong>.</p>
+
+<p>Scholarships will be distributed to fully registered delegations based on genuine financial need, demonstrated efforts at fundraising destined for covering the costs of attending McMUN as well as the size and costs faced by the attending delegation.</p>
+
+<p>Please note that, in order to be eligible for the scholarship, your delegation needs to be fully registered (with the {% if school.use_tiered %}deposit{% else %}full payment{% endif %} sent) by {% if school.use_priority %}October 1<sup>st</sup>, the deadline for priority{% else %}November 18<sup>st</sup>, the deadline for regular{% endif %} registration. Delegations selected to receive the scholarship will be notified by email by December 1<sup>st</sup>. The amount of the scholarship can be collected in the form of a cheque at the time of the conference.</p>
+
+<p>If you have any questions regarding the scholarship application or selection process, please do not
+hesitate to contact our Chargé D’Affaires, Daniel Stysis, at charge@mcmun.org.</p>
+
+<form method="post" id="scholarship-form">
+	<fieldset class="hidden">
+		{% csrf_token %}
+	</fieldset>
+
+	{% if form.errors %}
+	<fieldset class="errors">
+		<p>There were some errors with your application! Please fix them below.</p>
+	</fieldset>
+	{% endif %}
+
+	<fieldset>
+		<legend>Scholarship Award Type</legend>
+		<dl>
+			<dt>
+				<label for="id_scholarship_type">Choose the type of scholarship you are applying: </label>
+			</dt>
+			<dd>
+				{{ form.new_school }} Award type: New School (Awarded to a school that has not attended SSUNS within the last 2 years)
+				{% if form.new_school.errors %}
+					<p class="errors">How can you mess this up? It's a checkbox.</p>
+				{% endif %}
+
+				{% if school.is_international %}
+					{{ form.international }} Award type: International School (Awarded to a school outside the U.S. or Canada)
+					{% if form.international.errors %}
+						<p class="errors">How can you mess this up? It's a checkbox.</p>
+					{% endif %}
+				{% endif %}
+				
+			</dd>
+			
+			<dt>
+				<label>If your school has previously received a SSUNS Scholarship, please indicate the year and the amount.</label>
+			</dt>
+			<dd>
+				<label for="id_previous_scholarship_year">Year:</label> {{ form.previous_scholarship_year }}
+				<label for="id_previous_scholarship_amount">Amount:</label> {{ form.previous_scholarship_amount }}
+				{% if form.previous_scholarship_amount.errors or form.previous_scholarship_year.errors %}
+					<p class="errors">Please enter the year and the amount (numbers).</p>
+				{% endif %}
+			</dd>
+		</dl>
+	</fieldset>
+
+	<fieldset>
+		<legend>Short-answer questions</legend>
+		<dl>
+			<dt>
+				<label for="id_impact_on_delegation">What impact would the SSUNS Scholarship have on your school's delegation?</label>
+			</dt>
+			<dd>
+				{{ form.impact_on_delegation }}
+				{% if form.impact_on_delegation.errors %}
+					<p class="errors">Please explain the impact that scholarship would have on your delegation.</p>
+				{% endif %}
+			</dd>
+
+			<dt>
+				<label for="id_principles_of_organisation">Please explain the principles or intent of the organization you represent, previous SSUNS experience, its involvement within the SSUNS community and any other activities it may be
+involved in.</label>
+			</dt>
+			<dd>
+				{{ form.principles_of_organisation }}
+				{% if form.principles_of_organisation.errors %}
+					<p class="errors">This field is required.</p>
+				{% endif %}
+			</dd>
+
+			<dt>
+				<label for="id_importance_of_ssuns">Please explain the importance of attending SSUNS 2013 as well as of receiving a SSUNS Scholarship.</label>
+			</dt>
+			<dd>
+				{{ form.importance_of_ssuns }}
+				{% if form.importance_of_mcmun.errors %}
+					<p class="errors">This field is required.</p>
+				{% endif %}
+			</dd>
+			
+			<dt>
+				<label for="id_other_information">Is there any other information that you believe should be taken into consideration when reviewing your scholarship application?</label>
+			</dt>
+			<dd>
+				{{ form.other_information }}
+				{% if form.other_information.errors %}
+					<p class="errors">How can there possibly be errors in this field?</p>
+				{% endif %}
+			</dd>
+		</dl>
+	</fieldset>
+	<p>Before clicking on the submit button here below, please double check that the information is accurate and up to date.</p>
+
+	<fieldset class="submit">
+		<input type="submit" name="submit" value="Submit" />
+	</fieldset>
+</form>
+{% endblock %}

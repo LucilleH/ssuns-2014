@@ -1,0 +1,150 @@
+<script>
+function checkpassword()
+{
+        var password = document.getElementsByName('quizPassword')[0].value;
+        if (password === "unmod1107")
+        {
+                return true;
+        }
+        else
+        {
+                alert("Wrong Password!");
+                return false;
+        }
+}
+</script>
+{% extends "base.html" %}
+{% block content %}
+<h1>Survey</h1>
+<form method="post" id="survey">
+	<fieldset class="hidden">
+                {% csrf_token %}
+        </fieldset>
+	{% if form.errors %}
+	<fieldset class="errors">
+		<p>Please fill out all questions below!</p>
+	</fieldset>
+	{% endif %}
+	<fieldset>
+        	<legend>Delegate Information</legend>
+                <dl>
+                        <dt><label>School: </label></dt>
+                        <dd>
+				{{ form.school }}
+				{% if form.school.errors %}
+					<p class="errors">Please choose a school</p>
+				{% endif %}
+			</dd>
+			<dt><label>First Name: </label></dt>
+			<dd>
+				{{ form.first_name }}
+				{% if form.first_name.errors %}
+					<p class="errors">Please enter your first name.</p>
+				{% endif %}
+			</dd>
+			<dt><label>Last Name: </label></dt>
+			<dd>
+				{{ form.last_name }}
+				{% if form.last_name.errors %}
+					<p class="errors">Please enter your last name.</p>
+				{% endif %}
+			</dd>
+		</dl>
+	</fieldset>
+	<fieldset>
+		<legend>Questionaire</legend>
+		<dl>
+			<dt><label>1. True or False: Non-Member States/Observer States may vote on substantive matters (e.g. a draft resolution)</label></dt>
+			<dd>{{ form.q1 }}</dd>
+			<dt><label>2. True or False: Non-Governmental Organizations may be neither a sponsor nor a signatory to resolutions.</label></dt>
+			<dd>{{ form.q2 }}</dd>
+			<dt><label>3. True or False: Non-Governmental Organizations may make oral statements to committee, upon submitting a written appeal and at the discretion of the Chair. </label></dt>
+                        <dd>{{ form.q3 }}</dd>
+			<dt><label>4. A delegate who responds with “present and voting” at roll call may NOT __________ on substantive matters:</label></dt>
+                        <dd>{{ form.q4 }}</dd>
+			<dt><label>5. What is quorum for debate?</label></dt>
+                        <dd>{{ form.q5 }}</dd>
+			<dt><label>6. What is quorum for voting procedure?</label></dt>
+                        <dd>{{ form.q6 }}</dd>
+			<dt><label>7. True or False: Delegates may motion for a roll call vote on procedural matters. </label></dt>
+                        <dd>{{ form.q7 }}</dd>
+			<dt><label>8. A motion to set a topic on the agenda requires how many speakers for and how many speakers against?</label></dt>
+                        <dd>{{ form.q8 }}</dd>
+			<dt><label>9. What is the purpose of the primary speakers' list?</label></dt>
+                        <dd>{{ form.q9 }}</dd>
+			<dt><label>10.  What is the purpose of the secondary speakers’ list?</label></dt>
+                        <dd>{{ form.q10 }}</dd>
+			<dt><label>11.  A member may have his/her name added to the primary speakers’ list or secondary speakers’ list by:</label></dt>
+                        <dd>{{ form.q11 }}</dd>
+			<dt><label>12.  Upon exhaustion of the secondary speakers’ list:</label></dt>
+                        <dd>{{ form.q12 }}</dd>
+			<dt><label>13.  When making a motion to caucus, a delegate must specify the following:</label></dt>
+                        <dd>{{ form.q13 }}</dd>
+			<dt><label>14. True or False: No points or motions shall be in order during an unmoderated caucus:</label></dt>
+                        <dd>{{ form.q14 }}</dd>
+			<dt><label>15. True or False: Delegates may yield speaking time during a moderated caucus. </label></dt>
+                        <dd>{{ form.q15 }}</dd>
+			<dt><label>16.  A motion to table debate results in the following:</label></dt>
+                        <dd>{{ form.q16 }}</dd>
+			<dt><label>17. True or False: Once a motion to close the secondary speakers’ list has passed, it cannot be re-opened.</label></dt>
+                        <dd>{{ form.q17 }}</dd>
+			<dt><label>18.  If a motion to close the secondary speakers' list is passed:</label></dt>
+                        <dd>{{ form.q18 }}</dd>
+			<dt><label>19.  A motion to recess is only in order within the final _____ minutes of a committee session.</label></dt>
+			<dd>{{ form.q19 }}</dd>
+			<dt><label>20.  A motion for adjournment is in order if one of the following conditions is satisfied except for:</label></dt>
+                        <dd>{{ form.q20 }}</dd>
+			<dt><label>21. Delegates are permitted to interrupt another delegate if they rise on the following points except for:</label></dt>
+                        <dd>{{ form.q21 }}</dd>
+			<dt><label>22. True or False: Only the Chair may set a time limit on speeches.</label></dt>
+                        <dd>{{ form.q22 }}</dd>
+			<dt><label>23.  Delegates may yield his/her time in all of the following ways except for:</label></dt>
+                        <dd>{{ form.q23 }}</dd>
+			<dt><label>24. The default yield, unless it is changed is to:</label></dt>
+                        <dd>{{ form.q24 }}</dd>
+			<dt><label>25. True or False: If a delegate has yielded his/her time to questions, both the time taken to ask the question and the time taken to answer it shall be counted against the delegate’s remaining speaking time</label></dt>
+                        <dd>{{ form.q25 }}</dd>
+			<dt><label>26. A delegate may request a Right of Reply from the Chair if:</label></dt>
+                        <dd>{{ form.q26 }}</dd>
+			<dt><label>27. True or False: A Right of Reply to another Right of Reply is never in order</label></dt>
+                        <dd>{{ form.q27 }}</dd>
+			<dt><label>28. True or False: Working papers require sponsors but not signatories.</label></dt>
+                        <dd>{{ form.q28 }}</dd>
+			<dt><label>29. In order for a draft resolution to be approved by the dais, a minimum of _______ states must be designated as sponsors.</label></dt>
+                        <dd>{{ form.q29 }}</dd>
+			<dt><label>30.  Sponsors are required to vote in favour of a draft resolution unless:</label></dt>
+                        <dd>{{ form.q30 }}</dd>
+			<dt><label>31. In order to be approved and introduced, a draft resolution must have signatories accounting for a minimum of _________ of the members of the committee.</label></dt>
+                        <dd>{{ form.q31 }}</dd>
+			<dt><label>32. True or False: In a question and answer period following the introduction of a draft resolution, multiple sponsors may answer a single question, provided that they do not repeat what has already been said by another sponsor.</label></dt>
+                        <dd>{{ form.q32 }}</dd>
+			<dt><label>33. True or False: If a motion to question the competence of the body is passed, the draft resolution in question is withdrawn and cannot be reintroduced.</label></dt>
+                        <dd>{{ form.q33 }}</dd>
+			<dt><label>34. True or False: Friendly amendments are substantive amendments approved by all sponsors of a draft resolution and the Dais.</label></dt>
+                        <dd>{{ form.q34 }}</dd>
+			<dt><label>35. Upon the discretion of the Chair, delegates may vote “with rights” during: </label></dt>
+                        <dd>{{ form.q35 }}</dd>
+			<dt><label>36. A motion to have a draft resolution considered an Important Question will be in order if the draft resolution deals with any of the following except: </label></dt>
+                        <dd>{{ form.q36 }}</dd>
+			<dt><label>37. When voting on amendments, a tie will result in: </label></dt>
+                        <dd>{{ form.q37 }}</dd>
+			<dt><label>38. True or False: Motions to divide preambulatory clauses are never in order.</label></dt>
+                        <dd>{{ form.q38 }}</dd>
+			<dt><label>39.  How many resolutions may be passed on any given agenda topic?39.  How many resolutions may be passed on any given agenda topic?</label></dt>
+                        <dd>{{ form.q39 }}</dd>
+			<dt></label>40. How many members must vote in favour of a draft resolution for it to pass?</label></dt>
+			<dd>{{ form.q40 }}</dd>
+			<div class="hidden">{{ form.num_correct }}</div>	
+		</dl>
+	</fieldset>
+	<fieldset>
+		<dl>
+			<dt>Quiz password (Ask your faculty advisor): </dt>
+			<dd><input type="password" name="quizPassword" /></dd>
+		</dl>
+	</fieldset>
+	<fieldset class="submit">
+		<input type="submit" name="submit" value="Submit" onclick="return checkpassword()"/>
+	</fieldset>
+</form>
+{% endblock %}

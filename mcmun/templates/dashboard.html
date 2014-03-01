@@ -1,0 +1,252 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Your dashboard</h1>
+
+{% if unfilled_assignments %}
+<div class="alert">
+    <p>You have unfilled committee assignments! Please indicate the names of the delegates who will be occupying each country or character assignment in the <a href="#committee-assignments"><strong>Committee assignments</strong></a> section below, needed for badge-printing purposes.</p>
+</div>
+{% endif %}
+
+{% if school %}
+<table id="dashboard-table">
+	<tr>
+		<td>
+			<div id="profile">
+				<h3>{{ school }}</h3>
+
+				<p>
+					{{ school.first_name }} {{ school.last_name }}
+					<br />
+					{{ school.address }}
+					<br />
+					{{ school.get_country_display }}
+					<br />
+					{{ school.phone_number }}
+				</p>
+				<br />
+				<p>
+					<strong>Email address:</strong> {{ user.username }}
+					<br />
+					<a href="{% url password %}">Change your password</a> :: <a href="{% url logout %}">Log out</a>
+				</p>
+			</div>
+		</td>
+		<td>
+			<div id="invoice">
+				<h2>Invoice details</h2>
+				<p>
+					<strong>Number of delegates:</strong> {{ school.num_delegates }}
+					<br />
+					<strong>Payment method:</strong> {% if school.use_online_payment %}online payment{% else %}by cheque{% endif %}
+					<br />
+					<strong>Priority registration:</strong> {% if school.use_priority %}Yes{% else %}No{% endif %}
+					<br />
+					<strong>Amount owed:</strong> {{ school.amount_owed }} {{ school.get_currency }}
+					<br />
+					<strong>Amount paid:</strong> {{ school.get_amount_paid }} {{ school.get_currency }}
+				</p>
+				<p>Lost your copy of your invoice PDF? Email <a href="mailto:it@ssuns.org">it@ssuns.org</a>.{% comment %}Eventually I'll make a view to show the PDF to people with the proper permissions. Later.{% endcomment %}</p>
+			</div>
+		</td>
+	</tr>
+</table>
+
+{% if additional_pay %}
+	<div id="invoice">
+	<h2>Additional Delegates Invoice Details</h2>
+	<table class="separated-cells">
+		<tr>
+			<th>Number of delegates</th>
+			<th>Payment method</th>
+			<th>Priority registration</th>
+			<th>Amount owed</th>
+			<th>Amount paid</th>
+		</tr>
+		{% for addpay in additional_pay %}
+		<tr>
+			<td> {{ addpay.add_num_delegates }} </td>
+			<td> {% if addpay.add_use_online_payment %}online payment{% else %}by cheque{% endif %} </td>
+			<td> No </td>
+			<td> {{ addpay.amount_owed_additional }} {{ school.get_currency }} </td>
+			<td> {{ addpay.get_add_amount_paid }} {{ school.get_currency }} </td>
+		</tr>
+		{% endfor %}
+		</table>
+	</div>
+	<p>Lost your copy of your invoice PDF? Email <a href="mailto:it@ssuns.org">it@ssuns.org</a>.{% comment %}Eventually I'll make a view to show the PDF to people with the proper permissions. Later.{% endcomment %}</p>
+{% endif %}
+
+<h3>Sample Background Guides</h3>
+<p>To access the background guides for your committees, please go to <a href="www.ssuns.org/committees-list">www.ssuns.org/committees-list</a>, then select the committee you have been assigned to. You will be able to download the background guide at the bottom of the committee page by entering the password "ssjuns2013". Please do not share this password with students who are not attending SSUNS. </p>
+
+{% if school.committeeassignment_set.count %}
+<h2 id="committee-assignments">Committee assignments</h2>
+
+<p>
+Please ensure that you enter a delegate's name for each position that you have been assigned by October 22. Once you have filled in the delegate name(s) for each position, make sure to upload the relevant position paper by November 6. If you would like feedback for your position paper, please tell your delegate to email it to <a href="mailto:committees@ssuns.org">committees@ssuns.org</a> by October 25th. Their corresponding deputy will report back to them. Kindly note that only final position papers should be uploaded here.
+</p>
+<p>
+Please check that any delegate names that have been entered are entered correctly, as you will not be able to change anything once submitted except by contacting <a href="mailto:schools@ssuns.org">schools@ssuns.org</a>. You do not have to enter all the names at once.
+</p>
+<p>
+In addition, if any of your students would like to apply for 'Individual Need-Based or Need & Merit Based' scholarships, kindly ask them to fill out the application available for download <a href="/scholarships" target="_blank">here</a>. We ask faculty advisers to submit the final application below on the dashboard. Deadline is September 17.
+</p>
+<p><strong>Please upload PDF files for both position paper and scholarship application. We do not recommend any other document formats.<br />
+IMPORTANT: All position papers and scholarship applications must be submitted on the dashboard via your relevant faculty advisor. If you wish to change your position paper, email <a href="mailto:committees@ssuns.org">committees@ssuns.org</a>. To change your scholarship application, email <a href="mailto:pr@ssuns.org">pr@ssuns.org</a></strong></p>
+
+<form action="{% url assignments %}" method="post" enctype="multipart/form-data">
+{% for m in management_forms %}{{ m }}{% endfor %}
+{% csrf_token %}
+<table class="separated-cells">
+	<thead>
+		<tr>
+			<th>Committee</th>
+			<th>Assignment</th>
+			<th>Delegate name(s)</th>
+			<th width="20%">Position paper</th>
+			<th width="20%">Scholarship application</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for f, s_f in formset %}
+		{% with c=f.instance s=s_f.instance %}
+		<tr>
+			<td><a href="{{ c.committee.get_absolute_url }}">{{ c.committee.get_name }}</a></td>
+			<td>{{ c.get_assignment_display }}</td>
+			<td>
+				{% if c.delegate_name %}
+					<p>Delegate name: {{ c.delegate_name }}</p>
+					<div class="hidden">{{ f.delegate_name }}</div>
+				{% else %}
+					{{ f.delegate_name }}
+				{% endif %}
+			</td>
+			<td>
+            	{{ f.id }}
+                {% if c.delegate_name %}
+			{% if c.position_paper %}
+				<a href="{{ c.position_paper }}" target="_blank">view</a>
+			{% else %}
+                   		{{ f.position_paper }}
+			{% endif %}
+                {% else %}
+                    Uploading position paper after submitting the delegate name.
+                {% endif %}
+            </td>
+			<td>
+				{% if c.delegate_name %}
+					{% for f in s_f %}
+					{% with m=f.instance %}
+						{% if m.scholarship_individual %}
+							<a href="/{{ m.scholarship_individual }}" target="_blank">view</a>
+							<div class="hidden">{{ f.as_p }}</div>
+						{% else %}
+							{{ f.as_p }}
+						{% endif %}
+					{% endwith %}
+					{% endfor %}
+				{% else %}
+					Apply individual scholarship after submitting the delegate name.
+					{% for f in s_f %}
+						<div class="hidden">{{ f.as_p }}</div>
+					{% endfor %}
+				{% endif %}
+			</td>
+		</tr>
+		{% endwith %}
+		{% endfor %}
+	</tbody>
+</table>
+
+<p><strong>Please confirm any names that you've filled in before pressing submit. If you leave a field blank, you may fill it in later.</strong></p>
+
+<fieldset class="submit">
+	<input type="submit" name="submit" value="Submit" />
+</fieldset>
+</form>
+{% endif %}
+
+<div id="scholarship">
+	<h2>School Scholarship application</h2>
+	<p>We only offer scholarship applications for International/New Schools attending SSUNS. An International School is defined as a school which is outside Canada/United States and a New School is defined as a school that hasn't attended SSUNS in the last five years. Kindly find the corresponding applications on <a href="/scholarships" target="_blank">this page</a>
+	</p>
+	{% if form %}
+		<p><strong>Please upload PDF files for school scholarship application. We do not recommend any other document formats. You cannot reupload school scholarship application once you submit. If you are eligible for both scholarship, please upload them both at the same time.</strong></p>
+		<form action="{% url dashboard %}" method="post" enctype="multipart/form-data">
+			<fieldset class="hidden">
+				{% csrf_token %}
+			</fieldset>
+			{% if school.is_international %}
+				<p>International school scholarship application: {{ form.scholarship_international }}</p>
+			{% else %}
+				<p>Your school is not eligible for international school scholarship</p>
+			{% endif %}
+				<p>New school scholarship application: {{ form.scholarship_new }}</p>
+			<fieldset class="submit">
+				<input type="submit" name="submit" value="Submit" />
+			</fieldset>
+		</form>
+	{% else %}
+		{% if scholarshipfile.scholarship_international %}
+			<p>Uploaded international school scholarship application: <a href="/{{ scholarshipfile.scholarship_international }}" target="_blank">view</a></p>
+		{% endif %}
+		{% if scholarshipfile.scholarship_new %}	
+			<p>Uploaded new school scholarship application: <a href="/{{ scholarshipfile.scholarship_new }}" target="_blank">view</a></p>
+		{% endif %}	
+			<p>If you want to reupload school scholarship application, please contact <a href="mailto:pr@ssuns.org">pr@ssuns.org</a></p>
+	{% endif %}
+</div>
+
+<h2 id="dates">Important dates</h2>
+
+<table>
+   	<tr><td><b>July 30:</b> Priority Registration Deadline (All Payments Made to be Eligible for Priority Fees)</td></tr>
+	<tr><td><b>First Week of September:</b> Background Guides come online</td></tr>
+	<tr><td><b>First Week of September:</b> Initial Committee Assignments Released</td></tr>
+	<tr><td><b>September 10:</b> Deadline for 100% Refund of Delegate Fees</td></tr>
+	<tr><td><b>September 17:</b> Scholarship Applications Deadline</td></tr>
+	<tr><td><b>October 1:</b> Deadline for 50% Refund of Delegate Fees</td></tr>
+	<tr><td><b>October 8:</b> Regular Registration Closes and Waiting List Opens</td></tr>
+	<tr><td><b>October 8:</b> Hotel Room Bookings at Delta Centreville Due</td></tr>
+	<tr><td><b>October 22:</b> Delegate Badge List Due</td></tr>
+	<tr><td><b>October 25:</b> Position Paper Feedback Deadline</td></tr>
+	<tr><td><b>November 6:</b> Final Position Paper Deadline</td></tr>
+	<tr><td><b>November 7-10:</b> SSUNS 2013</td></tr>
+</table>
+
+<h2 id="committees">Committee preferences</h2>
+
+<p>The committee preferences form is now <strong>closed</strong>.</p>
+
+<p>You have indicated your committee preferences to be:</p>
+
+<table>
+	<tr><td>{{ school.committee_1.get_name }}</td></tr>
+	<tr><td>{{ school.committee_2.get_name }}</td></tr>
+	<tr><td>{{ school.committee_3.get_name }}</td></tr>
+	<tr><td>{{ school.committee_4.get_name }}</td></tr>
+</table>
+
+<p>Please contact <a href="mailto:schools@ssuns.org">schools@ssuns.org</a> if you have any questions or wish to change your preferences.</p>
+
+<h2 id="committees">Country Preferences</h2>
+<table>
+   	<tr><td>{{ school.get_country_1_display }}</td>
+	    <td>{{ school.get_country_2_display }}</td></tr>
+	<tr><td>{{ school.get_country_3_display }}</td>
+	    <td>{{ school.get_country_4_display }}</td></tr>
+	<tr><td>{{ school.get_country_5_display }}</td>
+	    <td>{{ school.get_country_6_display }}</td></tr>
+	<tr><td>{{ school.get_country_7_display }}</td>
+	    <td>{{ school.get_country_8_display }}</td></tr>
+	<tr><td>{{ school.get_country_9_display }}</td>
+	    <td>{{ school.get_country_10_display }}</td>
+   </tr>
+</table>
+{% else %}
+<p>Unfortunately there's nothing for you to see here. Please move along.</p>
+{% endif %}
+
+{% endblock %}
