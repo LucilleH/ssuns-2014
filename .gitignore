@@ -1,8 +1,8 @@
 *.pyc
 tmp
 ssuns_2014
-static/admin*
-static/img/dais*
+static/admin/*
+static/img/dais/*
 *.swp
 uploads
 *~
