@@ -6,7 +6,7 @@ from committees.models import CommitteeAssignment
 
 class CommitteeInline(admin.StackedInline):
 	model = CommitteeAssignment
-	extra = 0
+	extra = 3
 
 class RegisteredSchoolAdmin(admin.ModelAdmin):
 	# Sort reverse chronologically

@@ -19,7 +19,15 @@
 	https://github.com/LucilleH/ssuns-2014 -->
 </head>
 <body>
-	<div id="header">
+	<div id="menu">
+                <ul>
+<!--                        {% for p in pages %}
+                                <li><a href="/{{ p.short_name }}">{{ p.long_name }}</a></li>
+			{% endfor %}
+-->		</ul>
+	
+	</div>
+-->	<div id="header">
 		<div id="masthead">
 			<img class="logoImg" src="{{ STATIC_URL }}img/logoWhiteLeaves.png" width="200px"/>
 			<center>
@@ -28,17 +36,13 @@
 					<span class="middle">SSUNS 2014</span><br />
 					<span class="bottom">November 6th - 9th, Montreal</span>
 				</div>
-			<div class="social-media">
-				<a href="https://twitter.com/ssuns_mtl" target="_blank" class="twitter" title="Find us on Twitter">&nbsp;</a>
-				<a href="https://facebook.com/officialssuns" target="_blank" class="facebook" title="Find us on Facebook">&nbsp;</a>
-				<a href="mailto:info@ssuns.org" class="email" title="Email us at info@ssuns.org">&nbsp;</a>&nbsp;
-			</div>
 
 			</center>
 		</div>
 
-	<iframe width="560" height="315" src="//www.youtube.com/embed/t9jCujpkC1o?rel=0" frameborder="0" allowfullscreen></iframe>	
-
+	</div>
+	<div class="video">
+		<iframe width="700" height="430" src="//www.youtube.com/embed/t9jCujpkC1o?rel=0" frameborder="0" allowfullscreen></iframe>	
 	</div>
 <!--	<div id="menu">
 		<ul>
@@ -56,8 +60,16 @@
 		</ul>
 	</div>
 -->
+<div class="wrapper">
 	<div id="content">  
 		{% block content %}{% endblock %}
 	</div>
+</div>
+	 <div class="social-media">
+         	<a href="https://twitter.com/ssuns_official" target="_blank" class="twitter" title="Find us on Twitter">&nbsp;</a>
+         	<a href="https://facebook.com/officialssuns" target="_blank" class="facebook" title="Find us on Facebook">&nbsp;</a>
+         	<a href="mailto:info@ssuns.org" class="email" title="Email us at info@ssuns.org">&nbsp;</a>&nbsp;
+         </div>
+
 </body>
 </html>

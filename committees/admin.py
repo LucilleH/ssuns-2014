@@ -1,13 +1,32 @@
 from django.contrib import admin
 from django import forms
 from committees.models import *
+from committees.constants import COUNTRYLIST
+
+class CCMInline(admin.StackedInline):
+	model = CountryCharacterMatrix
+	extra = 3
+
+class CommitteeAdmin(admin.ModelAdmin):
+	ordering = ['name']
+	inlines = [CCMInline]
+
+	def assign_countries(self, request, queryset):
+		for obj in queryset:
+			for country in COUNTRYLIST:
+				CountryCharacterMatrix.objects.get_or_create(committee=obj, position=country)
+
+		message = "country matrix created"
+		self.message_user(request, message)
+	assign_countries.short_description = "Insert all countries to CCM for selected committees"
+	actions=['assign_countries']
 
 
 class CommitteeAssignmentAdmin(admin.ModelAdmin):
-	list_display = ('school', 'committee', 'assignment', 'is_valid', 'unassigned')
+	list_display = ('school', 'assignment', 'unassigned')
 
 class ScholarshipIndividualAdmin(admin.ModelAdmin):
-	list_display = ('name_of_delegate', 'school', 'committee', 'is_uploaded')
+	list_display = ('name_of_delegate', 'school', 'committee_assignment', 'is_uploaded')
 	ordering = ['-scholarship_individual']
 
 	def school(self, obj):
@@ -18,15 +37,12 @@ class ScholarshipIndividualAdmin(admin.ModelAdmin):
 	def committee(self, obj):
 		return "%s" % obj.committee_assignment.committee
 	committee.short_description = 'Committee'
-	committee.admin_order_field = 'committee_assignment__committee'
+	committee.admin_order_field = 'committee_assignment'
 
 admin.site.register(Category)
-admin.site.register(Committee)
-admin.site.register(Committee_Dais)
+admin.site.register(Committee, CommitteeAdmin)
+admin.site.register(CommitteeDais)
 admin.site.register(CommitteeBackgroundGuide)
-admin.site.register(AdHocApplication)
-admin.site.register(BRICSApplication)
-admin.site.register(NixonApplication)
-admin.site.register(WallStreetApplication)
+admin.site.register(CountryCharacterMatrix)
 admin.site.register(CommitteeAssignment, CommitteeAssignmentAdmin)
 admin.site.register(ScholarshipIndividual, ScholarshipIndividualAdmin)

@@ -8,7 +8,6 @@ from django.shortcuts import render, get_object_or_404
 from django.views.static import serve
 
 from committees.models import Committee, position_paper_upload_path, scholarship_upload_path
-from committees.forms import AdHocAppForm, BRICSAppForm, NixonAppForm, WallStreetAppForm
 from committees.utils import get_committee_from_email
 
 
@@ -36,51 +35,6 @@ def view(request, slug):
 	}
 
 	return render(request, 'committee.html', data)
-
-
-def application(request, slug):
-	# Hard-coding the list of committees with applications for now
-	# This should really be a field on the committee (for next year)
-	committee = get_object_or_404(Committee, slug=slug)
-
-	app_forms = {
-		'ad-hoc': AdHocAppForm,
-		'brics': BRICSAppForm,
-		'frost-nixon': NixonAppForm,
-		'wall-street': WallStreetAppForm,
-	}
-
-	if slug in app_forms:
-		app_form = app_forms[slug]
-
-	if request.method == 'POST':
-		form = app_form(request.POST)
-
-		if form.is_valid():
-			form.save()
-
-			data = {
-				'committee': committee,
-				'page': {
-					'long_name': 'Successful application for %s' % committee.name,
-				}
-			}
-
-			return render(request, 'committee_app_success.html', data)
-	else:
-		form = app_form
-
-	data = {
-		'deadline': 'November 18th',
-		'page': {
-			'long_name': 'Application for %s' % committee.name,
-		},
-		'intro_template': 'committee_apps/%s.md' % slug,
-		'committee': committee,
-		'form': form,
-	}
-
-	return render(request, 'committee_app.html', data)
 
 
 
