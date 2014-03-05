@@ -15,8 +15,8 @@ class Page(models.Model):
 	custom_template = models.BooleanField(default=False)
 	# Set to true if you want to display as home page
 	use_home = models.BooleanField(default=False)
-	# specify the name of the picture that they wanna use for the icon in the parent page
-	pagePic = models.CharField(max_length=50, blank=True, null=True)
+	# specify the video url you want to use if home template is selected.
+        pagePic = models.CharField(max_length=50, blank=True, null=True, verbose_name="video URL")
 	#whether to display titlepic or not
 	titlePic = models.BooleanField(default=False)
 	

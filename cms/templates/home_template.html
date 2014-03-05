@@ -1,0 +1,35 @@
+<!--<div class="twitter">
+	<a class="twitter-timeline" href="https://twitter.com/search?q=%23SSUNS" width="250px" height="300px" data-widget-id="321114393083518976">Tweets about "#SSUNS"</a>
+	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</div>
+-->
+{% if page.pagePic %}
+	<div class="video">
+                <iframe width="700" height="430" src="{{ page.pagePic }}" frameborder="0" allowfullscreen></iframe>
+        </div>
+	<div class="wrapper">
+{% else %}
+	<div class="wrapper-no-video">
+{% endif %}
+<div id="content">
+{% if page.parentpage.subpages.all %}
+	{% for sp in page.parentpage.subpages.all %}
+		<section>
+			<h1>{{ sp.long_name }}</h1>
+			{% if sp.custom_template %}
+                		{% with "pages/"|add:sp.short_name|add:".html" as template_file %}
+                       			{% include template_file %}
+                		{% endwith %}
+        		{% else %}
+				{% if sp.content %}
+              				{% load markup %}
+                       			{{ sp.content|markdown:"def_list" }}
+                		{% else %}
+                       			{% include "under-construction.html" %}
+                		{% endif %}
+			{% endif %}
+		</section>
+	{% endfor %}
+{% endif %}
+</div>
+</div>

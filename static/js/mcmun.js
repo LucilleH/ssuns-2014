@@ -1,8 +1,5 @@
 $(document).ready(function() {
 	
-	 $('.slideshow').cycle({
-		fx: 'fade'
-	});
 	// for registration if it's the first time the school attend ssuns, then ask them more question
 	$('#registration_form select[id^="id_first_time"]').change(function () {
 		var result = $(this).find('option:selected').val();

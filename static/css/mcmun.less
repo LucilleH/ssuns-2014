@@ -29,10 +29,12 @@ body {
 	width: @containerWidth;
 }
 
+
 #header {
 	.container;
 	background-repeat: no-repeat;
 	background-position: 0 20px;
+	margin-top: 60px;
 }
 
 #masthead {
@@ -111,12 +113,30 @@ body {
         background-attachment: fixed;
         background-position: top left;
 }
+
+.wrapper-no-video {
+	margin-top: 20px;
+	padding-top: 10px;
+	width: 100%;
+        background: #fff;
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: top left;
+}
+
 #content {
 	position: relative;
-	width: 900px;
+	width: 850px;
+	max-width:100%;
 	margin: 0 auto;
-	padding: 30px;
 	font-size: 13px;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	section {
+		padding: 15px;
+		margin-top: 15px;
+	}
 	h1, h2, h3, h4, h5, h6 {
 		padding-top: 10px;
 		padding-bottom: 10px;

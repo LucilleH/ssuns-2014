@@ -20,7 +20,7 @@ fieldset .errors,fieldset .errorlist{color:#aa0000;}
 img{border:0;}
 body{background-color:#101d2b;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:12px;color:#1e1e1e;width:100%;margin:0;padding:0;background-size:100%;background-repeat:no-repeat;background-attachment:fixed;background-position:top left;overflow-y:scroll;}
 .container{margin:0 auto;width:800px;}
-#header{margin:0 auto;width:800px;background-repeat:no-repeat;background-position:0 20px;}
+#header{margin:0 auto;width:800px;background-repeat:no-repeat;background-position:0 20px;margin-top:60px;}
 #masthead{position:relative;}#masthead .title{position:absolute;top:30px;right:50px;color:#FFF;font-family:Raleway;font-weight:normal;text-shadow:#000000 0 2px 0;text-align:right;}#masthead .title .top{font-size:2em;line-height:1em;}
 #masthead .title .middle{font-size:6.3em;line-height:1.0em;font-weight:bold;}
 #masthead .title .bottom{font-size:2em;font-weight:bold;line-height:1em;}
@@ -31,7 +31,9 @@ body{background-color:#101d2b;font-family:"Helvetica Neue",Helvetica,Arial,sans-
 .social-media .facebook{background-image:url('../img/facebook.png');}
 .social-media .email{background-image:url('../img/email.png');}
 .wrapper{margin-top:-100px;padding-top:100px;width:100%;background:#fff;background-size:100%;background-repeat:no-repeat;background-attachment:fixed;background-position:top left;}
-#content{position:relative;width:900px;margin:0 auto;padding:30px;font-size:13px;overflow:auto;background:#ffffff;margin-bottom:30px;}#content h1,#content h2,#content h3,#content h4,#content h5,#content h6{padding-top:10px;padding-bottom:10px;clear:both;}
+.wrapper-no-video{margin-top:20px;padding-top:10px;width:100%;background:#fff;background-size:100%;background-repeat:no-repeat;background-attachment:fixed;background-position:top left;}
+#content{position:relative;width:850px;max-width:100%;margin:0 auto;font-size:13px;padding-top:30px;padding-bottom:30px;overflow:auto;background:#ffffff;margin-bottom:30px;}#content section{padding:15px;margin-top:15px;}
+#content h1,#content h2,#content h3,#content h4,#content h5,#content h6{padding-top:10px;padding-bottom:10px;clear:both;}
 #content h1{padding-top:0;padding-bottom:0;font-size:3.5em;margin-top:0;font-family:Raleway;}
 #content h1+h2{padding-top:10px;}
 #content h2+h3,#content h3+h3{padding-top:0px;}
