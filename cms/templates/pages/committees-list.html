@@ -3,9 +3,11 @@
     <ul id="committees-grid">
         {% for committee in category.committee_set.all %}
             <li>
-		<a href="{% url committees.views.view committee.slug %}">
+<!--		<a href="{% url 'committees.views.view' committee.slug %}">
+-->
 		<img src="{{ STATIC_URL }}img/committees/{{ committee.slug }}.jpg" /><br /><h5>{{ committee.name }}</h5>
-		</a>	
+<!--		</a>	
+-->
 		<p />
 	     </li>
         {% endfor %}

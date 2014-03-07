@@ -37,6 +37,12 @@ body {
 	margin-top: 60px;
 }
 
+@media screen and (max-width: 850px) {
+    #header {
+        display: none !important;
+    }
+}
+
 #masthead {
 	position: relative;
 	.title {
@@ -75,12 +81,20 @@ body {
 	margin-right:auto;
 	margin-top: 10px;
 	width: 700px;	
+	max-width: 100%;
 	box-shadow: 10px 10px 10px #000;
 	z-index: 4;
+	iframe {
+		width: 700px;
+		max-width: 100%;
+		height: 430px;
+		max-width: 100%;
+	}
 }
 .social-media {
 	margin: auto;
 	width: 800px;
+	max-width:100%;
 	text-align: right;
 	margin-top: -15px;
 	a {
@@ -115,14 +129,9 @@ body {
 }
 
 .wrapper-no-video {
+	.wrapper;
 	margin-top: 20px;
 	padding-top: 10px;
-	width: 100%;
-        background: #fff;
-        background-size: 100%;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-position: top left;
 }
 
 #content {
@@ -133,9 +142,10 @@ body {
 	font-size: 13px;
 	padding-top: 30px;
 	padding-bottom: 30px;
+	margin-bottom: 30px;
 	section {
-		padding: 15px;
-		margin-top: 15px;
+		padding: 30px;
+		padding-top: 60px;
 	}
 	h1, h2, h3, h4, h5, h6 {
 		padding-top: 10px;
@@ -162,9 +172,7 @@ body {
 		font-size: 2.0em;
 		color: @darkGrey;
 	}
-	overflow: auto;
 	background: @contentBg;
-	margin-bottom: 30px;
 	ul, ol {
 		margin: 10px 0 10px 20px;
 		&.horizontal {

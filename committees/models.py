@@ -29,9 +29,10 @@ class Category(models.Model):
 class Committee(models.Model):
 	name = models.CharField(max_length=100)
 	slug = models.CharField(max_length=20, unique=True)
-	description = models.TextField()
+	description = models.TextField(null=True, blank=True)
 	category = models.ForeignKey(Category)
 	assign_type = models.BooleanField(choices=ASSIGN_TYPE, verbose_name="Assignment Type")
+	video_url = models.CharField(max_length=255, null=True, blank=True, verbose_name="video URL")
 
 	def __unicode__(self):
 		return self.name + " (" + self.get_assign_type_display() + ")"

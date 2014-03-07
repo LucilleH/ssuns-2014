@@ -5,7 +5,7 @@
 -->
 {% if page.pagePic %}
 	<div class="video">
-                <iframe width="700" height="430" src="{{ page.pagePic }}" frameborder="0" allowfullscreen></iframe>
+                <iframe src="{{ page.pagePic }}" frameborder="0" allowfullscreen></iframe>
         </div>
 	<div class="wrapper">
 {% else %}
@@ -14,7 +14,7 @@
 <div id="content">
 {% if page.parentpage.subpages.all %}
 	{% for sp in page.parentpage.subpages.all %}
-		<section>
+		<section id="{{ sp.short_name }}">
 			<h1>{{ sp.long_name }}</h1>
 			{% if sp.custom_template %}
                 		{% with "pages/"|add:sp.short_name|add:".html" as template_file %}

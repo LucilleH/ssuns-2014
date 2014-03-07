@@ -5,20 +5,9 @@
 		{% with "home_template.html" as template_file %}
 			{% include template_file %}
 		{% endwith %}
-	{% endif %}
-	{% if page.show_nav %}
-		<h1>{{ page.long_name }}</h1>
-	{% endif %}
-	{% if page.custom_template %}
-		{% with "pages/"|add:page.short_name|add:".html" as template_file %}
-			{% include template_file %}
-		{% endwith %}
 	{% else %}
-		{% if page.content %}
-			{% load markup %}
-			{{ page.content|markdown:"def_list" }}
-		{% else %}
-			{% include "under-construction.html" %}
-		{% endif %}
+		{% with "subpage_template.html" as template_file %}
+                        {% include template_file %}
+                {% endwith %}
 	{% endif %}
 {% endblock %}
