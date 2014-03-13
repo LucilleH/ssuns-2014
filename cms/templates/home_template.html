@@ -3,9 +3,9 @@
 	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 </div>
 -->
-{% if page.pagePic %}
+{% if page.video_url %}
 	<div class="video">
-                <iframe src="{{ page.pagePic }}" frameborder="0" allowfullscreen></iframe>
+                <iframe src="{{ page.video_url }}" frameborder="0" allowfullscreen></iframe>
         </div>
 	<div class="wrapper">
 {% else %}
@@ -14,6 +14,7 @@
 <div id="content">
 {% if page.parentpage.subpages.all %}
 	{% for sp in page.parentpage.subpages.all %}
+		{% if sp.display %}
 		<section id="{{ sp.short_name }}">
 			<h1>{{ sp.long_name }}</h1>
 			{% if sp.custom_template %}
@@ -29,6 +30,7 @@
                 		{% endif %}
 			{% endif %}
 		</section>
+		{% endif %}
 	{% endfor %}
 {% endif %}
 </div>

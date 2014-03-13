@@ -16,9 +16,9 @@ class Page(models.Model):
 	# Set to true if you want to display as home page
 	use_home = models.BooleanField(default=False)
 	# specify the video url you want to use if home template is selected.
-        pagePic = models.CharField(max_length=50, blank=True, null=True, verbose_name="video URL")
+        video_url = models.CharField(max_length=50, blank=True, null=True, verbose_name="video URL")
 	#whether to display titlepic or not
-	titlePic = models.BooleanField(default=False)
+	display = models.BooleanField(default=False, verbose_name="display")
 	
 	def __unicode__(self):
 		return self.long_name
