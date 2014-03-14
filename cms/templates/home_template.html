@@ -11,12 +11,26 @@
 {% else %}
 	<div class="wrapper-no-video">
 {% endif %}
-<div id="content">
+<div class="bs-docs-container">
 {% if page.parentpage.subpages.all %}
+        <div class="bs-sidebar hidden-print affix" role="complementary">
+                <ul class="nav bs-sidenav">
+        	{% for sp in page.parentpage.subpages.all %}
+                	{% if sp.display %}
+			<li><a href="#{{ sp.short_name }}">{{ sp.long_name }}</a></li>
+			{% endif %}
+		{% endfor %}
+		</ul>
+	</div>
+</div>
+<div id="content">
 	{% for sp in page.parentpage.subpages.all %}
 		{% if sp.display %}
 		<section id="{{ sp.short_name }}">
-			<h1>{{ sp.long_name }}</h1>
+
+		{% if sp.show_nav %}
+        	        <h1>{{ sp.long_name }}</h1>
+        	{% endif %}
 			{% if sp.custom_template %}
                 		{% with "pages/"|add:sp.short_name|add:".html" as template_file %}
                        			{% include template_file %}
@@ -35,3 +49,4 @@
 {% endif %}
 </div>
 </div>
+<script src="{{ STATIC_URL }}js/nav.js"></script>
