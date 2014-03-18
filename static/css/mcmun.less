@@ -462,15 +462,41 @@ body {
     #header {
         display: none !important;
     }
+    .video {
+	display: none !important;
+	iframe {
+            display: none !important;
+	}
+    }
     .wrapper {
-	padding-top: 50px !important;
+	padding-top: 180px !important;
     }
     .wrapper-no-video {
         padding-top: 50px !important;
     }
 
-    #content {
-	padding-top: 0px;
-    }
 }
 
+#home-theme {
+	ul {
+		list-style-type: none;
+		margin: 0;
+		margin-top:20px;	
+		li {
+			.inline-block;
+			vertical-align: top;
+			text-align: center;
+			margin-right: 25px;
+			margin-top:20px;
+			div {
+				padding-top:35px;
+				height:220px; 
+				width:220px;
+				-moz-border-radius:220px; 
+				-webkit-border-radius:220px;
+				border-radius:220px;
+				background:#BFC4CC;
+			}
+		}
+	}
+}

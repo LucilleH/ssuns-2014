@@ -17,7 +17,12 @@ def get_scholarship_upload_path(instance, filename):
 
 
 class Category(models.Model):
+	class Meta:
+		ordering = ['position']
+
 	name = models.CharField(max_length=50)
+	# Determines the ordering in the menu bar
+	position = models.PositiveIntegerField(unique=True)	
 
 	class Meta:
 		verbose_name_plural = 'categories'

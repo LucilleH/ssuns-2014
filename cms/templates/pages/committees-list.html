@@ -1,5 +1,6 @@
 {% for category in categories %}
     <h2>{{ category.name }}</h2>
+    <br />
     <ul id="committees-grid">
         {% for committee in category.committee_set.all %}
             <li>

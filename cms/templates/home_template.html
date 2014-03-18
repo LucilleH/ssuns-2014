@@ -13,6 +13,7 @@
 {% endif %}
 <div class="bs-docs-container">
 {% if page.parentpage.subpages.all %}
+	{% if page.short_name != "home-tmp" %}
         <div class="bs-sidebar hidden-print affix" role="complementary">
                 <ul class="nav bs-sidenav">
         	{% for sp in page.parentpage.subpages.all %}
@@ -22,6 +23,7 @@
 		{% endfor %}
 		</ul>
 	</div>
+	{% endif %}
 </div>
 <div id="content">
 	{% for sp in page.parentpage.subpages.all %}
