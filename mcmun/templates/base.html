@@ -22,7 +22,6 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="{{ STATIC_URL }}js/jquery.cycle.all.js"></script>
 	<script src="{{ STATIC_URL }}js/mcmun.js"></script>
-
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="http://getbootstrap.com/dist/js/bootstrap.js"></script>
@@ -60,10 +59,12 @@
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="/">Home</a></li>
-<!--            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
--->          
+		<li><a href="/">Home</a></li>
+		{% for page in pages %}
+			{% if page.short_name != "home" %}
+		        <li><a href="/{{ page.short_name }}">{{ page.long_name }}</a></li>     
+			{% endif %}
+		{% endfor %}
 	  </ul>
         </div>
       </div>
