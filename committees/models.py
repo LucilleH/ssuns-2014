@@ -54,17 +54,18 @@ class Committee(models.Model):
 		ordering = ('category', 'id')
 
 class CommitteeDais(models.Model):
+	class Meta:
+		ordering = ['position']
+
 	committee = models.ForeignKey(Committee)
 	name = models.CharField(max_length=255)
-	position = models.CharField(max_length=255)
-	position_index = models.IntegerField(max_length=2, choices=[(i,i) for i in range(20)])
+	title = models.CharField(max_length=255)
+	position = models.IntegerField(max_length=2, choices=[(i,i) for i in range(20)])
 	pic_name = models.CharField(max_length=255, unique=True)
 
 	def __unicode__(self):
 		return "%s - %s" % (self.committee.name, self.name)
 
-	class Meta:
-		ordering = ('committee', 'id')
 
 class CommitteeBackgroundGuide(models.Model):
 	committee = models.ForeignKey(Committee)

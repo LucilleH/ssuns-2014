@@ -32,19 +32,16 @@
 
 {{ committee.description|markdown:"footnotes,def_list,tables" }}
 
-<h2>Dais</h2>
+<h1>Dais</h1>
 
-<table>
-	<tr>
-		{% for dais in committee.committeedais_set.all %}
-		<td>
-			<b>{{ dais.name }}</b><p />
-			{{ dais.position }} <p />
-			<img src="{{ STATIC_URL }}img/dais/{{ committee.slug }}/{{ dais.pic_name }}" width="150px" height="225px"/>
-		</td>
-		{% endfor %}
-	</tr>
-</table>
+<ul>
+{% for dais in committee.committeedais_set.all %}
+	<li><b>{{ dais.name }}</b><p />
+		{{ dais.title }} <p />
+		<img src="{{ STATIC_URL }}img/dais/{{ committee.slug }}/{{ dais.pic_name }}" />
+	</li>
+{% endfor %}
+</ul>
 
 {% if bg_uploaded %}
 	<h2>Background Guide</h2>

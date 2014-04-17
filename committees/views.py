@@ -30,8 +30,6 @@ def view(request, slug):
 		'committee': committee,
 		'bg_uploaded': bg_uploaded,
 		'bgset': bgset,
-		'dais_template': 'dais_photos/%s.html' % committee.slug,
-		'DAIS_PHOTO_URL': '%simg/dais/%s/' % (settings.STATIC_URL, committee.slug),
 	}
 
 	return render(request, 'committee.html', data)

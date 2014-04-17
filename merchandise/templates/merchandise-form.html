@@ -1,0 +1,61 @@
+{% load merchandise_extras %}
+
+<h2>{{ thing }} - {{ thing.online_price|price }}</h2>
+
+{% if orders %}
+<form method='post' action='{% url 'merchandise_submit' %}'>
+{% csrf_token %}
+<input type='hidden' name='merch_type' value='{{ merch_type }}' />
+<table>
+    <thead>
+        <tr>
+            <th>Quantity</th>
+            {% if thing.has_size %}
+            <th>Size</th>
+            {% endif %}
+            <th>Comment</th>
+            {% if not final %}
+            <th>Actions</th>
+            {% endif %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in orders %}
+        <tr>
+            <td>{{ order.quantity }}</td>
+            {% if thing.has_size %}
+            <td>{{ order.get_size_display }}</td>
+            {% endif %}
+            <td>{{ order.comment }}</td>
+            {% if not final %}
+            <td><button name='delete' value='{{ order.id }}'>Delete</button>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</form>
+</table>
+{% else %}
+<p>You have not placed any orders for {{ thing }}.</p>
+<br />
+{% endif %}
+
+<div class='merch-pic'>
+    <img src='/static/img/merchandise/{{ thing.slug }}.png' alt='' />
+</div>
+{% if not final %}
+<div class='merch-order-form'>
+    <form method='post' action='{% url 'merchandise_submit' %}'
+          class='merchandise-form'>
+        {% csrf_token %}
+        <ul>
+            {{ form.as_ul }}
+            <li class='right-float'>
+                <input type='submit' name='submit' value='Add' />
+            </li>
+        </ul>
+        <input type='hidden' name='merch_type' value='{{ merch_type }}' />
+        <input type='hidden' name='slug' value='{{ thing.slug }}' />
+    </form>
+</div>
+{% endif %}

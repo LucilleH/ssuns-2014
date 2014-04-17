@@ -66,6 +66,7 @@ body{background-color:#101d2b;font-family:"Helvetica Neue",Helvetica,Arial,sans-
 #sec ul{list-style:none;margin-top:10px;margin-left:-20px;}#sec ul li div{min-height:400px;padding-top:10px;}#sec ul li div img{float:left;padding-right:20px;width:250px;}
 #sec ul li div h3{display:inline;padding-top:0px;color:#555555;padding-bottom:10px;}
 #sec ul li div p{padding-top:20px;}
+#dais ul{list-style:none;margin-top:10px;margin-left:-20px;}#dais ul li img{width:150px;height:225px;}
 #fee-information{display:none;padding-top:10px;}
 #staffing-signup{padding-top:20px;}
 #dashboard-table td{vertical-align:top;}#dashboard-table td h2,#dashboard-table td h3{padding-top:10px;}

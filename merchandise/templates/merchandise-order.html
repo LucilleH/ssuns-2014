@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% load merchandise_extras %}
+
+{% block content %}
+<p>
+    <a href='{% url 'merchandise' %}'>
+    &laquo; Back to merchandise overview page
+    </a>
+</p>
+
+<h1>Order merchandise</h1>
+
+<p>
+The online merchandise shop is now <strong>closed</strong>. Please contact
+<a href="mailto:ops@mcmun.org">ops@mcmun.org</a> if you have any questions.
+</p>
+
+{% comment %}
+
+{% if final %}
+<div class='center-align'>
+    <h2 class='red-text'>Your order has been finalised.</h2>
+</div>
+<p>
+You will receive an email containing an invoice of your order within several
+business days. Please contact it@mcmun.org if you have any questions or would
+like to change your order.
+</p>
+{% else %}
+{% if submit %}
+<div class='center-align'>
+    <h2 class='red-text'>Your order has been updated.</h2>
+</div>
+<hr />
+{% endif %}
+<p>Ready to place your order? Use the form below to add/delete items from your
+order. You'll be able to submit your order before the end of September.</p>
+
+<p>You can use the comment fields for anything. We would recommend using them to
+keep track of who on your delegation ordered what.</p>
+
+<p>Once you're ready to finalise your order, press the button below. </p>
+
+<form method='post' action='{% url 'merchandise_submit' %}'>
+<div class='center-align'>
+    <input type='submit' name='finalise' value='Finalise your order' />
+</div>
+{% endif %}
+
+
+{% for thing, orders, form in bundles %}
+    {% include 'merchandise-form.html' with merch_type='bundle' %}
+{% endfor %}
+
+{% for thing, orders, form in items %}
+    {% include 'merchandise-form.html' with merch_type='item' %}
+{% endfor %}
+{% endcomment %}
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% load markup %}
+{% load merchandise_extras %}
+
+{% block content %}
+<h1>Merchandise</h1>
+
+<p>
+To celebrate our 25th anniversary, we will not only be bringing you the largest
+merchandise selection that has ever been offered at McMUN, but for the first
+time ever, you can place your orders in advance! Worried that the famous McMUN
+shot glass will be sold out before you get a chance to buy it? Or do you just
+not want to have to wait in line for the new McMUN lapel pin? By placing an
+online order now, we will have your merchandise ready for you to pick up. Also,
+to encourage everyone to take full advantage of the online shop, we have reduced
+our prices!
+</p>
+
+<p>
+<em>Certain items may not be available at the conference and prices may
+increase. All the prices listed below include taxes.</em>
+</p>
+
+<p>
+Delegates will be able to place an order on merchandise after they have
+registered and their registration has been approved by the Chargée d'Affaires.
+The online shop will be open from August 1st 2013 to November 19th, 2013.
+</p>
+
+{% for bundle in bundles %}
+<h2>{{ bundle.name}} {{ bundle.online_price|price }}
+    <span class='red-text'>(save {{ bundle.get_amount_saved|price }})</span>
+</h2>
+{{ bundle.description|markdown }}
+<br />
+<div class='left-float'>
+    <img src='{{ STATIC_URL }}img/merchandise/{{ bundle.slug }}.png' alt='' />
+</div>
+<div class='left-float'>
+    <ul>
+        {% for item in bundle.items.all %}
+        <li>{{ item.name }} ({{ item.online_price|price }} value)</li>
+        {% endfor %}
+    </ul>
+</div>
+<br clear='all' />
+{% endfor %}
+
+{% for item in items %}
+<h2>{{ item.name}} {{ item.online_price|price }}
+    {% if item.is_limited %}
+        <span class='red-text'>LIMITED QUANTITY</span>
+    {% endif %}
+</h2>
+{{ item.description|markdown }}
+<br />
+
+<div class='center-align'>
+    <img src='{{ STATIC_URL }}img/merchandise/{{ item.slug }}.png' alt='' />
+</div>
+{% endfor %}
+
+<h2>Policies for delegates</h2>
+<ul>
+    <li>Orders will be made by delegation.</li>
+    <li>An order can only be placed once a delegation has received confirmation
+    of registration.</li>
+    <li>The online merchandise shop has a save feature so you can save your
+    order until you are ready to place an order.</li>
+    <li>Accepted payment methods are PayPal and mailed cheque (the same as
+    with registration).</li>
+    <li>An order will only be processed once it has been fully paid.</li>
+    <li>Once an order is complete, an electronic invoice will be sent by email.</li>
+    <li>Orders can be picked up by delegation when they sign in at the
+    conference on January 23rd.</li>
+    <li>It is recommended that you bring your order confirmation/receipt when
+    picking up your order.</li>
+    <li>Reimbursement policy: 30 days from the date of merchandise order (not
+    the date of registration or date of pickup)</li>
+</ul>
+{% endblock %}
