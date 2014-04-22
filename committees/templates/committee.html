@@ -4,7 +4,6 @@
 
 {% block content %}
 
-
 {% if committee.video_url %}
         <div class="video">
                 <iframe width="700" height="430" src="{{ committee.video_url }}" frameborder="0" allowfullscreen></iframe>
@@ -16,11 +15,8 @@
 <div id="content">
 
 <a href="/committees-list">Go back</a>
-<div class="center-align">
-	<img src="{{ STATIC_URL }}img/committees/{{ committee.slug }}.jpg" />
-</div>
 
-<br />
+<p />
 
 <h1>{{ committee.name }}</h1>
 
@@ -32,16 +28,21 @@
 
 {{ committee.description|markdown:"footnotes,def_list,tables" }}
 
+<br />
 <h1>Dais</h1>
-
+<div id="dais">
 <ul>
 {% for dais in committee.committeedais_set.all %}
-	<li><b>{{ dais.name }}</b><p />
-		{{ dais.title }} <p />
-		<img src="{{ STATIC_URL }}img/dais/{{ committee.slug }}/{{ dais.pic_name }}" />
+	<li>
+		<div>
+			<img src="{{ STATIC_URL }}img/dais/{{ committee.slug }}/{{ dais.pic_name }}" /><p />
+			<p><b>{{ dais.name }}</b><br />
+			{{ dais.title }} </p>
+		</div>
 	</li>
 {% endfor %}
 </ul>
+</div>
 
 {% if bg_uploaded %}
 	<h2>Background Guide</h2>
