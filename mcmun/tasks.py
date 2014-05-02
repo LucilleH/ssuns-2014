@@ -48,10 +48,10 @@ def generate_invoice(school_id, username, password):
 
 	# Send out an email to the user explaining that their account has been approved
 	# CC myself just in case they forget the password or whatever
-	invoice_subject = 'Invoice for SSUNS 2013'
+	invoice_subject = 'Invoice for SSUNS 2014'
 	invoice_message_filename = 'invoice'
 
-	invoice_id = 'SSUNS13' + str(school_id).zfill(3)
+	invoice_id = 'SSUNS14' + str(school_id).zfill(3)
 
 	pdf_context = {
 		'invoice_id': invoice_id,
@@ -67,7 +67,8 @@ def generate_invoice(school_id, username, password):
 
 	attachment_filenames = [pdf_filename]
 
-	send_email.delay(invoice_subject, invoice_message_filename, [school.email], context=invoice_context, bcc=[settings.IT_EMAIL, settings.CHARGE_EMAIL], attachment_filenames=attachment_filenames)
+#	send_email.delay(invoice_subject, invoice_message_filename, [school.email], context=invoice_context, bcc=[settings.IT_EMAIL, settings.CHARGE_EMAIL], attachment_filenames=attachment_filenames)
+	send_email.delay(invoice_subject, invoice_message_filename, [school.email], context=invoice_context, bcc=[settings.IT_EMAIL], attachment_filenames=attachment_filenames)
 
 @task
 def regenerate_invoice(school_id):
@@ -87,10 +88,10 @@ def regenerate_invoice(school_id):
 
 	# Send out an email to the user explaining that their account has been approved
 	# CC myself just in case they forget the password or whatever
-	invoice_subject = 'Invoice for SSUNS 2013'
+	invoice_subject = 'Invoice for SSUNS 2014'
 	invoice_message_filename = 're-invoice'
 
-	invoice_id = 'SSUNS13' + str(school_id).zfill(3)
+	invoice_id = 'SSUNS14' + str(school_id).zfill(3)
 
 	pdf_context = {
 		'invoice_id': invoice_id,
@@ -128,10 +129,10 @@ def regenerate_add_invoice(school_id, add_id):
 
 	# Send out an email to the user explaining that their account has been approved
 	# CC myself just in case they forget the password or whatever
-	invoice_subject = 'Invoice for SSUNS 2013, addtional delegates'
+	invoice_subject = 'Invoice for SSUNS 2014, addtional delegates'
 	invoice_message_filename = 'add-invoice'
 
-	invoice_id = 'SSUNS13' + str(add_id).zfill(3)
+	invoice_id = 'SSUNS14' + str(add_id).zfill(3)
 
 	pdf_context = {
 		'invoice_id': invoice_id,

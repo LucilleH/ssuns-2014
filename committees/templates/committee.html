@@ -14,7 +14,7 @@
 {% endif %}
 <div id="content">
 
-<a href="/committees-list">Go back</a>
+<a href="/committees#committees-list">Go back</a>
 
 <p />
 
@@ -35,7 +35,7 @@
 {% for dais in committee.committeedais_set.all %}
 	<li>
 		<div>
-			<img src="{{ STATIC_URL }}img/dais/{{ committee.slug }}/{{ dais.pic_name }}" /><p />
+			<img src="{{ STATIC_URL }}img/dais/{{ committee.slug }}/{{ dais.pic_name }}.jpg" /><p />
 			<p><b>{{ dais.name }}</b><br />
 			{{ dais.title }} </p>
 		</div>

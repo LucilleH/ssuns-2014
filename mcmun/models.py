@@ -70,6 +70,7 @@ class RegisteredSchool(models.Model):
 
 	experience = models.TextField(null=True, blank=True)
 	mcgill_tours = models.IntegerField(default=0, choices=[(n, n) for n in xrange(MIN_NUM_DELEGATES, MAX_NUM_DELEGATES + 1)])
+	merchandise = models.BooleanField(choices=YESNO)
 	disclaimer = models.BooleanField(choices=YESNO, default=True)
 	account = models.ForeignKey(User, null=True)
 
@@ -144,7 +145,7 @@ class RegisteredSchool(models.Model):
 
 	def send_success_email(self):
 		# Send out email to user (receipt of registration)
-		receipt_subject = 'Successful registration for SSUNS 2013'
+		receipt_subject = 'Successful registration for SSUNS 2014'
 		receipt_message_filename = 'registration_success'
 		receipt_context = {
 			'first_name': self.first_name,
@@ -153,7 +154,7 @@ class RegisteredSchool(models.Model):
 
 		send_email.delay(receipt_subject, receipt_message_filename, [self.email], context=receipt_context)
 
-		# Send out email to Serena, myself (link to approve registration)
+		# Send out email to Charge, myself (link to approve registration)
 		approve_subject = 'New registration for SSUNS'
 		approve_message_filename = 'registration_approve'
 		approve_context = {
@@ -276,52 +277,3 @@ def approve_schools(sender, instance, **kwargs):
 
 
 
-class DelegateSurvey(models.Model):
-
-	school = models.ForeignKey(RegisteredSchool, null=False)
-	first_name = models.CharField(max_length=50)
-	last_name = models.CharField(max_length=50)
-	q1 = models.BooleanField(choices=TRUEFALSE)
-	q2 = models.BooleanField(choices=TRUEFALSE)
-	q3 = models.BooleanField(choices=TRUEFALSE)
-	q4 = models.CharField(max_length=1, choices=Q4)
-	q5 = models.CharField(max_length=1, choices=Q5)	
-	q6 = models.CharField(max_length=1, choices=Q6)
-	q7 = models.BooleanField(choices=TRUEFALSE)
-	q8 = models.CharField(max_length=1, choices=Q8)
-	q9 = models.CharField(max_length=1, choices=Q9)
-	q10 = models.CharField(max_length=1, choices=Q10)
-	q11 = models.CharField(max_length=1, choices=Q11)
-	q12 = models.CharField(max_length=1, choices=Q12)
-	q13 = models.CharField(max_length=1, choices=Q13)
-	q14 = models.BooleanField(choices=TRUEFALSE)
-	q15 = models.BooleanField(choices=TRUEFALSE)
-	q16 = models.CharField(max_length=1, choices=Q16)
-	q17 = models.BooleanField(choices=TRUEFALSE)
-	q18 = models.CharField(max_length=1, choices=Q18)
-	q19 = models.CharField(max_length=1, choices=Q19)
-	q20 = models.CharField(max_length=1, choices=Q20)
-	q21 = models.CharField(max_length=1, choices=Q21)
-	q22 = models.BooleanField(choices=TRUEFALSE)
-	q23 = models.CharField(max_length=1, choices=Q23)
-	q24 = models.CharField(max_length=1, choices=Q24)
-	q25 = models.BooleanField(choices=TRUEFALSE)
-	q26 = models.CharField(max_length=1, choices=Q26)
-	q27 = models.BooleanField(choices=TRUEFALSE)
-	q28 = models.BooleanField(choices=TRUEFALSE)
-	q29 = models.CharField(max_length=1, choices=Q29)
-	q30 = models.CharField(max_length=1, choices=Q30)
-	q31 = models.CharField(max_length=1, choices=Q31)
-	q32 = models.BooleanField(choices=TRUEFALSE)
-	q33 = models.BooleanField(choices=TRUEFALSE)
-	q34 = models.BooleanField(choices=TRUEFALSE)
-	q35 = models.CharField(max_length=1, choices=Q35)
-	q36 = models.CharField(max_length=1, choices=Q36)
-	q37 = models.CharField(max_length=1, choices=Q37)
-	q38 = models.BooleanField(choices=TRUEFALSE)
-	q39 = models.CharField(max_length=1, choices=Q39)
-	q40 = models.CharField(max_length=1, choices=Q40)
-	num_correct = models.IntegerField(default=0)
- 
-	def __unicode__(self):
-		return self.first_name + " " + self.last_name

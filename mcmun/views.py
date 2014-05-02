@@ -11,9 +11,9 @@ from django.views.static import serve
 from committees.forms import CommitteeAssignmentFormSet, ScholarshipIndividualFormset
 from committees.models import ScholarshipIndividual
 from committees.utils import get_committee_from_email
-from mcmun.forms import RegistrationForm, ScholarshipSchoolForm, CommitteePrefsForm, DelegateSurveyForm
-from mcmun.constants import MIN_NUM_DELEGATES, MAX_NUM_DELEGATES, SURVEYANSWER
-from mcmun.models import RegisteredSchool, AddDelegates, ScholarshipSchoolApp, scholarshipschool_upload_path, DelegateSurvey
+from mcmun.forms import RegistrationForm, ScholarshipSchoolForm, CommitteePrefsForm
+from mcmun.constants import MIN_NUM_DELEGATES, MAX_NUM_DELEGATES
+from mcmun.models import RegisteredSchool, AddDelegates, ScholarshipSchoolApp, scholarshipschool_upload_path
 
 
 def home(request):
@@ -162,66 +162,6 @@ def serve_scholarshipschool(request, file_name):
 	else:
 		raise PermissionDenied
 
-
-def delegate_survey(request):
-	if request.method == 'POST':
-		form = DelegateSurveyForm(request.POST)
-		if form.is_valid():
-			# get the number of right answers
-			num_correct = 0
-                	survey = form.save(commit=False)
-			field_array = [survey.q1, survey.q2, survey.q3, survey.q4, survey.q5, survey.q6, survey.q7, survey.q8, survey.q9, survey.q10, survey.q11, survey.q12, survey.q13, survey.q14, survey.q15, survey.q16, survey.q17, survey.q18, survey.q19, survey.q20, survey.q21, survey.q22, survey.q23, survey.q24, survey.q25, survey.q26, survey.q27, survey.q28, survey.q29, survey.q30, survey.q31, survey.q32, survey.q33, survey.q34, survey.q35, survey.q36, survey.q37, survey.q38, survey.q39, survey.q40]
-
-			print field_array
-			tupple = zip(field_array, SURVEYANSWER)
-			for (s, t) in tupple:
-				if str(s) in str(t) or s == t:
-					num_correct += 1
-			survey.num_correct = num_correct
-			if not request.POST.get('address', '').startswith('http://'):
-				survey.save()
-
-			data = {
-				'page': {
-					'long_name': 'Submit Successful'
-				}
-			}
-			return render(request, "survey_success.html", data)
-	else:
-		form = DelegateSurveyForm()
-
-	data = {
-		'form': form,
-	}
-
-	return render(request, "survey.html", data)
-
-@login_required
-def survey_result(request):
-	# If it's a dais member, redirect to that committee's position paper listing
-	if request.user.username.endswith('@ssuns.org'):
-		dais_committee = get_committee_from_email(request.user.username)
-		if dais_committee:
-			return redirect(dais_committee)
-
-	form = None
-	school = None
-	message = None
-
-	if request.user.registeredschool_set.count():
-		# There should only be one anyway (see comment in models.py)
-		school = request.user.registeredschool_set.filter(is_approved=True)[0]
-		
-		survey = DelegateSurvey.objects.filter(school=school)
-		if survey.count() == 0:
-			message = "Sorry, none of your delegate has fill out the survey yet!"
-
-		data = {
-			'survey_result': survey,
-			'message': message,
-			'survey_answer': SURVEYANSWER
-		}
-	return render(request, "survey_result.html", data)
 
 def nikhil_error(request):
 	# For testing errors

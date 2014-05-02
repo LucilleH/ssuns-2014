@@ -1,7 +1,6 @@
 import re
 
-from mcmun.models import RegisteredSchool, AddDelegates, ScholarshipSchoolApp, ScholarshipIndividual, DelegateSurvey
-from mcmun.constants import SURVEYANSWER
+from mcmun.models import RegisteredSchool, AddDelegates, ScholarshipSchoolApp, ScholarshipIndividual
 
 from django import forms
 
@@ -44,6 +43,7 @@ class RegistrationForm(forms.ModelForm):
 			'committee_4',
 			'experience',
 			'mcgill_tours',
+			'merchandise',
 			'num_delegates',
 			'use_online_payment',
 			'disclaimer',
@@ -70,9 +70,6 @@ class ScholarshipIndividualForm(forms.ModelForm):
 	class Meta:
 		model = ScholarshipIndividual
 
-class DelegateSurveyForm(forms.ModelForm):
-	class Meta:
-		model = DelegateSurvey
 	
 class CommitteePrefsForm(forms.ModelForm):
 	class Meta:

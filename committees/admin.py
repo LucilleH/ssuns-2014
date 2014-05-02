@@ -39,9 +39,13 @@ class ScholarshipIndividualAdmin(admin.ModelAdmin):
 	committee.short_description = 'Committee'
 	committee.admin_order_field = 'committee_assignment'
 
+
+class CommitteeDaisAdmin(admin.ModelAdmin):
+	ordering = ['committee']
+
 admin.site.register(Category)
 admin.site.register(Committee, CommitteeAdmin)
-admin.site.register(CommitteeDais)
+admin.site.register(CommitteeDais, CommitteeDaisAdmin)
 admin.site.register(CommitteeBackgroundGuide)
 admin.site.register(CountryCharacterMatrix)
 admin.site.register(CommitteeAssignment, CommitteeAssignmentAdmin)

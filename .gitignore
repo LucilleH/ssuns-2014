@@ -1,6 +1,7 @@
 *.pyc
 tmp
 ssuns_2014
+mcmun/invoice
 static/admin/*
 static/img/dais/*
 *.swp

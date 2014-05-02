@@ -85,33 +85,6 @@ YESNO = (( True, 'Yes'), (False, 'No'))
 HOWYOUHEAR = (('brochure', 'Brochure'), ('letter', 'Letter'), ('website', 'Website'), ('another_school', 'Other School'), ('other', 'Other'))
 
 
-# Survey questions start
 TRUEFALSE = (( True, 'True'), (False, 'False'))
-Q4 = (('a', u'Vote in favour'),('b', u'Vote in opposed'),('c', u'Abstain'))
-Q5 = (('a', u'One-third of the members of a committee'),('b', u'A simple majority'),('c', u'Two-thirds of the members of a committee'))
-Q6 = (('a', u'One-third of the members of a committee'),('b', u'A simple majority'),('c', u'Two-thirds of the members of a committee'))
-Q8 = (('a', u'One (1) for, one (1) against'),('b', u'Two (2) for, two (2) against'),('c', u'Only two (2) speakers for'))
-Q9 = (('a', u'To determine which members are more important, and therefore should speak first'),('b', u'To set the agenda of the topics to be discussed'),('c', u'To discuss pressing issues that must be addressed immediately by the committee'))
-Q10 = (('a', u'To discuss the topic in question'),('b', u'To allow less important members an opportunity to speak to the committee.'),('c', u'To address less pressing issues of secondary importance'))
-Q11 = (('a', u'Raising their placard'),('b', u'Submitting a written request to the Dais'),('c', u'Approaching the Dais'))
-Q12 = (('a', u'Debate on a topic is automatically closed'),('b', u'A member may motion to continue debate'),('c', u'The committee returns immediately to the primary speakers\' list'))
-Q13 = (('a', u'Type (moderated or unmoderated)'),('b', u'Type (moderated or unmoderated) and duration'),('c', u'Type (moderated or unmoderated), duration, and purpose'),('d', u'Type (moderated or unmoderated), duration, purpose, and speaking time for a moderated caucus'))
-Q16 = (('a', u'Debate on a given substantive issue is ended without having voted on any draft resolutions, with the option of reintroducing the tabled topic later on.'),('b', u'Debate on a given substantive issue is ended and the committee moves to voting procedure.'),('c', u'Debate on a given substantive issue is ended without having voted on any draft resolutions, and debate on the topic cannot be returned to.'))
-Q18 = (('a', u'Debate is closed on the topic immediately'),('b', u'No new speakers shall be added to the list, and debate is closed automatically upon exhaustion of the speakers\' list.'),('c', u'Two (2) more speakers may be added to the list.'))
-Q19 = (('a', u'Five (5)'),('b', u'Fifteen (15)'),('c', u'Thirty (30)'))
-Q20 = (('a', u'At least two topics on its agenda have been considered.'),('b', u'The committee has considered every topic on its agenda.'),('c', u'There remain fewer than thirty (30) minutes in the last committee session of the conference.'))
-Q21 = (('a', u'A Point of Personal Privilege'),('b', u'A Point of Order'),('c', u'A Point of Parliamentary Inquiry'))
-Q23 = (('a', u'To the Chair'),('b', u'To comments'),('c', u'To another delegate'),('d', u'To the pages'),('e', u'To questions'))
-Q24 = (('a', u'The Chair'),('b', u'Comments'),('c', u'Questions'))
-Q26 = (('a', u'Another delegate personally insults him/her or his/her state during a speech'),('b', u'He/she feels that another delegate is off-policy'),('c', u'His/her state does not agree with what a delegate has said in a speech'))
-Q29 = (('a', u'Two (2)'),('b', u'Three (3)'),('c', u'Four (4)'))
-Q30 = (('a', u'The number of sponsors exceeds five (5).'),('b', u'One or more friendly amendments are passed.'),('c', u'One or more unfriendly amendments are passed.'))
-Q31 = (('a', u'One-fifth (1/5)'),('b', u'One quarter (1/4)'),('c', u'One-third (1/3)'))
-Q35 = (('a', u'A placard vote'),('b', u'A Roll Call Vote'),('c', u'All of the above'))
-Q36 = (('a', u'Maintenance of international peace and security'),('b', u'Admission of new members to the United Nations'),('c', u'Suspension of the rights and privileges of membership'),('d', u'Expulsion of members'),('e', u'Crimes against humanity'),('f', u'Operation of the trusteeship system'),('g', u'Budgetary questions'))
-Q37 = (('a', u'The passing of the amendment'),('b', u'The failure of the amendment'),('c', u'A re-vote'))
-Q39 = (('a', u'Only 1'),('b', u'It depends on the size of the committee'),('c', u'Any number'))
-Q40 = (('a', u'A simple majority of the members present'),('b', u'Two-thirds (2/3) of the members present'),('c', u'Two-thirds (2/3) of the members present, as well as the unanimous approval of the Dais'))
 
 
-SURVEYANSWER = ['False', 'True', 'True', 'c', 'a', 'b', 'False', 'b', 'b', 'a', 'b', 'a', 'd', 'True', 'False', 'a', 'True', 'b', 'b', 'a', 'c', 'False', 'd', 'b', 'False', 'a', 'True', 'False', 'a', 'c', 'a', 'False', 'True', 'True', 'b', 'e', 'b', 'True', 'c', 'a']

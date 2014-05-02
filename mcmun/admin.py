@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from mcmun.models import RegisteredSchool, AddDelegates, ScholarshipSchoolApp, DelegateSurvey
+from mcmun.models import RegisteredSchool, AddDelegates, ScholarshipSchoolApp
 from mcmun.tasks import regenerate_invoice, regenerate_add_invoice
 from committees.models import CommitteeAssignment
 
@@ -48,9 +48,6 @@ class AddDelegatesAdmin(admin.ModelAdmin):
 class ScholarshipSchoolAdmin(admin.ModelAdmin):
 	list_display = ('school', 'new_school_application_uploaded', 'international_application_uploaded')
 
-class DelegateSurveyAdmin(admin.ModelAdmin):
-	list_display = ('school', 'first_name', 'last_name')
 admin.site.register(RegisteredSchool, RegisteredSchoolAdmin)
 admin.site.register(AddDelegates, AddDelegatesAdmin)
 admin.site.register(ScholarshipSchoolApp, ScholarshipSchoolAdmin)
-admin.site.register(DelegateSurvey, DelegateSurveyAdmin)

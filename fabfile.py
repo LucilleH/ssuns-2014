@@ -15,11 +15,13 @@ def static():
     local("python manage.py collectstatic --noinput")
 
 def restart():
-    local('kill -HUP `cat gunicorn.pid`')
+    local('kill -HUP `cat ./tmp/gunicorn.pid`')
 
 def stats():
     local('python manage.py get_registration_stats')
 
+def celery():
+    local('python manage.py celeryd --concurrency=1 > ./tmp/celery.log 2>&1 & echo $! > ./tmp/celery.pid &')
 
 def sh():
     local('python manage.py shell')

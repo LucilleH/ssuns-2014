@@ -1,6 +1,397 @@
 {% extends "base.html" %}
-
 {% block content %}
-<h1>{{ page.long_name }}</h1>
-<p>Registration hasn't open up yet!</p>
+<div class="wrapper-no-video">
+<div id="content">
+
+
+<h1>Registration</h1>
+
+<p>Dear Faculty Advisor/Head Delegate,</p>
+
+<p>Thank you for your interest and trust in SSUNS 2014. If you have any questions or concerns while filling out the registration application form, you can contact our Chargee D'Affaires Hilary Chu at <a href="mailto:schools@ssuns.org">schools@ssuns.org</a>. Similarly, please note that you only need to fill out this application once and that if any of the information changes after registration, simply inform Hilary Chu at <a href="mailto:schools@ssuns.org">schools@ssuns.org</a>.</p> 
+
+<p>After you register and click submit, you will receive a confirmation email at the email address that you have provided.</p>
+
+<form action="" method="post" id="registration_form">
+	<fieldset class="hidden">
+		{% csrf_token %}
+		<input type="text" name="address" value="" />
+	</fieldset>
+
+	{% if form.errors %}
+	<fieldset class="errors">
+		<p>There were some errors with your registration! Please fix them below.</p>
+	</fieldset>
+	{% endif %}
+
+	<fieldset>
+		<legend>School details</legend>
+		<dl>
+			<dt>
+				<label for="id_school_name">Name of school:</label>
+			</dt>
+			<dd>
+				{{ form.school_name }}
+				{% if form.school_name.errors %}
+					<p class="errors">Please enter the name of your institution.</p>
+				{% endif %}
+			</dd>
+			<dt>
+				<label for="first_time">Will this be your first time attending SSUNS?</label>
+			</dt>
+			<dd>
+				{{ form.first_time }}
+			</dd>
+		</dl>
+		<dl id="howYouHear" style="display:none;"> <!-- bad style. fix later -->	
+			<dt>
+				<label for="id_how_you_hear">How did you first hear about SSUNS?</label>
+			</dt>
+			<dd>
+				{{ form.how_you_hear }}
+			</dd>
+			<dl id="anotherschool" style="display:none;">
+				<dt>
+					<label for="id_another_school">Which school referred you to SSUNS?</label>
+				</dt>
+				<dd>
+					{{ form.another_school }}
+				</dd>
+			</dl>
+			<dl id="other" style="display:none;">
+				<dt>
+					<label for="id_other_method">Please specify</label>
+				</dt>
+				<dd>
+					{{ form.other_method }}
+				</dd>
+			</dl>
+		</dl>
+	</fieldset>
+	<fieldset>
+		<legend>Contact details</legend>
+		<dl>
+			<dt>
+				<label for="id_first_name">Faculty Advisor First Name:</label>
+			</dt>
+			<dd>
+				{{ form.first_name }}
+				{% if form.first_name.errors %}
+					<p class="errors">Please enter your first name.</p>
+				{% endif %}
+			</dd>
+
+			<dt>
+				<label for="id_last_name">Faculty Advisor Last Name:</label>
+			</dt>
+			<dd>{{ form.last_name }}
+				{% if form.last_name.errors %}
+					<p class="errors">Please enter your last name.</p>
+				{% endif %}
+			</dd>
+
+			<dt>
+				<label for="id_email">Faculty Advisor Contact Email:</label>
+				<p>Please enter an unique email with less than 30 characters. The receipt will be sent to this email. The address will be your new account username</p>
+			</dt>
+			<dd>
+				{{ form.email }}
+				{% if form.email.errors %}
+					<p class="errors">Please ensure that you have correctly entered one email with less than 50 characters.</p>
+				{% endif %}
+			</dd>
+			<dt>
+				<label for="id_delegate_email">Head Delegate Contact Email:</label>
+				<p>Please enter only one email with less than 50 characters.</p>
+			</dt>
+			<dd>
+				{{ form.delegate_email }}
+				{% if form.delegate_email.errors %}
+					<p class="errors">Please ensure that you have correctly entered one email with less than 50 characters.</p>
+				{% endif %}
+			</dd>
+			<dt>
+				<label for="id_other_email">Other Contact Email:</label>
+			</dt>
+			<dd>
+				{{ form.other_email }}
+			</dd>
+			<dt>
+				<label for="id_mail_address">Mailing Address:</label>
+			</dt>
+			<dd>
+				{{ form.mail_address }}
+				{% if form.mail_address.errors %}
+					<p class="errors">Please enter the address of your institution.</p>
+				{% endif %}
+			</dd>
+			<dt>
+				<label for="id_city">City</label>
+			</dt>
+			<dd>
+				{{ form.city }}
+				{% if form.city.errors %}
+					<p class="errors">Please enter the city.</p>
+				{% endif %}
+			</dd>
+			<dt>
+				<label for="id_province_state">Province/State</label>
+			</dt>
+			<dd>
+				{{ form.province_state }}
+				{% if form.province_state.errors %}
+					<p class="errors">Please enter your province/state.</p>
+				{% endif %}
+			</dd>
+			<dt>
+				<label for="id_postal_code">Postal code</label>
+			</dt>
+			<dd>
+				{{ form.postal_code }}
+				{% if form.postal_code.errors %}
+					<p class="errors">Please enter the postal code.</p>
+				{% endif %}
+			</dd>
+			<dt>
+				<label for="id_country">In which country is your institution located?</label>
+			</dt>
+			<dd>
+				{{ form.country }}
+				{% if form.country.errors %}
+					<p class="errors">Please choose the country in which your institution is located.</p>
+				{% endif %}
+			</dd>
+			<dt>
+				<label for="id_advisor_phone">Phone Number</label>
+			</dt>
+			<dd>
+				{{ form.advisor_phone }}
+				{% if form.advisor_phone.errors %}
+					<p class="errors">Allowed characters: digits, spaces, hyphens, parentheses, and the plus sign.</p>
+				{% endif %}
+			</dd>
+			<dt>
+				<label for="id_fax">Fax Number</label>
+			</dt>
+			<dd>
+				{{ form.fax }}
+			</dd>
+		</dl>
+	</fieldset>
+	
+	<fieldset>
+		<legend>Country Selection</legend>
+		<dl>
+		<table>
+		<tr>
+			<td>
+			<dt>
+				<p>Please choose 10 countries and/or NGOs in order of preference, 
+				with 1 being the highest. You may wish to refer to the <a href="/matrix" target="_blank">country-committee matrix</a> to make your selections. 
+				The matrix is in PDF format. To read it, you'll need Adobe Acrobat Reader, available <a href="http://get.adobe.com/reader/">here</a>. 
+				To read our country assignment policy, click <a href="/conference-policies" target="_blank">here</a>. Please do not select the same country twice.</p>
+			</dt>
+			</td>
+			<td>
+			<dd>
+				{{ form.country_1 }}
+				{% if form.country_1.errors %}
+					<p class="errors"> Please select one country.</p>
+				{% endif %}
+			
+				{{ form.country_2 }}
+				{% if form.country_2.errors %}
+					<p class="errors"> Please select one country.</p>
+				{% endif %}
+			
+				{{ form.country_3 }}
+				{% if form.country_3.errors %}
+					<p class="errors"> Please select one country.</p>
+				{% endif %}
+			
+				{{ form.country_4 }}
+				{% if form.country_4.errors %}
+					<p class="errors"> Please select one country.</p>
+				{% endif %}
+			
+				{{ form.country_5 }}
+				{% if form.country_5.errors %}
+					<p class="errors"> Please select one country.</p>
+				{% endif %}
+			
+				{{ form.country_6 }}
+				{% if form.country_6.errors %}
+					<p class="errors"> Please select one country.</p>
+				{% endif %}
+			
+				{{ form.country_7 }}
+				{% if form.country_7.errors %}
+					<p class="errors"> Please select one country.</p>
+				{% endif %}
+			
+				{{ form.country_8 }}
+				{% if form.country_8.errors %}
+					<p class="errors"> Please select one country.</p>
+				{% endif %}
+			
+				{{ form.country_9 }}
+				{% if form.country_9.errors %}
+					<p class="errors"> Please select one country.</p>
+				{% endif %}
+			
+				{{ form.country_10 }}
+				{% if form.country_10.errors %}
+					<p class="errors"> Please select one country.</p>
+				{% endif %}
+			</dd>
+			</td>
+		</tr>
+		</table>
+		</dl>
+	</fieldset>
+
+	<fieldset>
+		<legend>Specialized Agencies and Crises</legend>
+		<dl>
+		<table>
+		<tr>
+			<td>
+			<dt>
+				<p>SSUNS will be simulating a diverse array of small and exciting specialized agencies and crises. 
+				Please indicate your first three preferences for the following committees should you be interested in participating in them. 
+				More information on the specific committee can be obtained by from the <a href="/committees-list" target="_blank">committees list</a>. 
+				Please be advised that due to its nature, the Ad-Hoc Committee of the Secretary General is application-based. Please do not select the same committee twice.<p>
+			</dt>
+			</td>
+			<td>
+			<dd>
+				{{ form.committee_1 }}
+				{% if form.committee_1.errors %}
+					<p class="errors"> Please select one committee.</p>
+				{% endif %}
+			
+				{{ form.committee_2 }}
+				{% if form.committee_2.errors %}
+					<p class="errors"> Please select one committee.</p>
+				{% endif %}
+			
+				{{ form.committee_3 }}
+				{% if form.committee_3.errors %}
+					<p class="errors"> Please select one committee.</p>
+				{% endif %}
+			
+				{{ form.committee_4 }}
+				{% if form.committee_4.errors %}
+					<p class="errors"> Please select one committee.</p>
+				{% endif %}
+			</dd>
+			</td>
+		</tr>
+		</table>
+		</dl>
+	</fieldset>
+
+	<fieldset>
+		<legend>Previous Model United Nations Experience (highly recommended)</legend>
+		<dl>
+			<dt>
+				<p>Please describe your previous experience at SSUNS, 
+				and with other Model United Nations programs including any previous achievements.  
+				If you wish, you may include this information in a separate e-mail message addressed to Hilary Chu,
+				 Chargée d'Affaires (<a href="mailto:schools@ssuns.org">schools@ssuns.org</a>).
+				</p>
+			</dt>
+			<dd>
+				{{ form.experience }}
+			</dd>
+		</dl>
+	</fieldset>
+	<fieldset>
+		<legend>McGill Tours & Merchandise</legend>
+		<dl>
+			<dt>
+				<label for="id_mcgill_tours">Number Attending McGill Tours (incl. Faculty Advisers):</label>
+			       <p>Are you considering attending one of Canada’s most prestigious universities? 
+				Are you interested in learning more about McGill University or simply finding out more about what student life in Montreal is like? 
+				SSUNS is also offering McGill tours on the Thursday morning of the conference. 
+				The tour will be guided by official tour guides who will be giving one-hour tours of the campus. 
+				Delegates will be divided into groups of around 15, and at the end of the tour, delegates will have the opportunity to visit the bookstore and pick up a few souvenirs. 
+				For more information, you can visit <a href="http://ssuns.org/mcgill-tours" target="_blank">http://ssuns.org/mcgill-tours</a>). Cost per delegate is $2. 
+				</p>
+			</dt>
+			<dd>
+<!--
+				<p>The McGill Tours Application reached the maximum capacity. It is now closed. Contact <a href="mailto:ops@ssuns.org">ops@ssuns.org</a> for more information.</p>
+				<div class="hidden">{{ form.mcgill_tours }}</div>
+-->
+				{{ form.mcgill_tours }}
+			</dd>
+		</dl>
+		<dl>
+			<dt>
+				<label for="id_merchandise">Will you be interested in customized SSUNS T-shirt for your school?</label>
+		 		<p>If yes, our Chief of Staff Katie Gilfillan will contact you via email</p>
+                        </dt>
+                        <dd>
+                                {{ form.merchandise }}
+                                {% if form.merchandise.errors %}
+                                <p class="errors">Please choose yes or no.</p>
+                                {% endif %}	
+			</dd>
+		</dl>
+	</fieldset>
+
+	<fieldset>
+		<legend>Delegation and payment information</legend>
+		<dl>
+			<dt>
+				<label for="id_num_delegates">Number of delegates:</label>
+				<p>If you wish to register more than {{ max_num_delegates }} delegates, or need to change the number of delegates after registering, contact <a href="mailto:schools@ssuns.org">schools@ssuns.org</a>.</p>
+			</dt>
+			<dd>
+				{{ form.num_delegates }}
+				{% if form.num_delegates.errors %}
+					<p class="errors">Please ensure that the number of delegates you select is between {{ min_num_delegates }} and {{ max_num_delegates }}, inclusive.</p>
+				{% endif %}
+			</dd>
+
+			<dt>
+				<label for="id_use_online_payment">Online payment (via PayPal):</label>
+				<p>You will be emailed instructions on how to complete the payment after your registration is approved. <strong><u>Note that there is an additional 3% convenience fee for online payments, due to a fee charged to us by PayPal.</u></strong></p>
+				<p>The alternative is to pay by cheque, mailed with one of the main shipping companies. See our <a href="/payment">payment policy page</a> for more information.</p>
+			</dt>
+			<dd>{{ form.use_online_payment }}</dd>
+
+			{% comment %} 
+			<dt>
+				<label for="id_use_tiered">Use the tiered payment system:</label>
+				<p>If you do not wish to pay the full fee up front, select this and you can pay using our tiered system of deposit and remainder. See our <a href="/payment">payment policy page</a> for more information..</p>
+			</dt>
+			<dd>{{ form.use_tiered }}</dd>
+			{% endcomment %}
+		</dl>
+	</fieldset>
+	<fieldset>
+		<legend>Disclaimer</legend>
+		<dl>
+			<dt>
+				<p>Every year, we hire photographers to capture every moment of SSUNS when it comes to the experience of the staffers, delegates and faculty advisors alike. In an effort to promote our conference, we would like to use these pictures on our website/brochure/pamphlets for others to see and learn more about SSUNS. Would your school be amenable for SSUNS to use such photos? </p>
+			</dt>
+			<dd>
+				{{ form.disclaimer }}
+			</dd>
+		</dl>
+	</fieldset>
+
+	<fieldset>
+		<p>Please confirm that the above information is correct. You will receive a confirmation email once your registration has been received. Once your registration is approved, you will be notified by email and will receive an invoice as well as payment instructions depending on the method of payment you selected. If you have any technical issues with the registration process, contact <a href="mailto:it@ssuns.org">it@ssuns.org</a>.</p>
+	</fieldset>
+
+	<fieldset class="submit">
+		<input type="submit" name="submit" value="Submit" />
+	</fieldset>
+</form>
+
+</div>
+</div>
 {% endblock %}
