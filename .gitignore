@@ -4,7 +4,8 @@ ssuns_2014
 mcmun/invoice
 static/admin/*
 static/img/dais/*
+.*
+!/.gitignore
 *.swp
 uploads
-.*
 *~
