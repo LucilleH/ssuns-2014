@@ -6,4 +6,5 @@ static/admin/*
 static/img/dais/*
 *.swp
 uploads
+.*
 *~
