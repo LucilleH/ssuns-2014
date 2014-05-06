@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="wrapper-no-video">
+<div id="content">
 <h1>Your dashboard</h1>
 
 {% if unfilled_assignments %}
@@ -29,7 +31,7 @@
 				<p>
 					<strong>Email address:</strong> {{ user.username }}
 					<br />
-					<a href="{% url password %}">Change your password</a> :: <a href="{% url logout %}">Log out</a>
+					<a href="{% url 'password' %}">Change your password</a>
 				</p>
 			</div>
 		</td>
@@ -96,7 +98,7 @@ In addition, if any of your students would like to apply for 'Individual Need-Ba
 <p><strong>Please upload PDF files for both position paper and scholarship application. We do not recommend any other document formats.<br />
 IMPORTANT: All position papers and scholarship applications must be submitted on the dashboard via your relevant faculty advisor. If you wish to change your position paper, email <a href="mailto:committees@ssuns.org">committees@ssuns.org</a>. To change your scholarship application, email <a href="mailto:pr@ssuns.org">pr@ssuns.org</a></strong></p>
 
-<form action="{% url assignments %}" method="post" enctype="multipart/form-data">
+<form action="{% url 'assignments' %}" method="post" enctype="multipart/form-data">
 {% for m in management_forms %}{{ m }}{% endfor %}
 {% csrf_token %}
 <table class="separated-cells">
@@ -113,11 +115,11 @@ IMPORTANT: All position papers and scholarship applications must be submitted on
 		{% for f, s_f in formset %}
 		{% with c=f.instance s=s_f.instance %}
 		<tr>
-			<td><a href="{{ c.committee.get_absolute_url }}">{{ c.committee.get_name }}</a></td>
-			<td>{{ c.get_assignment_display }}</td>
+			<td><a href="{{ c.assignment.committee.get_absolute_url }}" target="_blank">{{ c.assignment.committee.get_name }}</a></td>
+			<td>{{ c.display_assignment }}</td>
 			<td>
 				{% if c.delegate_name %}
-					<p>Delegate name: {{ c.delegate_name }}</p>
+					<p>{{ c.delegate_name }}</p>
 					<div class="hidden">{{ f.delegate_name }}</div>
 				{% else %}
 					{{ f.delegate_name }}
@@ -170,31 +172,32 @@ IMPORTANT: All position papers and scholarship applications must be submitted on
 
 <div id="scholarship">
 	<h2>School Scholarship application</h2>
-	<p>We only offer scholarship applications for International/New Schools attending SSUNS. An International School is defined as a school which is outside Canada/United States and a New School is defined as a school that hasn't attended SSUNS in the last five years. Kindly find the corresponding applications on <a href="/scholarships" target="_blank">this page</a>
-	</p>
-	{% if form %}
+	
+	{% if scholarshipform %}
 		<p><strong>Please upload PDF files for school scholarship application. We do not recommend any other document formats. You cannot reupload school scholarship application once you submit. If you are eligible for both scholarship, please upload them both at the same time.</strong></p>
-		<form action="{% url dashboard %}" method="post" enctype="multipart/form-data">
+		<form action="{% url 'dashboard' %}" method="post" enctype="multipart/form-data">
 			<fieldset class="hidden">
 				{% csrf_token %}
 			</fieldset>
 			{% if school.is_international %}
-				<p>International school scholarship application: {{ form.scholarship_international }}</p>
+				<p>International school scholarship application: </p>
 			{% else %}
-				<p>Your school is not eligible for international school scholarship</p>
+				<p>Delegation scholarship (U.S and Canada only): </p>
 			{% endif %}
-				<p>New school scholarship application: {{ form.scholarship_new }}</p>
+			{{ scholarshipform.scholarship }}
 			<fieldset class="submit">
 				<input type="submit" name="submit" value="Submit" />
 			</fieldset>
 		</form>
 	{% else %}
-		{% if scholarshipfile.scholarship_international %}
-			<p>Uploaded international school scholarship application: <a href="/{{ scholarshipfile.scholarship_international }}" target="_blank">view</a></p>
+		{% if scholarshipfile.application_uploaded %}
+			{% if school.is_international %}
+				<p>Uploaded international school scholarship application: </p>
+			{% else %}
+				<p>Uploaded delegation scholarship application: </p>
+			{% endif %}
+			<a href="/{{ scholarshipfile.scholarship }}" target="_blank">view</a>
 		{% endif %}
-		{% if scholarshipfile.scholarship_new %}	
-			<p>Uploaded new school scholarship application: <a href="/{{ scholarshipfile.scholarship_new }}" target="_blank">view</a></p>
-		{% endif %}	
 			<p>If you want to reupload school scholarship application, please contact <a href="mailto:pr@ssuns.org">pr@ssuns.org</a></p>
 	{% endif %}
 </div>
@@ -248,5 +251,6 @@ IMPORTANT: All position papers and scholarship applications must be submitted on
 {% else %}
 <p>Unfortunately there's nothing for you to see here. Please move along.</p>
 {% endif %}
-
+</div>
+</div>
 {% endblock %}

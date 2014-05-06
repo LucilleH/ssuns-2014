@@ -166,7 +166,7 @@
 				<tr class="bottom-border">
 					<td>
 						<p><strong>Per-delegate fee ({{ payment_type }})</strong></p>
-						<p class="left-space"><em>Applicable for all schools {% if payment_type == 'regular' %}after{% else %}before{% endif %} July 30.</em></p>
+						<p class="left-space"><em>Applicable for all schools {% if payment_type == 'regular' %}after{% else %}before{% endif %} July 31.</em></p>
 					</td>
 					<td class="amount">${{ school.get_delegate_fee }}.00</td>
 					<td class="amount right-border">{{ school.num_delegates }}</td>
@@ -206,13 +206,13 @@
 					</td>
 					<td class="amount">$25</td>
 					<td class="amount right-border">--</td>
-					<td class="amount">$25 {{ school.get_currency }}
+					<td class="amount">$25 {{ school.get_currency }}</td>
 				</tr>
 				{% endif %}
 				<tr>
 					<td colspan="3" class="right-border">
 						<div class="right-align">
-							<p><strong>TOTAL (due&nbsp;<u>{% if school.use_priority %}July 30th{% else %}October 1st{% endif %}</u>)</strong><p>
+							<p><strong>TOTAL (due&nbsp;<u>{% if school.use_priority %}July 31th{% else %}October 1st{% endif %}</u>)</strong></p>
 							<p><em>{% if school.get_currency == 'CAD' %}Canadian delegations must pay in Canadian dollars.{% else %}Delegations located outside of Canada must pay in US dollars.{% endif %}</em></p>
 						</div>
 					</td>
@@ -241,25 +241,27 @@
 			</div>
 			{% endif %}
 			<p>&nbsp;</p>
-
+			<p>&nbsp;</p>
+			<p>&nbsp;</p>
+			
 			<h2>Refund policy</h2>
 
-			<p>The $90 club registration fee is a one-time non-refundable fee per delegation. If you decide not to join us at SSUNS 2013:</p>
+			<p>The club registration fee (delegation fee) is a one-time non-refundable fee per delegation. If you decide not to join us at SSUNS 2014:</p>
 			<ul>
-				<li>Before September 10th, your refund will be the payment received minus the $85 club registration fee.</li>
-				<li>Before October 1st, your refund will be a 50% refund of your Total Delegate Fee.</li>
+				<li>Before August 31st, your refund will be the payment received minus the club registration fee (100% refund of your Total Delegate Fee).</li>
+				<li>Before October 6st, your refund will be a 50% refund of your Total Delegate Fee.</li>
 			</ul>
 			<p>Please note that after October 1st there are no refunds under any circumstances.</p>
 
 			<p>&nbsp;</p>
 			<h2>Contacting SSUNS</h2>
-			<p>If you have any questions about your invoice or registration please contact Paola Daniore, USG Finance, or Serena Wang, Charg&eacute;e d'Affaires, respectively.</p>
+			<p>If you have any questions about your invoice or registration please contact Paola Daniore, USG Finance, or Hilary Chu, Charg&eacute;e d'Affaires, respectively.</p>
 			<p>&nbsp;</p>
 			<table class="center-align">
 				<tr>
 					<td>
 						<p>
-							Serena Wang
+							Hilary Chu
 							<br />
 							Charg&eacute;e d'Affaires
 							<br />
@@ -272,7 +274,7 @@
 					</td>
 					<td>
 						<p>
-							Paola Daniore
+							Lauryn Peng
 							<br />
 							USG Finance
 							<br />

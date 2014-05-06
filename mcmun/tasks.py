@@ -100,7 +100,7 @@ def regenerate_invoice(school_id):
 	}
 
 	# Generate the invoice PDF, save it under tmp/
-	pdf_filename = 'mcmun/invoice/ssuns_invoice_%s.pdf' % invoice_id
+	pdf_filename = 'mcmun/invoice/ssuns_invoice_%s_new.pdf' % invoice_id
 	file = open(pdf_filename, 'wb')
 	pdf = generate_pdf('pdf/invoice.html', file_object=file, context=pdf_context)
 	file.close()

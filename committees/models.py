@@ -119,6 +119,9 @@ class CommitteeAssignment(models.Model):
 		num = int(self.school.num_delegates) - CommitteeAssignment.objects.filter(school=self.school).count()
 		return "%s" % num
 
+	def display_assignment(self):
+		return "%s" % self.assignment.position
+
 class ScholarshipIndividual(models.Model):
 	class Meta:
 		unique_together = ('committee_assignment', 'scholarship_individual')

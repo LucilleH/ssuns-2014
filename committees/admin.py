@@ -23,7 +23,7 @@ class CommitteeAdmin(admin.ModelAdmin):
 
 
 class CommitteeAssignmentAdmin(admin.ModelAdmin):
-	list_display = ('school', 'assignment', 'unassigned')
+	list_display = ('school', 'assignment','delegate_name', 'unassigned')
 
 class ScholarshipIndividualAdmin(admin.ModelAdmin):
 	list_display = ('name_of_delegate', 'school', 'committee_assignment', 'is_uploaded')

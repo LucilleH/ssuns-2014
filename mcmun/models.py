@@ -244,19 +244,20 @@ class AddDelegates(models.Model):
 
 class ScholarshipSchoolApp(models.Model):
 	school = models.OneToOneField(RegisteredSchool)
-	scholarship_international = models.FileField(upload_to=get_scholarshipschool_upload_path, blank=True, null=True, verbose_name="International school scholarship application")
-	scholarship_new = models.FileField(upload_to=get_scholarshipschool_upload_path, blank=True, null=True, verbose_name="New school scholarship application")
-
+	scholarship = models.FileField(upload_to=get_scholarshipschool_upload_path, blank=True, null=True, verbose_name="school scholarship application")
+	
 	def __unicode__(self):
 		return self.school.school_name
 
-	def international_application_uploaded(self):
-		return self.scholarship_international != ""
-	international_application_uploaded.boolean = True
+	def application_uploaded(self):
+		return self.scholarship != ""
+	application_uploaded.boolean = True
 
-	def new_school_application_uploaded(self):
-                return self.scholarship_new != ""
-        new_school_application_uploaded.boolean = True
+	def is_international(self):
+		if self.school.country != 'CA' and self.school.country != 'US':
+			return True
+		return False
+	is_international.boolean = True
 
 
 @receiver(models.signals.pre_save, sender=RegisteredSchool, dispatch_uid="approve_schools")
@@ -270,7 +271,9 @@ def approve_schools(sender, instance, **kwargs):
 		# School does not have an account. Make one!
 		password = generate_random_password()
 		username = instance.email[:30]
-		new_account = User.objects.create_user(username=username, password=password)
+		email = instance.email
+		new_account = User.objects.create_user(username=username, password=password, email=email)
+
 		instance.account = new_account
 
 		instance.send_invoice_email(new_account.username, password)

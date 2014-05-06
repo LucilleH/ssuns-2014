@@ -46,7 +46,7 @@ class AddDelegatesAdmin(admin.ModelAdmin):
 	actions = ['re_invoice']
 
 class ScholarshipSchoolAdmin(admin.ModelAdmin):
-	list_display = ('school', 'new_school_application_uploaded', 'international_application_uploaded')
+	list_display = ('school', 'application_uploaded', 'is_international')
 
 admin.site.register(RegisteredSchool, RegisteredSchoolAdmin)
 admin.site.register(AddDelegates, AddDelegatesAdmin)

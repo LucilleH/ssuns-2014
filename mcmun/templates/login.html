@@ -1,9 +1,14 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="wrapper-no-video">
+<div id="content">
+
 <h1>Log in</h1>
 
 <p>When your registration has been approved, you will receive an email containing your username (the email you entered when registering) and a randomly-generated password. You will not be able to log in until you have received such an email.</p>
+
+<p>Click <a href="/registration-form">here</a> to register if you haven't already.</p>
 
 <form method="post" action="{% url "login" %}">
 	{% if form.errors %}
@@ -27,5 +32,8 @@
 	<input type="submit" value="login" />
 	<input type="hidden" name="next" value="{{ next }}" />
 </form>
-
+<p></p>
+<p>Forgot your password? Click <a href="/password_reset">here</a></p>
+</div>
+</div>
 {% endblock %}

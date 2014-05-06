@@ -6,7 +6,7 @@ def less():
     local("lessc static/css/mcmun.less -x > static/css/mcmun.css")
 
 def up():
-    local("python /srv/ssuns.org/bin/gunicorn -c /srv/ssuns.org/gunicorn_config.py ssuns_2014.wsgi > ./tmp/gunicorn.log 2>&1 & echo $! > ./tmp/gunicorn.pid &")
+    local("python /srv/ssuns.org/bin/gunicorn -c /srv/ssuns.org/gunicorn_config.py mcmun.wsgi > ./tmp/gunicorn.log 2>&1 & echo $! > ./tmp/gunicorn.pid &")
 
 def dump():
     local("python manage.py dumpdata --indent=4 > backup.json")
@@ -22,6 +22,9 @@ def stats():
 
 def celery():
     local('python manage.py celeryd --concurrency=1 > ./tmp/celery.log 2>&1 & echo $! > ./tmp/celery.pid &')
+
+def celeryrestart():
+    local('kill -HUP `cat ./tmp/celery.pid`')
 
 def sh():
     local('python manage.py shell')
