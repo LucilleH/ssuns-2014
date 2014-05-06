@@ -1,6 +1,7 @@
 *.pyc
 tmp
 mcmun/invoice
+mcmun/addinvoice
 mcmun/conf.py
 mcmun/static/admin/*
 mcmun/static/img/dais/*
