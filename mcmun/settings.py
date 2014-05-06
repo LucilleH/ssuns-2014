@@ -31,6 +31,7 @@ ADMINS = (
     ('lh', 'it@ssuns.org'),
 )
 
+ADMIN_URL = 'http://www.ssuns.org/%s/' % conf.ADMIN_PREFIX
 MANAGERS = ADMINS
 
 DATABASES = {
