@@ -5,6 +5,8 @@ mcmun/addinvoice
 mcmun/conf.py
 mcmun/static/admin/*
 mcmun/static/img/dais/*
+db.json
+mydatabase
 .*
 !/.gitignore
 *.swp

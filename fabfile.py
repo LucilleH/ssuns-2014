@@ -3,7 +3,7 @@ from fabric.context_managers import lcd
 
 
 def less():
-    local("lessc static/css/mcmun.less -x > static/css/mcmun.css")
+    local("lessc mcmun/static/css/mcmun.less -x > mcmun/static/css/mcmun.css")
 
 def up():
     local("python /srv/ssuns.org/bin/gunicorn -c /srv/ssuns.org/gunicorn_config.py mcmun.wsgi > ./tmp/gunicorn.log 2>&1 & echo $! > ./tmp/gunicorn.pid &")
