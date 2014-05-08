@@ -80,20 +80,20 @@
 	<p>Lost your copy of your invoice PDF? Email <a href="mailto:it@ssuns.org">it@ssuns.org</a>.{% comment %}Eventually I'll make a view to show the PDF to people with the proper permissions. Later.{% endcomment %}</p>
 {% endif %}
 
-<h3>Sample Background Guides</h3>
-<p>To access the background guides for your committees, please go to <a href="www.ssuns.org/committees-list">www.ssuns.org/committees-list</a>, then select the committee you have been assigned to. You will be able to download the background guide at the bottom of the committee page by entering the password "ssjuns2013". Please do not share this password with students who are not attending SSUNS. </p>
+<h3>Background Guides</h3>
+<p>To access the background guides for your committees, please go to <a href="www.ssuns.org/committees-list">www.ssuns.org/committees-list</a>, then select the committee you have been assigned to.</p>
 
 {% if school.committeeassignment_set.count %}
 <h2 id="committee-assignments">Committee assignments</h2>
 
 <p>
-Please ensure that you enter a delegate's name for each position that you have been assigned by October 22. Once you have filled in the delegate name(s) for each position, make sure to upload the relevant position paper by November 6. If you would like feedback for your position paper, please tell your delegate to email it to <a href="mailto:committees@ssuns.org">committees@ssuns.org</a> by October 25th. Their corresponding deputy will report back to them. Kindly note that only final position papers should be uploaded here.
+Please ensure that you enter a delegate's name for each position that you have been assigned by October 20th. Once you have filled in the delegate name(s) for each position, make sure to upload the relevant position paper by November 5. If you would like feedback for your position paper, please tell your delegate to email it to <a href="mailto:committees@ssuns.org">committees@ssuns.org</a> by October 20th. Their corresponding deputy will report back to them. Kindly note that only final position papers should be uploaded here.
 </p>
 <p>
 Please check that any delegate names that have been entered are entered correctly, as you will not be able to change anything once submitted except by contacting <a href="mailto:schools@ssuns.org">schools@ssuns.org</a>. You do not have to enter all the names at once.
 </p>
 <p>
-In addition, if any of your students would like to apply for 'Individual Need-Based or Need & Merit Based' scholarships, kindly ask them to fill out the application available for download <a href="/scholarships" target="_blank">here</a>. We ask faculty advisers to submit the final application below on the dashboard. Deadline is September 17.
+In addition, if any of your students would like to apply for Individual scholarships, kindly ask them to fill out the application available for download <a href="/scholarships" target="_blank">here</a>. We ask faculty advisers to submit the final application below on the dashboard. Deadline is October 20th.
 </p>
 <p><strong>Please upload PDF files for both position paper and scholarship application. We do not recommend any other document formats.<br />
 IMPORTANT: All position papers and scholarship applications must be submitted on the dashboard via your relevant faculty advisor. If you wish to change your position paper, email <a href="mailto:committees@ssuns.org">committees@ssuns.org</a>. To change your scholarship application, email <a href="mailto:pr@ssuns.org">pr@ssuns.org</a></strong></p>
@@ -134,7 +134,7 @@ IMPORTANT: All position papers and scholarship applications must be submitted on
                    		{{ f.position_paper }}
 			{% endif %}
                 {% else %}
-                    Uploading position paper after submitting the delegate name.
+                    Upload position paper after submitting the delegate name.
                 {% endif %}
             </td>
 			<td>
@@ -205,21 +205,21 @@ IMPORTANT: All position papers and scholarship applications must be submitted on
 <h2 id="dates">Important dates</h2>
 
 <table>
-   	<tr><td><b>July 30:</b> Priority Registration Deadline (All Payments Made to be Eligible for Priority Fees)</td></tr>
+   	<tr><td><b>July 31st:</b> Priority Registration Deadline (All Payments Made to be Eligible for Priority Fees)</td></tr>
+   	<tr><td><b>August 31st:</b> Deadline for 100% Refund of Delegate Fees</td></tr>
 	<tr><td><b>First Week of September:</b> Background Guides come online</td></tr>
 	<tr><td><b>First Week of September:</b> Initial Committee Assignments Released</td></tr>
-	<tr><td><b>September 10:</b> Deadline for 100% Refund of Delegate Fees</td></tr>
-	<tr><td><b>September 17:</b> Scholarship Applications Deadline</td></tr>
-	<tr><td><b>October 1:</b> Deadline for 50% Refund of Delegate Fees</td></tr>
-	<tr><td><b>October 8:</b> Regular Registration Closes and Waiting List Opens</td></tr>
-	<tr><td><b>October 8:</b> Hotel Room Bookings at Delta Centreville Due</td></tr>
-	<tr><td><b>October 22:</b> Delegate Badge List Due</td></tr>
-	<tr><td><b>October 25:</b> Position Paper Feedback Deadline</td></tr>
-	<tr><td><b>November 6:</b> Final Position Paper Deadline</td></tr>
-	<tr><td><b>November 7-10:</b> SSUNS 2013</td></tr>
+	<tr><td><b>October 6th:</b> Deadline for 50% Refund of Delegate Fees</td></tr>
+	<tr><td><b>October 6th:</b> Regular Registration Closes and Waiting List Opens</td></tr>
+	<tr><td><b>October 6th:</b> Hotel Room Bookings at Hilton Bonaventure Due</td></tr>
+	<tr><td><b>October 20th:</b> Delegate name assignments Due</td></tr>
+	<tr><td><b>October 20th:</b> Position Paper Feedback Deadline</td></tr>
+	<tr><td><b>October 20th:</b> Scholarship Applications Deadline</td></tr>
+	<tr><td><b>November 5th:</b> Final Position Paper Deadline</td></tr>
+	<tr><td><b>November 6-9:</b> SSUNS 2014</td></tr>
 </table>
 
-<h2 id="committees">Committee preferences</h2>
+<h2 id="committees">Character based committee preferences</h2>
 
 <p>The committee preferences form is now <strong>closed</strong>.</p>
 
@@ -231,8 +231,6 @@ IMPORTANT: All position papers and scholarship applications must be submitted on
 	<tr><td>{{ school.committee_3.get_name }}</td></tr>
 	<tr><td>{{ school.committee_4.get_name }}</td></tr>
 </table>
-
-<p>Please contact <a href="mailto:schools@ssuns.org">schools@ssuns.org</a> if you have any questions or wish to change your preferences.</p>
 
 <h2 id="committees">Country Preferences</h2>
 <table>

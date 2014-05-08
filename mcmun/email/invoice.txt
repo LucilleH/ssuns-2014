@@ -11,7 +11,7 @@ You can now log in at http://www.ssuns.org/dashboard to check the details of you
 Username: %(username)s
 Password: %(password)s
 
-You will be able to enter the names of the delegates who will be attending, and upload position papers from that page.
+You will be able to enter the names of the delegates who will be attending, and upload position papers from that page in September.
 
 Please keep this email for your records.
 

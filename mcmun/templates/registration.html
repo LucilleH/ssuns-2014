@@ -92,30 +92,45 @@
 
 			<dt>
 				<label for="id_email">Faculty Advisor Contact Email:</label>
-				<p>Please enter an unique email with less than 30 characters. The receipt will be sent to this email. The address will be your new account username</p>
+				<p>Please enter an unique email with less than 100 characters. The receipt will be sent to this email. The address will be your new account username</p>
 			</dt>
 			<dd>
 				{{ form.email }}
 				{% if form.email.errors %}
-					<p class="errors">Please ensure that you have correctly entered one email with less than 50 characters.</p>
+					<p class="errors">Please ensure that you have correctly entered one unique email with less than 100 characters.</p>
+				{% endif %}
+			</dd>
+
+			<dt>
+				<label for="id_personal_email">Faculty Advisor Personal Alternative Email:</label>
+				<p>Please enter an unique personal email with less than 100 characters. The email should end with "hotmail.com", "gmail.com", "live.com", "yahoo.com" or other known email postfix.</p>
+			</dt>
+			<dd>
+				{{ form.personal_email }}
+				{% if form.personal_email.errors %}
+					<p class="errors">Please ensure that you have correctly entered one unique email with less than 100 characters.</p>
+				{% endif %}
+			</dd>
+
+			<dt>
+				<label for="id_last_name">Head Delegate Name:</label>
+			</dt>
+			<dd>{{ form.delegate_name }}
+				{% if form.delegate_name.errors %}
+					<p class="errors">Please enter head delegate name.</p>
 				{% endif %}
 			</dd>
 			<dt>
 				<label for="id_delegate_email">Head Delegate Contact Email:</label>
-				<p>Please enter only one email with less than 50 characters.</p>
+				<p>Please enter only one email with less than 100 characters.</p>
 			</dt>
 			<dd>
 				{{ form.delegate_email }}
 				{% if form.delegate_email.errors %}
-					<p class="errors">Please ensure that you have correctly entered one email with less than 50 characters.</p>
+					<p class="errors">Please ensure that you have correctly entered one unique email with less than 100 characters.</p>
 				{% endif %}
 			</dd>
-			<dt>
-				<label for="id_other_email">Other Contact Email:</label>
-			</dt>
-			<dd>
-				{{ form.other_email }}
-			</dd>
+			
 			<dt>
 				<label for="id_mail_address">Mailing Address:</label>
 			</dt>
@@ -188,7 +203,6 @@
 			<dt>
 				<p>Please choose 10 countries and/or NGOs in order of preference, 
 				with 1 being the highest. You may wish to refer to the <a href="/matrix" target="_blank">country-committee matrix</a> to make your selections. 
-				The matrix is in PDF format. To read it, you'll need Adobe Acrobat Reader, available <a href="http://get.adobe.com/reader/">here</a>. 
 				To read our country assignment policy, click <a href="/conference-policies" target="_blank">here</a>. Please do not select the same country twice.</p>
 			</dt>
 			</td>
@@ -251,7 +265,7 @@
 	</fieldset>
 
 	<fieldset>
-		<legend>Specialized Agencies and Crises</legend>
+		<legend>Specialized Agencies and Crises (Character based committees only)</legend>
 		<dl>
 		<table>
 		<tr>
@@ -260,7 +274,7 @@
 				<p>SSUNS will be simulating a diverse array of small and exciting specialized agencies and crises. 
 				Please indicate your first three preferences for the following committees should you be interested in participating in them. 
 				More information on the specific committee can be obtained by from the <a href="/committees-list" target="_blank">committees list</a>. 
-				Please be advised that due to its nature, the Ad-Hoc Committee of the Secretary General is application-based. Please do not select the same committee twice.<p>
+				Please do not select the same committee twice.<p>
 			</dt>
 			</td>
 			<td>
@@ -330,13 +344,13 @@
 		<dl>
 			<dt>
 				<label for="id_merchandise">Will you be interested in customized SSUNS T-shirt for your school?</label>
-		 		<p>If yes, our Chief of Staff Katie Gilfillan will contact you via email</p>
-                        </dt>
-                        <dd>
-                                {{ form.merchandise }}
-                                {% if form.merchandise.errors %}
-                                <p class="errors">Please choose yes or no.</p>
-                                {% endif %}	
+		 		<p>If yes, our Chief of Staff Katie Gilfillan will contact you via email. If you have any question, please contact katie Gilfillan at <a href="mailto:staff@ssuns.org">staff@ssuns.org</a></p>
+            </dt>
+          	<dd>
+                {{ form.merchandise }}
+                {% if form.merchandise.errors %}
+                	<p class="errors">Please choose yes or no.</p>
+                {% endif %}	
 			</dd>
 		</dl>
 	</fieldset>

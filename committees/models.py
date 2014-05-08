@@ -32,6 +32,9 @@ class Category(models.Model):
 
 
 class Committee(models.Model):
+	class Meta:
+		ordering = ['name']
+
 	name = models.CharField(max_length=100)
 	slug = models.CharField(max_length=20, unique=True)
 	description = models.TextField(null=True, blank=True)
@@ -40,7 +43,7 @@ class Committee(models.Model):
 	video_url = models.CharField(max_length=255, null=True, blank=True, verbose_name="video URL")
 
 	def __unicode__(self):
-		return self.name + " (" + self.get_assign_type_display() + ")"
+		return self.name
 	
 	def get_name(self):
 		return self.name
@@ -50,8 +53,6 @@ class Committee(models.Model):
 	def get_absolute_url(self):
 		return ('committee_view', [self.slug])
 
-	class Meta:
-		ordering = ('category', 'id')
 
 class CommitteeDais(models.Model):
 	class Meta:

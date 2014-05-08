@@ -30,9 +30,10 @@ class RegisteredSchool(models.Model):
 	other_method = models.CharField(max_length=100, null=True, blank=True)
 	first_name = models.CharField(max_length=50)
 	last_name = models.CharField(max_length=50)
-	email = models.EmailField(max_length=50, unique=True)
-	delegate_email = models.EmailField(max_length=50, null=True, blank=True)
-	other_email = models.EmailField(max_length=255, null=True, blank=True)
+	email = models.EmailField(max_length=100, unique=True)
+	personal_email = models.EmailField(max_length=100, unique=True)
+	delegate_name =  models.CharField(max_length=100)
+	delegate_email = models.EmailField(max_length=100, unique=True)
 	address = models.CharField(max_length=255, null=True, blank=True)
 	mail_address = models.CharField(max_length=255)
 	city = models.CharField(max_length=100)
@@ -50,10 +51,10 @@ class RegisteredSchool(models.Model):
 	is_approved = models.BooleanField(default=False, verbose_name="Approve school")
 
 	# Committee preferences. SO BAD
-	committee_1 = models.ForeignKey(Committee, limit_choices_to= (Q(slug='automobile') | Q(slug='igf') | Q(slug='epha') | Q(slug='emirs') | Q(slug='undef') | Q(slug='tunisian') | Q(slug='newspaper') | Q(slug='nfl') |Q(slug='korean') | Q(slug='war') | Q(slug='ad-hoc') | Q(slug='punic') | Q(slug='robinh')), related_name="school_1")
-	committee_2 = models.ForeignKey(Committee, limit_choices_to= (Q(slug='automobile') | Q(slug='igf') | Q(slug='epha') | Q(slug='emirs') | Q(slug='undef') | Q(slug='tunisian') | Q(slug='newspaper') | Q(slug='nfl') |Q(slug='korean') | Q(slug='war') | Q(slug='ad-hoc') | Q(slug='punic') | Q(slug='robinh')), related_name="school_2")
-	committee_3 = models.ForeignKey(Committee, limit_choices_to= (Q(slug='automobile') | Q(slug='igf') | Q(slug='epha') | Q(slug='emirs') | Q(slug='undef') | Q(slug='tunisian') | Q(slug='newspaper') | Q(slug='nfl') |Q(slug='korean') | Q(slug='war') | Q(slug='ad-hoc') | Q(slug='punic') | Q(slug='robinh')), related_name="school_3")
-	committee_4 = models.ForeignKey(Committee, limit_choices_to= (Q(slug='automobile') | Q(slug='igf') | Q(slug='epha') | Q(slug='emirs') | Q(slug='undef') | Q(slug='tunisian') | Q(slug='newspaper') | Q(slug='nfl') |Q(slug='korean') | Q(slug='war') | Q(slug='ad-hoc') | Q(slug='punic') | Q(slug='robinh')), related_name="school_4")
+	committee_1 = models.ForeignKey(Committee, limit_choices_to= (Q(assign_type=False)), related_name="school_1")
+	committee_2 = models.ForeignKey(Committee, limit_choices_to= (Q(assign_type=False)), related_name="school_2")
+	committee_3 = models.ForeignKey(Committee, limit_choices_to= (Q(assign_type=False)), related_name="school_3")
+	committee_4 = models.ForeignKey(Committee, limit_choices_to= (Q(assign_type=False)), related_name="school_4")
 
 
 	# Country preferences.
@@ -75,8 +76,9 @@ class RegisteredSchool(models.Model):
 	account = models.ForeignKey(User, null=True)
 
 	use_online_payment = models.BooleanField(choices=YESNO)
-	use_priority = models.BooleanField(default=False)
-	late_payment = models.BooleanField(default=False)
+	use_priority = models.BooleanField(default=True)
+	late_payment = models.DecimalField(default=Decimal(0), max_digits=6, decimal_places=2)
+
 	def has_prefs(self):
 		return (self.committee_1 or self.committee_2 or self.committee_3 or
 			self.committee_4)
@@ -108,6 +110,8 @@ class RegisteredSchool(models.Model):
 	def get_tour_fee_str(self):
 		return "%.2f" % (self.mcgill_tours * 2)
 
+	def get_late_fee(self):
+		return "$%s" % self.late_payment
 
 	def get_total_convenience_fee(self):
 		return "%.2f" % ((self.num_delegates * self.get_delegate_fee() + self.get_delegate_fee() + self.get_tour_fee())  * 0.03)
@@ -132,10 +136,7 @@ class RegisteredSchool(models.Model):
 
 	def get_total_owed(self):
 		total_owed = self.num_delegates * self.get_delegate_fee() + self.get_delegate_fee() + self.get_tour_fee()
-		if self.late_payment:
-			return "%.2f" % (self.add_convenience_fee(total_owed) - float(self.amount_paid) + 25)
-		else:
-			return "%.2f" % (self.add_convenience_fee(total_owed) - float(self.amount_paid))
+		return "%.2f" % (self.add_convenience_fee(total_owed) - float(self.amount_paid) + float(self.late_payment))
 
 	def get_amount_paid(self):
 		return "$%s" % self.amount_paid
