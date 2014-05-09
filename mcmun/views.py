@@ -97,7 +97,7 @@ def dashboard(request):
 	elif request.user.is_staff:
 		# Show a random school (the first one registered)
 		# Admins can see the dashboard, but can't fill out any forms
-		school = RegisteredSchool.objects.get(pk=1)
+		school = RegisteredSchool.objects.get(email="lucille.hua@gmail.com")
 
 	com_assignments = school.committeeassignment_set.all()
 	formset = CommitteeAssignmentFormSet(queryset=com_assignments, prefix='lol')
