@@ -156,8 +156,8 @@
 				</tr>
 				<tr>
 					<td>
-						<p><strong>Delegation fee</strong></p>
-						<p class="left-space"><em>A one-time fee, regardless of delegation size.</em></p>
+						<p><strong>Delegation fee ({{ payment_type }})</strong></p>
+						<p class="left-space"><em>A one-time fee, regardless of delegation size. Applicable for all schools {% if payment_type == 'regular' %}after{% else %}before{% endif %} July 31.</em></p>
 					</td>
 					<td class="amount">${{ school.get_delegate_fee }}.00</td>
 					<td class="amount right-border">1</td>
@@ -212,7 +212,7 @@
 				<tr>
 					<td colspan="3" class="right-border">
 						<div class="right-align">
-							<p><strong>TOTAL (due&nbsp;<u>{% if school.use_priority %}July 31th{% else %}October 1st{% endif %}</u>)</strong></p>
+							<p><strong>TOTAL (due&nbsp;<u>{% if school.use_priority %}July 31st{% else %}October 1st{% endif %}</u>)</strong></p>
 							<p><em>{% if school.get_currency == 'CAD' %}Canadian delegations must pay in Canadian dollars.{% else %}Delegations located outside of Canada must pay in US dollars.{% endif %}</em></p>
 						</div>
 					</td>
@@ -255,7 +255,7 @@
 
 			<p>&nbsp;</p>
 			<h2>Contacting SSUNS</h2>
-			<p>If you have any questions about your invoice or registration please contact Paola Daniore, USG Finance, or Hilary Chu, Charg&eacute;e d'Affaires, respectively.</p>
+			<p>If you have any questions about your invoice or registration please contact Lauryn Peng, USG Finance, or Hilary Chu, Charg&eacute;e d'Affaires, respectively.</p>
 			<p>&nbsp;</p>
 			<table class="center-align">
 				<tr>

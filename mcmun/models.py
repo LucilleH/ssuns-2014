@@ -41,7 +41,7 @@ class RegisteredSchool(models.Model):
 	postal_code = models.CharField(max_length=20)
 	advisor_phone = models.CharField(max_length=20)
 	fax = models.CharField(max_length=20, null=True, blank=True)
-	country = models.CharField(max_length=2, choices=COUNTRIES)
+	country = models.CharField(max_length=2, choices=COUNTRIESFULL)
 
 
 	num_delegates = models.IntegerField(default=1, choices=[(n, n) for n in xrange(MIN_NUM_DELEGATES, MAX_NUM_DELEGATES + 1)])
@@ -58,16 +58,16 @@ class RegisteredSchool(models.Model):
 
 
 	# Country preferences.
-	country_1 = models.CharField(max_length=2, choices=COUNTRIES)
-	country_2 = models.CharField(max_length=2, choices=COUNTRIES)
-	country_3 = models.CharField(max_length=2, choices=COUNTRIES)
-	country_4 = models.CharField(max_length=2, choices=COUNTRIES)
-	country_5 = models.CharField(max_length=2, choices=COUNTRIES)
-	country_6 = models.CharField(max_length=2, choices=COUNTRIES)
-	country_7 = models.CharField(max_length=2, choices=COUNTRIES)
-	country_8 = models.CharField(max_length=2, choices=COUNTRIES)
-	country_9 = models.CharField(max_length=2, choices=COUNTRIES)
-	country_10 = models.CharField(max_length=2, choices=COUNTRIES)
+	country_1 = models.CharField(max_length=100, choices=COUNTRIESNGO)
+	country_2 = models.CharField(max_length=100, choices=COUNTRIESNGO)
+	country_3 = models.CharField(max_length=100, choices=COUNTRIESNGO)
+	country_4 = models.CharField(max_length=100, choices=COUNTRIESNGO)
+	country_5 = models.CharField(max_length=100, choices=COUNTRIESNGO)
+	country_6 = models.CharField(max_length=100, choices=COUNTRIESNGO)
+	country_7 = models.CharField(max_length=100, choices=COUNTRIESNGO)
+	country_8 = models.CharField(max_length=100, choices=COUNTRIESNGO)
+	country_9 = models.CharField(max_length=100, choices=COUNTRIESNGO)
+	country_10 = models.CharField(max_length=100, choices=COUNTRIESNGO)
 
 	experience = models.TextField(null=True, blank=True)
 	mcgill_tours = models.IntegerField(default=0, choices=[(n, n) for n in xrange(MIN_NUM_DELEGATES, MAX_NUM_DELEGATES + 1)])
