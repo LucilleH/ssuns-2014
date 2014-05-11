@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 from mcmun.pages import pages
 # Uncomment the next two lines to enable the admin:
-from django.contrib import admin 
+from django.contrib import admin
 # for development use
 from django.conf import settings
 #from django.conf.urls.static import static
@@ -18,8 +18,9 @@ urlpatterns = patterns('',
     url(r'^registration-tmp', 'mcmun.views.registration', name='registration'),
     url(r'^login$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}, name='login'),
     url(r'^logout$', 'django.contrib.auth.views.logout', {'next_page': '/'}, name='logout'),
-    url(r'^password$', 'django.contrib.auth.views.password_change', {'template_name': 'password.html'}, name='password'),
+    url(r'^password$', 'django.contrib.auth.views.password_change', {'template_name': 'password.html', 'post_change_redirect': '/password_success'}, name='password'),
     url(r'^password_success$', 'django.contrib.auth.views.password_change_done', {'template_name': 'password_success.html'}, name="password_success"),
+
     url(r'^password_reset$', 'django.contrib.auth.views.password_reset', {'template_name': 'password_reset.html', 'from_email': settings.IT_EMAIL, 'email_template_name': 'password_reset_email.html', 'subject_template_name': 'password_reset_subject.txt'}, name="password_reset"),
     url(r'^password_reset_done$', 'django.contrib.auth.views.password_reset_done', {'template_name': 'password_reset_done.html'}, name="password_reset_done"),
     url(r'^password_reset_confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$', 'django.contrib.auth.views.password_reset_confirm', {'template_name': 'password_reset_confirm.html', 'post_reset_redirect' : '/password_reset_complete'}, name="password_reset_confirm"),
