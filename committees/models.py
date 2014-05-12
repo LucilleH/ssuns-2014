@@ -89,7 +89,7 @@ class CommitteeBackgroundGuide(models.Model):
 # position available for each committee, so make less mistake when assigning positions to delegates
 class CountryCharacterMatrix(models.Model):
 	committee = models.ForeignKey(Committee)
-	position = models.CharField(max_length=100)
+	position = models.CharField(max_length=255)
 
 	class Meta:
     		unique_together = ('committee', 'position',)

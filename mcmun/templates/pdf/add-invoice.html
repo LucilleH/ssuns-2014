@@ -163,6 +163,8 @@
 					<td class="amount right-border">{{ addDelegates.add_num_delegates }}</td>
 					<td class="amount">${{ addDelegates.get_add_total_delegate_fee }}.00 {{ school.get_currency }}</td>
 				</tr>
+
+				{% if addDelegates.add_mcgill_tours %}
 				<tr class="bottom-border">
 					<td>
 						<p><strong>McGill Tours fee</strong></p>
@@ -171,7 +173,8 @@
 					<td class="amount right-border">{{ addDelegates.add_mcgill_tours }}</td>
 					<td class="amount">${{ addDelegates.get_add_tour_fee_str }} {{ school.get_currency }}</td>
 				</tr>
-				
+				{% endif %}
+
 				{% if addDelegates.late_payment %}
                 <tr class="bottom-border">
 					<td>

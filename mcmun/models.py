@@ -117,7 +117,7 @@ class RegisteredSchool(models.Model):
 		return self.num_delegates * self.get_delegate_fee() + self.get_delegate_fee() + self.get_tour_fee() + float(self.late_payment)
 
 	def get_total_convenience_fee(self):
-		return "%.2f" % (self.get_total_raw * 0.03)
+		return "%.2f" % (self.get_total_raw() * 0.03)
 
 	def add_convenience_fee(self, number):
 		"""
@@ -138,8 +138,7 @@ class RegisteredSchool(models.Model):
 		return self.get_delegate_fee() * self.num_delegates
 
 	def get_total_owed(self):
-		total_owed = self.get_total_raw
-		return "%.2f" % (self.add_convenience_fee(self.get_total_raw) - float(self.amount_paid))
+		return "%.2f" % (self.add_convenience_fee(self.get_total_raw()) - float(self.amount_paid))
 
 	def get_amount_paid(self):
 		return "$%s" % self.amount_paid

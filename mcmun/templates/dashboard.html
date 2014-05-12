@@ -81,7 +81,7 @@
 {% endif %}
 
 <h3>Background Guides</h3>
-<p>Background guide will be available in early September. To access the background guides for your committees, please go to <a href="www.ssuns.org/committees-list">www.ssuns.org/committees-list</a>, then select the committee you have been assigned to. </p>
+<p>Background guide will be available in early September. To access the background guides for your committees, please go to <a href="/committees#committees-list" target="_blank">www.ssuns.org/committees</a>, then select the committee you have been assigned to. </p>
 
 {% if school.committeeassignment_set.count %}
 <h2 id="committee-assignments">Committee assignments</h2>
@@ -175,6 +175,7 @@ IMPORTANT: All position papers and scholarship applications must be submitted on
 	
 	{% if scholarshipform %}
 		<p><strong>Please upload PDF files for school scholarship application. We do not recommend any other document formats. You cannot reupload school scholarship application once you submit. If you are eligible for both scholarship, please upload them both at the same time.</strong></p>
+		<p>Visit <a href="/registration#scholarships" target="_blank">www.ssuns.org/registration</a> for more details on school scholarship.</p>
 		<form action="{% url 'dashboard' %}" method="post" enctype="multipart/form-data">
 			<fieldset class="hidden">
 				{% csrf_token %}
@@ -192,11 +193,11 @@ IMPORTANT: All position papers and scholarship applications must be submitted on
 	{% else %}
 		{% if scholarshipfile.application_uploaded %}
 			{% if school.is_international %}
-				<p>Uploaded international school scholarship application: </p>
+				<p>Uploaded international school scholarship application: 
 			{% else %}
-				<p>Uploaded delegation scholarship application: </p>
+				<p>Uploaded delegation scholarship application: 
 			{% endif %}
-			<a href="/{{ scholarshipfile.scholarship }}" target="_blank">view</a>
+			<a href="/{{ scholarshipfile.scholarship }}" target="_blank">view</a></p>
 		{% endif %}
 			<p>If you want to reupload school scholarship application, please contact <a href="mailto:pr@ssuns.org">pr@ssuns.org</a></p>
 	{% endif %}

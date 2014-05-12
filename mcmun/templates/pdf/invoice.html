@@ -172,6 +172,8 @@
 					<td class="amount right-border">{{ school.num_delegates }}</td>
 					<td class="amount">${{ school.get_total_delegate_fee }}.00 {{ school.get_currency }}</td>
 				</tr>
+				
+				{% if school.mcgill_tours %}
 				<tr class="bottom-border">
 					<td>
 						<p><strong>McGill Tours fee</strong></p>
@@ -180,6 +182,7 @@
 					<td class="amount right-border">{{ school.mcgill_tours }}</td>
 					<td class="amount">${{ school.get_tour_fee_str }} {{ school.get_currency }}</td>
 				</tr>
+				{% endif %}
 
 				{% if school.late_payment %}
 				<tr class="bottom-border">
@@ -215,7 +218,7 @@
 				<tr>
 					<td colspan="3" class="right-border">
 						<div class="right-align">
-							<p><strong>TOTAL (due&nbsp;<u>{% if school.use_priority %}July 31st{% else %}October 1st{% endif %}</u>)</strong></p>
+							<p><strong>TOTAL (due&nbsp;<u>{% if school.use_priority %}July 31st{% else %}October 6th{% endif %}</u>)</strong></p>
 							<p><em>{% if school.get_currency == 'CAD' %}Canadian delegations must pay in Canadian dollars.{% else %}Delegations located outside of Canada must pay in US dollars.{% endif %}</em></p>
 						</div>
 					</td>
