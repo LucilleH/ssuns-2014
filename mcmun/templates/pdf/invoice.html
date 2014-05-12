@@ -180,6 +180,18 @@
 					<td class="amount right-border">{{ school.mcgill_tours }}</td>
 					<td class="amount">${{ school.get_tour_fee_str }} {{ school.get_currency }}</td>
 				</tr>
+
+				{% if school.late_payment %}
+				<tr class="bottom-border">
+					<td>
+						<p><strong>Late payment fee</strong></p>
+					</td>
+					<td class="amount">--</td>
+					<td class="amount right-border">--</td>
+					<td class="amount">{{ school.get_late_fee }} {{ school.get_currency }}</td>
+				</tr>
+				{% endif %}
+				
 				{% if school.use_online_payment %}
 				<tr class="bottom-border">
 					<td>
@@ -199,16 +211,7 @@
 					<td class="amount right-border">--</td>
 					<td class="amount">{{ school.get_amount_paid }} {{ school.get_currency }}</td>
 				</tr>
-				{% if school.late_payment %}
-				<tr class="bottom-border">
-					<td>
-						<p><strong>Late payment fee</strong></p>
-					</td>
-					<td class="amount">--</td>
-					<td class="amount right-border">--</td>
-					<td class="amount">{{ school.get_late_fee }} {{ school.get_currency }}</td>
-				</tr>
-				{% endif %}
+			
 				<tr>
 					<td colspan="3" class="right-border">
 						<div class="right-align">

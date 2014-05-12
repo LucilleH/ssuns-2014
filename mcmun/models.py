@@ -113,8 +113,11 @@ class RegisteredSchool(models.Model):
 	def get_late_fee(self):
 		return "$%s" % self.late_payment
 
+	def get_total_raw(self):
+		return self.num_delegates * self.get_delegate_fee() + self.get_delegate_fee() + self.get_tour_fee() + float(self.late_payment)
+
 	def get_total_convenience_fee(self):
-		return "%.2f" % ((self.num_delegates * self.get_delegate_fee() + self.get_delegate_fee() + self.get_tour_fee())  * 0.03)
+		return "%.2f" % (self.get_total_raw * 0.03)
 
 	def add_convenience_fee(self, number):
 		"""
@@ -135,8 +138,8 @@ class RegisteredSchool(models.Model):
 		return self.get_delegate_fee() * self.num_delegates
 
 	def get_total_owed(self):
-		total_owed = self.num_delegates * self.get_delegate_fee() + self.get_delegate_fee() + self.get_tour_fee()
-		return "%.2f" % (self.add_convenience_fee(total_owed) - float(self.amount_paid) + float(self.late_payment))
+		total_owed = self.get_total_raw
+		return "%.2f" % (self.add_convenience_fee(self.get_total_raw) - float(self.amount_paid))
 
 	def get_amount_paid(self):
 		return "$%s" % self.amount_paid
@@ -187,7 +190,7 @@ class AddDelegates(models.Model):
 	add_use_online_payment = models.BooleanField(choices=YESNO)
 	add_amount_paid = models.DecimalField(default=Decimal(0), max_digits=6, decimal_places=2, verbose_name="amount paid")
 	use_priority = models.BooleanField(default=False)
-	late_payment = models.BooleanField(default=False)
+	late_payment = models.DecimalField(default=Decimal(0), max_digits=6, decimal_places=2)
 
 	def get_add_tour_fee(self):
 		return (self.add_mcgill_tours * 2)
@@ -201,7 +204,10 @@ class AddDelegates(models.Model):
 		return delegate_fee
 	
 	def get_add_base_fee(self):
-		return (self.add_num_delegates * self.get_delegate_fee() + self.get_add_tour_fee())
+		return (self.add_num_delegates * self.get_delegate_fee() + self.get_add_tour_fee() + float(self.late_payment))
+
+	def get_late_fee(self):
+		return "$%s" % self.late_payment
 
 	def get_add_total_convenience_fee(self):
 		return "%.2f" % (self.get_add_base_fee()  * 0.03)
@@ -227,12 +233,8 @@ class AddDelegates(models.Model):
 		return self.add_num_delegates * self.get_delegate_fee()
 
 	def get_add_total_owed(self):
-		total_owed = self.get_add_base_fee()
-		if self.late_payment:
-			return "%.2f" % (self.add_convenience_fee(total_owed) - float(self.add_amount_paid) + 25)
-		else:
-			return "%.2f" % (self.add_convenience_fee(total_owed) - float(self.add_amount_paid))
-	
+		return "%.2f" % (self.add_convenience_fee(self.get_add_base_fee()) - float(self.add_amount_paid))
+
 	def get_add_amount_paid(self):
 		return "$%s" % self.add_amount_paid
 

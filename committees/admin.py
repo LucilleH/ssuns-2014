@@ -9,17 +9,6 @@ class CCMInline(admin.StackedInline):
 
 class CommitteeAdmin(admin.ModelAdmin):
 	ordering = ['name']
-	inlines = [CCMInline]
-
-	def assign_countries(self, request, queryset):
-		for obj in queryset:
-			for country in COUNTRYLIST:
-				CountryCharacterMatrix.objects.get_or_create(committee=obj, position=country)
-
-		message = "country matrix created"
-		self.message_user(request, message)
-	assign_countries.short_description = "Insert all countries to CCM for selected committees"
-	actions=['assign_countries']
 
 
 class CommitteeAssignmentAdmin(admin.ModelAdmin):
@@ -39,6 +28,8 @@ class ScholarshipIndividualAdmin(admin.ModelAdmin):
 	committee.short_description = 'Committee'
 	committee.admin_order_field = 'committee_assignment'
 
+class CountryCharacterMatrixAdmin(admin.ModelAdmin):
+	ordering = ['committee']
 
 class CommitteeDaisAdmin(admin.ModelAdmin):
 	ordering = ['committee']
@@ -47,6 +38,6 @@ admin.site.register(Category)
 admin.site.register(Committee, CommitteeAdmin)
 admin.site.register(CommitteeDais, CommitteeDaisAdmin)
 admin.site.register(CommitteeBackgroundGuide)
-admin.site.register(CountryCharacterMatrix)
+admin.site.register(CountryCharacterMatrix, CountryCharacterMatrixAdmin)
 admin.site.register(CommitteeAssignment, CommitteeAssignmentAdmin)
 admin.site.register(ScholarshipIndividual, ScholarshipIndividualAdmin)

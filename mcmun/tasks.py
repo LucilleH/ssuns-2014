@@ -111,7 +111,7 @@ def regenerate_invoice(school_id):
 
 @task
 def regenerate_add_invoice(school_id, add_id):
-	print "starting the generate_invoice task"
+	print "starting the add generate_invoice task"
 	RegisteredSchool = get_model('mcmun', 'RegisteredSchool')
 	AddDelegates = get_model('mcmun', 'AddDelegates')
 	school = RegisteredSchool.objects.get(pk=school_id)

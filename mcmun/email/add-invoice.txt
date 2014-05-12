@@ -1,0 +1,13 @@
+Dear %(first_name)s,
+
+The changes with regards to your registration for %(school_name)s at SSUNS 2014 has been made.
+
+Our records indicate that wish to add %(num_delegates)d delegates, that your desired payment for the additional is %(payment_method)s (%(payment_type)s registration), and that you wish to pay additional $%(total_balance)s %(currency)s.
+
+Attached you will find a new PDF invoice containing a breakdown of the costs as well as payment instructions.
+
+Please keep this email for your records.
+
+Looking forward to seeing you in November,
+
+the SSUNS 2014 Secretariat
