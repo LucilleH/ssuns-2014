@@ -4,6 +4,9 @@ from mcmun.models import RegisteredSchool, AddDelegates, ScholarshipSchoolApp
 from mcmun.tasks import regenerate_invoice, regenerate_add_invoice
 from committees.models import CommitteeAssignment
 
+class CommitteeInline(admin.StackedInline):
+	model = CommitteeAssignment
+	extra = 3
 
 class RegisteredSchoolAdmin(admin.ModelAdmin):
 	# Sort reverse chronologically
@@ -11,6 +14,7 @@ class RegisteredSchoolAdmin(admin.ModelAdmin):
 	list_display = ('school_name', 'email', 'is_approved', 'num_delegates', 'amount_owed', 'get_amount_paid')
 	list_filter = ('is_approved', 'use_online_payment')
 	exclude = ('account',)
+	inlines = [CommitteeInline]
 	readonly_fields = (
 		'school_name', 'first_time', 'how_you_hear', 'another_school',
 		'other_method', 'first_name', 'last_name',
