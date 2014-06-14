@@ -15,7 +15,7 @@ class RegisteredSchoolAdmin(admin.ModelAdmin):
 	list_filter = ('is_approved', 'use_online_payment')
 	exclude = ('account',)
 	inlines = [CommitteeInline]
-	readonly_fields = (
+	"""readonly_fields = (
 		'school_name', 'first_time', 'how_you_hear', 'another_school',
 		'other_method', 'first_name', 'last_name',
 		'address', 'mail_address', 'city', 'province_state','postal_code',
@@ -24,7 +24,7 @@ class RegisteredSchoolAdmin(admin.ModelAdmin):
 		'country_8', 'country_9', 'country_10', 'committee_1', 'committee_2',
 		'committee_3', 'committee_4', 'experience',
 		'merchandise', 'num_delegates', 'disclaimer',
-	)
+	)"""
 
 	def re_invoice(self, request, queryset):
 		for obj in queryset:
@@ -38,13 +38,6 @@ class RegisteredSchoolAdmin(admin.ModelAdmin):
 	re_invoice.short_description = "Send invoice to selected schools"
 	actions = ['re_invoice']
 
-	def save_model(self, request, obj, form, change):
-		if request.user.username == 'charge' or request.user.username == 'finance':
-			obj.save()
-			message = "school successfully modified"
-		else:
-			message = "You do not have permission to modify school information"
-		self.message_user(request, message)
 
 class AddDelegatesAdmin(admin.ModelAdmin):
 	# Sort reverse chronologically
