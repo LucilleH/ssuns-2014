@@ -20,7 +20,7 @@ class RegisteredSchoolAdmin(admin.ModelAdmin):
 		'other_method', 'first_name', 'last_name',
 		'address', 'mail_address', 'city', 'province_state','postal_code',
 		'advisor_phone', 'fax', 'experience',
-		'merchandise', 'num_delegates', 'disclaimer',
+		'merchandise', 'disclaimer',
 	)
 
 	def re_invoice(self, request, queryset):

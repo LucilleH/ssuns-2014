@@ -3,10 +3,6 @@ from django import forms
 from committees.models import *
 from committees.constants import COUNTRYLIST
 
-class CCMInline(admin.StackedInline):
-	model = CountryCharacterMatrix
-	extra = 3
-
 class CommitteeAdmin(admin.ModelAdmin):
 	ordering = ['name']
 
