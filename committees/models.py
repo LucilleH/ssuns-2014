@@ -101,7 +101,7 @@ class CountryCharacterMatrix(models.Model):
 class CommitteeAssignment(models.Model):
 	class Meta:
 		ordering = ('school', 'assignment')
-        permissions = (("can_view_papers", "Can view position papers"),)
+#		permissions = (("can_view_papers", "Can view position papers"),)
 
 	# Number of delegates is usually 1, except in SOCHUM
 	school = models.ForeignKey('mcmun.RegisteredSchool')
