@@ -1,6 +1,18 @@
 from django.shortcuts import render
 from cms.models import Page
 
+def mobile(request, name='mobile'):
+	try:
+		data = {
+			'page': Page.objects.get(short_name=name)
+		}
+
+		return render(request, 'page-mobile.html', data)
+	except Page.DoesNotExist:
+		return render(request, '404.html')
+
+
+
 def main(request, name='home'):
 	try:
 		data = {

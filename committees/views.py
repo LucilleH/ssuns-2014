@@ -35,6 +35,29 @@ def view(request, slug):
 	return render(request, 'committee.html', data)
 
 
+def view_mobile(request, slug):
+	committee = get_object_or_404(Committee, slug=slug)
+	# If the user is a member of the dais, show a link to the uploads page
+	# If background guide is uploaded
+	bgset = committee.committeebackgroundguide_set.all()
+	bg_uploaded = False
+	if bgset.count():
+		bg_uploaded = True
+
+
+	data = {
+		'page': {
+			'long_name': committee.name,
+		},
+		'committee': committee,
+		'bg_uploaded': bg_uploaded,
+		'bgset': bgset,
+	}
+
+	return render(request, 'committee-mobile.html', data)
+
+
+
 
 @login_required
 def serve_papers(request, file_name):

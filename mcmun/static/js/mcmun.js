@@ -2,6 +2,10 @@ $(document).ready(function() {
 	$('.slideshow').cycle({
 		fx: 'fade'
 	});
+	
+	$('.ui.sidebar').sidebar();
+	$('.ui.sidebar').first().sidebar('attach events', '.toggle.button');
+	$('.toggle.button').removeClass('disabled');
 
 	
 	// for registration if it's the first time the school attend ssuns, then ask them more question
