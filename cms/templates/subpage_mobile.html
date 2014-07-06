@@ -1,0 +1,16 @@
+<div class="wrapper-mobile">
+<div class="content-mobile">
+	{% if page.custom_template %}
+                {% with "pages/"|add:page.short_name|add:"-mobile.html" as template_file %}
+                        {% include template_file %}
+                {% endwith %}
+        {% else %}
+                {% if page.content %}
+                        {% load markup %}
+                        {{ page.content|markdown:"def_list" }}
+                {% else %}
+                        {% include "under-construction.html" %}
+                {% endif %}
+        {% endif %}
+</div>
+</div>
