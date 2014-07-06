@@ -5,6 +5,7 @@ mcmun/addinvoice
 mcmun/conf.py
 mcmun/static/admin/*
 mcmun/static/img/dais/*
+mcmun/static/semantic/*
 scholarship
 *.json
 mydatabase
