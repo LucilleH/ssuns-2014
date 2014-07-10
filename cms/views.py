@@ -22,3 +22,6 @@ def main(request, name='home'):
 		return render(request, 'page.html', data)
 	except Page.DoesNotExist:
 		return render(request, '404.html')
+
+def mobilehome(request, name='mobile-home'):
+	return render(request, 'home-mobile.html')

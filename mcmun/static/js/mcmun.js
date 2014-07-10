@@ -5,6 +5,7 @@ $(document).ready(function() {
 	
 	$('.ui.sidebar').sidebar();
 	$('.ui.sidebar').first().sidebar('attach events', '.toggle.button');
+	$('#pagename_bar').html($('#page_name').html());
 	
 	// for registration if it's the first time the school attend ssuns, then ask them more question
 	$('#registration_form select[id^="id_first_time"]').change(function () {
@@ -166,6 +167,7 @@ $(document).ready(function() {
 	}
 	*/
 
+	/* mark active item from url */
 	var url = window.location;
 	// Will only work if string in href matches with location
 	$('ul.nav a[href="'+ url +'"]').parent().addClass('active');

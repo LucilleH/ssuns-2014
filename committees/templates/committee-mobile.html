@@ -1,16 +1,10 @@
-{% extends "base-mobile.html" %}
-
 {% load markup %}
-
-{% block content %}
-
-<body class="index right pushed" ontouchstart="">
 	<!-- nav bar start -->
 	<div class="ui transparent inverted fixed main menu">
-		<a class="ui ui black icon button" href="/m/committees-list">
+		<a class="ui ui black icon button" onclick="closecommittee('/m/committees-list')">
        		<i class="left arrow icon"></i>
     	</a>
-		<div class="item"> {{ committee.name }}</div>
+		<div class="item"> {{ committee.slug | upper }}</div>
 	</div>
 
 	<div class="wrapper-mobile">
@@ -43,5 +37,3 @@
 
 		</div>
 	</div>
-</body>
-{% endblock %}
