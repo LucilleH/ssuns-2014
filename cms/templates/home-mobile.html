@@ -42,7 +42,7 @@ function loadcommittee(link){
 	$('#committeeload').load(link).hide().fadeIn();
 }
 function closecommittee(link) {
-	$('#committeeload').hide();
+	$('#committeeload').fadeOut();
 	window.scrollTo(0, 0);
 	$('#page_content').show();
 }
