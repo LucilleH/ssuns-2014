@@ -1,0 +1,39 @@
+{% load markup %}
+	<!-- nav bar start -->
+	<div class="ui transparent inverted fixed main menu">
+		<a class="ui ui black icon button" onclick="closecommittee('/m/committees-list')">
+       		<i class="left arrow icon"></i>
+    	</a>
+		<div class="item"> {{ committee.slug | upper }}</div>
+	</div>
+
+	<div class="wrapper-mobile">
+
+		<div class="content-mobile">
+		<h1>Description</h1>
+		{{ committee.description|markdown:"footnotes,def_list,tables" }}
+
+		<br />
+		<h1>Dais</h1>
+		<div id="dais">
+		<ul>
+		{% for dais in committee.committeedais_set.all %}
+			<li>
+				<div>
+					<img src="{{ STATIC_URL }}img/dais/{{ committee.slug }}/{{ dais.pic_name }}.jpg" /><p />
+					<p><b>{{ dais.name }}</b><br />
+					{{ dais.title }} </p>
+				</div>
+			</li>
+		{% endfor %}
+		</ul>
+		</div>
+		{% if bg_uploaded %}
+			<h2>Background Guide</h2>
+			{% for bg in bgset %}
+				<a href="{{ STATIC_URL }}files/bg/{{ bg.bg_link }}.pdf" target="_blank">Download {{ bg.bg_name }}</a><br />
+			{% endfor %}
+		{% endif %}
+
+		</div>
+	</div>

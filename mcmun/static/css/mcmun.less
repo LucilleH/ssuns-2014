@@ -129,6 +129,15 @@ body {
 	min-height: 350px;
 }
 
+.mobile {
+	margin: 0 auto;
+	background: #fff;
+	background-size: 100%;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: top left;
+}
+
 #content {
 	position: relative;
 	width: 850px;
@@ -254,6 +263,27 @@ body {
 	}
 }
 
+.content-mobile {
+	position: relative;
+	max-width: 100%;
+	margin: 0 auto;
+	font-size: 13px;
+	padding: 15px;
+	padding-top: 60px;
+	padding-bottom: 30px;
+}
+
+.ui.selection.list .item {
+	.content {
+		display: inline;
+	}
+	list-style-position: inherit;
+}
+
+.item.committee {
+	text-decoration: none;
+}
+
 
 .slideshow {
 	z-index:0;
@@ -266,6 +296,10 @@ body {
 .announcement {
 	width: 620px;
 	margin-top: 21px;
+}
+
+#page_name {
+	display: none;
 }
 
 #sec {
@@ -443,4 +477,11 @@ body {
 			}
 		}
 	}
+}
+
+.ui.black.button {
+	background-color: #333;
+}
+.ui.dimmer {
+  position: fixed!important;
 }
