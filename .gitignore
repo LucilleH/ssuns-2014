@@ -6,6 +6,7 @@ mcmun/conf.py
 mcmun/static/admin/*
 mcmun/static/img/dais/*
 mcmun/static/semantic/*
+mcmun/static/files/*
 scholarship
 *.json
 mydatabase

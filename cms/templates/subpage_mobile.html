@@ -1,8 +1,3 @@
-<body>
-<div id="committeeload"></div>
-<div id="page_content">
-
-        <div id="pageload">
                 {% if page.custom_template %}
                         {% with "pages/"|add:page.short_name|add:"-mobile.html" as template_file %}
                                 {% include template_file %}
@@ -15,31 +10,4 @@
                                 {% include "under-construction.html" %}
                         {% endif %}
                 {% endif %}
-        </div>
-
-</div>
-</body>
-<script>
-function loadpage(link){
-        $('.toggle.button').click();
-        $('#pageload').load(link, function() {  
-                $('#pagename_bar').html($('#page_name').html());
-        });
-}
-function loadcommittee(link){
-        $('#page_content').hide();
-        window.scrollTo(0, 0);
-        $('#committeeload').load(link).hide().fadeIn();
-}
-function closecommittee(link) {
-        $('#committeeload').fadeOut();
-        window.scrollTo(0, 0);
-        $('#page_content').show();
-}
-</script>    
-
-
-
-
-
         

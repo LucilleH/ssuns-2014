@@ -76,7 +76,7 @@ class RegisteredSchool(models.Model):
 	account = models.ForeignKey(User, null=True)
 
 	use_online_payment = models.BooleanField(choices=YESNO)
-	use_priority = models.BooleanField(default=True)
+	use_priority = models.BooleanField(default=False)
 	late_payment = models.DecimalField(default=Decimal(0), max_digits=6, decimal_places=2)
 
 	def has_prefs(self):

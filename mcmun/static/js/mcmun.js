@@ -3,11 +3,7 @@ $(document).ready(function() {
 		fx: 'fade'
 	});
 	
-	$('.ui.sidebar').sidebar();
-	$('.ui.sidebar').first().sidebar('attach events', '.toggle.button');
-	$('#pagename_bar').html($('#page_name').html());
-	
-	// for registration if it's the first time the school attend ssuns, then ask them more question
+	//registration whether first time school or not
 	$('#registration_form select[id^="id_first_time"]').change(function () {
 		var result = $(this).find('option:selected').val();
 		if(result === 'True') {
