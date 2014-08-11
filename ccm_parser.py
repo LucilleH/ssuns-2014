@@ -3,9 +3,14 @@ import json
 
 
 assignment_list = []
+ionic_list = []
 num_assignments = 0
 total_num_delegates = 0
 committees = json.load(open('committees/committees.json'))
+committees_ionic = {}
+
+for key in committees:
+	committees_ionic[key] = { "positions": [], "messages": [] }
 
 
 def create_assignment(committee_name, assignment):
@@ -25,9 +30,10 @@ def create_assignment(committee_name, assignment):
 			"committee": committee_id,
 		}
 	})
+	committees_ionic[committee_name]["positions"].append(assignment)
 
 
-reader = csv.reader(open('tmp/ccm/ccm-country.csv', 'rb'))
+reader = csv.reader(open('tmp/ccm/ccm-country.csv', 'rU'))
 
 
 for i, row in enumerate(reader):
@@ -43,7 +49,7 @@ for i, row in enumerate(reader):
 				create_assignment(committee_header[j], country)
 
 
-reader = csv.reader(open('tmp/ccm/ccm-character.csv', 'rb'))
+reader = csv.reader(open('tmp/ccm/ccm-character.csv', 'rU'))
 
 for i, row in enumerate(reader):
 	# read header row and get all committees
@@ -59,3 +65,5 @@ for i, row in enumerate(reader):
 # Write out the assignments to some file
 json.dump(assignment_list, open('tmp/ccm/matrix.json', 'w'),
     indent=4)
+json.dump(committees_ionic, open('tmp/ccm/matrix_ionic.json', 'w'),
+	indent=4)
