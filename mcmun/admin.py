@@ -12,7 +12,7 @@ class RegisteredSchoolAdmin(admin.ModelAdmin):
 	# Sort reverse chronologically
 	ordering = ['-id']
 	list_display = ('school_name', 'email', 'is_approved', 'num_delegates', 'amount_owed', 'get_amount_paid')
-	list_filter = ('is_approved', 'use_online_payment')
+	list_filter = ('is_approved', 'use_online_payment', 'merchandise')
 	exclude = ('account',)
 	inlines = [CommitteeInline]
 	readonly_fields = (

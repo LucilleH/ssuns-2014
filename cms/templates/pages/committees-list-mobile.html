@@ -1,14 +1,12 @@
-
 {% for category in categories %}
-    <b>{{ category.name }}</b>
-    <div class="ui selection divided list">
-    {% for committee in category.committee_set.all %}
-        <a class="item committee" onclick="loadcommittee('{% url 'committees.views.view_mobile' committee.slug %}')">
-            <img class="ui avatar image" src="{{ STATIC_URL }}img/committees/{{ committee.slug }}.jpg" />
-            <div class="content">{{ committee.name }}</div>
+<div class="item item-divider">{{ category.name }}</div>
+<div class="list">
+    	{% for committee in category.committee_set.all %}
+        <a class="item item-avatar item-avatar-committee" href="#/submenu?url={% url 'committees.views.view_mobile' committee.slug %}&title={{committee.slug}}">
+		{{ committee.name }}
+		<img src="http://ssuns.org{{ STATIC_URL }}img/committees/{{ committee.slug }}.jpg" />
         </a>
-    {% endfor %}
-    </div>
+    	{% endfor %}
+</div>
 {% endfor %}
-
 
