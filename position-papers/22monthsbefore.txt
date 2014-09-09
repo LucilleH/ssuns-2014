@@ -1,0 +1,36 @@
+- Send to all participants registered on an outreach trip 60 DAYS before the first day of their trip
+- Run a check daily for any participants added to a trip less than 60 days before departure and automatically send them this email 
+- COPY EMERGENCY CONTACTS
+
+		$fromEmail = "lseegmiller@studentsofferingsupport.ca";
+		$fromName = "Lindsay Seegmiller";
+		$subject = "2 months until ". $Country. "!";
+		$message = "Hi ".$username['FirstName'], and (and [EMERG CONTACT 1 FIRST NAME] and [EMERG CONTACT 2 FIRST NAME], FYI),
+
+
+		"<br /><br />We’re entering the home stretch before your trip! With only two months before you take off, we, at Head Office, just wanted to touch base to make sure everything is on track. To do this, here is a quick checklist for what you should be doing. Try to get through these this week. If you don’t have/can’t find anything below, email your VP Outreach, or myself directly. 
+		<br /><strong><u>Things to read...</u></strong><br />
+
+<ul>
+<li> <a href="http://www.studentsofferingsupport.ca/portal/OutreachProjects/SOS%20Outreach%20Trip%20Policies.pdf?ReferringModuleID=36">Read SOS Outreach Trip Policies</a></li>
+<li> <a href="http://www.studentsofferingsupport.ca/portal/OutreachProjects/display.php?ReferringModuleID=36">Read SOS Country Profile</a> </li>
+<li> Review flight details </li>
+<li> <a href="http://www.studentsofferingsupport.ca/portal/OutreachProjects/TIPS%20Youth%20Travel%20Policy.pdf?ReferringModuleID=36">Review insurance policy</a> </li>
+<li> <a href="http://www.studentsofferingsupport.ca/portal/OutreachProjects/Download%20PPT.php?ReferringModuleID=36">Review Community Information PowerPoint</a></li>
+</ul>
+
+<br /><strong><u>Things to do...</u></strong><br />
+<ul>
+<li> Join your trip’s Facebook group </li>
+<li> <a href="http://www.studentsofferingsupport.ca/portal/OutreachProjects/TripParticipantsForm.php?ReferringModuleID=36">Fill Out Participant Information Form</a></li>
+<li> <a href="http://www.studentsofferingsupport.ca/portal/OutreachProjects/MedicalFitnessForm.php?ReferringModuleID=36">Fill out Medical Release Form</a></li>
+<li> Print, sign and re-upload Waiver and Release </li>
+<li> <a href="http://www.studentsofferingsupport.ca/portal/OutreachProjects/VolunteerTripSafetyQuiz.php?ReferringModuleID=36">Take Health and Safety Test</a></li>
+<li> Book appointment with Travel Clinic to review recommended vaccinations/immunizations </li>
+<li> <a href="http://www.studentsofferingsupport.ca/portal/OutreachProjects/Visa%20Requirements.pdf?ReferringModuleID=36"> Confirm entry/exit requirements in final country + USA layovers</a>
+
+<br />As always, if you have any questions or concerns please do not hesitate to email us. We’re so excited for your trip and want to make sure you are as prepared as possible.
+Only <b>TWO MORE MONTHS!!</b><br />
+
+<br />The SOS Outreach Team<br /><br />
+		Lindsay Seegmiller (lseegmiller@studentsofferingsupport.ca),<br/> Director of International Outreach at SOS Head Office<br />";

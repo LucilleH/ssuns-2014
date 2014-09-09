@@ -8,6 +8,7 @@ mcmun/static/img/dais/*
 mcmun/static/semantic/*
 mcmun/static/files/*
 scholarship
+position-papers
 *.json
 mydatabase
 .*
