@@ -93,6 +93,7 @@ class CountryCharacterMatrix(models.Model):
 
 	class Meta:
     		unique_together = ('committee', 'position',)
+		ordering = ('committee', 'position')
 	
 	def __unicode__(self):
 		return "%s - %s" % (self.committee.name, self.position)

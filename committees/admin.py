@@ -9,6 +9,7 @@ class CommitteeAdmin(admin.ModelAdmin):
 
 class CommitteeAssignmentAdmin(admin.ModelAdmin):
 	list_display = ('school', 'assignment','delegate_name', 'unassigned')
+	ordering = ['school', 'assignment',]
 
 class ScholarshipIndividualAdmin(admin.ModelAdmin):
 	list_display = ('name_of_delegate', 'school', 'committee_assignment', 'is_uploaded')
@@ -25,7 +26,7 @@ class ScholarshipIndividualAdmin(admin.ModelAdmin):
 	committee.admin_order_field = 'committee_assignment'
 
 class CountryCharacterMatrixAdmin(admin.ModelAdmin):
-	ordering = ['committee']
+	ordering = ['committee', 'position',]
 
 class CommitteeDaisAdmin(admin.ModelAdmin):
 	ordering = ['committee']
