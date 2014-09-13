@@ -245,7 +245,7 @@ class AddDelegates(models.Model):
 
 
 class ScholarshipSchoolApp(models.Model):
-	school = models.OneToOneField(RegisteredSchool)
+	school = models.OneToOneField(RegisteredSchool, primary_key=True)
 	scholarship = models.FileField(upload_to=get_scholarshipschool_upload_path, blank=True, null=True, verbose_name="school scholarship application")
 	
 	def __unicode__(self):
@@ -260,6 +260,49 @@ class ScholarshipSchoolApp(models.Model):
 			return True
 		return False
 	is_international.boolean = True
+
+class MerchandiseApp(models.Model):
+	class Meta:
+		ordering = ('school', 'item')
+
+	school = models.ForeignKey(RegisteredSchool)
+	item = models.CharField(max_length=50, default='t-shirt')
+
+	xs = models.IntegerField(default=0, choices=[(n, n) for n in xrange(MIN_NUM_DELEGATES, MAX_NUM_DELEGATES)])
+	s = models.IntegerField(default=0, choices=[(n, n) for n in xrange(MIN_NUM_DELEGATES, MAX_NUM_DELEGATES)])
+	m = models.IntegerField(default=0, choices=[(n, n) for n in xrange(MIN_NUM_DELEGATES, MAX_NUM_DELEGATES)])
+	l = models.IntegerField(default=0, choices=[(n, n) for n in xrange(MIN_NUM_DELEGATES, MAX_NUM_DELEGATES)])
+	xl = models.IntegerField(default=0, choices=[(n, n) for n in xrange(MIN_NUM_DELEGATES, MAX_NUM_DELEGATES)])
+	xxl = models.IntegerField(default=0, choices=[(n, n) for n in xrange(MIN_NUM_DELEGATES, MAX_NUM_DELEGATES)])
+
+	price = models.DecimalField(default=Decimal(50), max_digits=6, decimal_places=2)
+	paid = models.BooleanField(default=False)
+
+	def __unicode__(self):
+		return self.school.school_name
+
+	def get_total_price(self):
+		return "%.2f" % ((self.xs + self.s + self.m + self.l + self.xl + self.xxl) * self.price)
+
+	def get_xs_price(self):
+		return "%.2f" % (self.xs * self.price)
+
+	def get_s_price(self):
+		return "%.2f" % (self.s * self.price)
+
+	def get_m_price(self):
+		return "%.2f" % (self.m * self.price)
+
+	def get_l_price(self):
+		return "%.2f" % (self.l * self.price)
+
+	def get_xl_price(self):
+		return "%.2f" % (self.xl * self.price)
+
+	def get_xxl_price(self):
+		return "%.2f" % (self.xxl * self.price)
+
+
 
 
 @receiver(models.signals.pre_save, sender=RegisteredSchool, dispatch_uid="approve_schools")
@@ -279,6 +322,3 @@ def approve_schools(sender, instance, **kwargs):
 		instance.account = new_account
 
 		instance.send_invoice_email(new_account.username, password)
-
-
-

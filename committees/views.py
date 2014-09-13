@@ -9,12 +9,15 @@ from django.views.static import serve
 
 from committees.models import Committee, position_paper_upload_path, scholarship_upload_path
 from committees.utils import get_committee_from_email
+from committees.forms import AwardAssignmentFormset
 
 
 def view(request, slug):
 	committee = get_object_or_404(Committee, slug=slug)
 	# If the user is a member of the dais, show a link to the uploads page
 	is_dais = get_committee_from_email(request.user.username) == committee
+
+	show_manage_link = (committee.allow_manager(request.user) and committee.is_assignable)
 	# If background guide is uploaded
 	bgset = committee.committeebackgroundguide_set.all()
 	bg_uploaded = False
@@ -30,6 +33,7 @@ def view(request, slug):
 		'committee': committee,
 		'bg_uploaded': bg_uploaded,
 		'bgset': bgset,
+		'show_manage_link': show_manage_link,
 	}
 
 	return render(request, 'committee.html', data)
@@ -154,3 +158,46 @@ def list_scholarship(request):
                 return render(request, 'list_scholarship.html', data)
         else:
                 raise Http404
+
+
+@login_required
+def manage(request, slug):
+	committee = get_object_or_404(Committee, slug=slug)
+
+	# Only the dais for this committee and other admins can access this
+	if not committee.allow_manager(request.user):
+		raise PermissionDenied
+
+	assignments = committee.countrycharactermatrix_set.order_by('position')
+
+	context = {
+        'committee': committee,
+        'title': 'Committee dashboard for %s' % committee.name,
+        'assignments': assignments,
+	}
+
+	return render(request, 'committee_manage.html', context)
+
+
+@login_required
+def awards(request, slug):
+	committee = get_object_or_404(Committee, slug=slug)
+	if not committee.allow_manager(request.user):
+		raise PermissionDenied
+
+	awards = committee.awards.all()
+	if request.method == 'POST':
+		formset = AwardAssignmentFormset(request.POST, queryset=awards)
+		if formset.is_valid():
+			formset.save()
+	else:
+		formset = AwardAssignmentFormset(queryset=awards)
+
+	context = {
+        'committee': committee,
+        'title': 'Awards dashboard for %s' % committee.name,
+        'formset': formset,
+        'positions': committee.countrycharactermatrix_set.all(),
+	}
+
+	return render(request, 'committee_awards.html', context)

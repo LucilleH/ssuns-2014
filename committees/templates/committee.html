@@ -16,6 +16,18 @@
 
 <a href="/committees#committees-list">Go back</a>
 
+{% if show_manage_link %}
+    <p class="right-float">
+        <a href="{% url 'committee_manage' committee.slug %}">
+            {% if user.is_authenticated %}
+                Manage this committee &raquo;
+            {% else %}
+                Login to manage this committee &raquo;
+            {% endif %}
+        </a>
+    </p>
+{% endif %}
+
 <p />
 
 <h1>{{ committee.name }}</h1>

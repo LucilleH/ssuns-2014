@@ -399,4 +399,6 @@ HOWYOUHEAR = (('brochure', 'Brochure'), ('letter', 'Letter'), ('website', 'Websi
 
 TRUEFALSE = (( True, 'True'), (False, 'False'))
 
+SIZE = (('XS', 'XS'),('S', 'S'),('M', 'M'),('L', 'L'),('XL', 'XL'),('XXL', 'XXL'))
+
 

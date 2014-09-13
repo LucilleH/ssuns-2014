@@ -150,3 +150,38 @@ def regenerate_add_invoice(school_id, add_id):
 
 	send_email.delay(invoice_subject, invoice_message_filename, [school.account.email], context=invoice_context, bcc=[settings.IT_EMAIL, settings.CHARGE_EMAIL, settings.FINANCE_EMAIL], attachment_filenames=attachment_filenames)
 
+
+@task
+def merch_invoice(merch_id):
+	print "starting the generate_invoice task"
+	MerchandiseApp = get_model('mcmun', 'MerchandiseApp')
+	merch = MerchandiseApp.objects.get(pk=merch_id)
+
+	invoice_context = {
+		'first_name': merch.school.first_name,
+		'school_name': merch.school.school_name,
+		'total_balance': merch.get_total_price(),
+		'currency': merch.school.get_currency(),
+	}
+
+	invoice_subject = 'Invoice for merchandise order'
+	invoice_message_filename = 'merch-invoice'
+
+	invoice_id = 'SSUNS14' + str(merch_id).zfill(3) + 'M'
+
+	pdf_context = {
+		'invoice_id': invoice_id,
+		'school': merch.school,
+		'merch': merch,
+	}
+
+	# Generate the invoice PDF, save it under tmp/
+	pdf_filename = 'mcmun/invoice/ssuns_invoice_%s_merchandise.pdf' % merch_id
+	file = open(pdf_filename, 'wb')
+	pdf = generate_pdf('pdf/merch-invoice.html', file_object=file, context=pdf_context)
+	file.close()
+
+	attachment_filenames = [pdf_filename]
+
+	send_email.delay(invoice_subject, invoice_message_filename, [merch.school.account.email], context=invoice_context, bcc=[settings.IT_EMAIL, settings.STAFF_EMAIL, settings.FINANCE_EMAIL], attachment_filenames=attachment_filenames)
+

@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+
+{% block extrahead %}
+<link rel="stylesheet" href="{{ STATIC_URL }}css/chosen.min.css"
+      type="text/css" />
+<script src="{{ STATIC_URL }}js/chosen.jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function () {
+    $('.chosen').chosen();
+});
+</script>
+{% endblock %}
+
+{% block content %}
+
+<div class="wrapper-no-video">
+
+<div id="content">
+
+<p>
+    <a href="{% url 'committee_manage' committee.slug %}">
+        &laquo; Back to committee dashboard
+    </a>
+</p>
+<h1>Awards dashboard</h1>
+<h2>{{ committee }}</h2>
+
+<form action="" method="POST">
+    {{ formset.management_form }}
+    {% csrf_token %}
+    <table class="separated-cells">
+        <thead>
+            <tr>
+                <th>Award</th>
+                <th>Position</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for f in formset %}
+            {% with a=f.instance %}
+            <tr>
+                <td>{{ a.award }}</td>
+                <td>
+                    <select name="{{ f.position.html_name }}" class="chosen"
+                        data-placeholder="Choose a delegate ...">
+                        <option value="">Choose a delegate ...</option>
+                        {% for position in positions %}
+                            <option value="{{ position.id }}"
+                            {% if position == a.position %}selected {% endif %}>
+                                {{ position.committeeassignment }} ({{ position.committeeassignment.school }})
+                                {% if not position.committeeassignment.position_paper %}
+                                &mdash; NO POSITION PAPER
+                                {% endif %}
+                            </option>
+                        {% endfor %}
+                    </select>
+                    {{ f.id }}
+                </td>
+            </tr>
+            {% endwith %}
+            {% endfor %}
+        </tbody>
+    </table>
+    <fieldset class="submit">
+        <input type="submit" value="Submit" name="submit" />
+    </fieldset>
+</form>
+</div>
+</div>
+{% endblock %}

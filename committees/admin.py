@@ -9,6 +9,7 @@ class CommitteeAdmin(admin.ModelAdmin):
 
 class CommitteeAssignmentAdmin(admin.ModelAdmin):
 	list_display = ('school', 'assignment','delegate_name', 'unassigned')
+	ordering = ['school', 'assignment',]
 
 class ScholarshipIndividualAdmin(admin.ModelAdmin):
 	list_display = ('name_of_delegate', 'school', 'committee_assignment', 'is_uploaded')
@@ -25,10 +26,23 @@ class ScholarshipIndividualAdmin(admin.ModelAdmin):
 	committee.admin_order_field = 'committee_assignment'
 
 class CountryCharacterMatrixAdmin(admin.ModelAdmin):
-	ordering = ['committee']
+	ordering = ['committee', 'position',]
 
 class CommitteeDaisAdmin(admin.ModelAdmin):
 	ordering = ['committee']
+
+class AwardAssignmentAdmin(admin.ModelAdmin):
+	list_display = ('position', 'award', 'committee', 'school')
+	list_per_page = 112  # show all the awards on one page
+
+	def school(self, obj):
+		if obj.position:
+			return "%s" % obj.position.committeeassignment.school
+		else:
+			return "(None)"
+	school.short_description = 'School'
+	school.admin_order_field  = 'position__school'
+
 
 admin.site.register(Category)
 admin.site.register(Committee, CommitteeAdmin)
@@ -37,3 +51,5 @@ admin.site.register(CommitteeBackgroundGuide)
 admin.site.register(CountryCharacterMatrix, CountryCharacterMatrixAdmin)
 admin.site.register(CommitteeAssignment, CommitteeAssignmentAdmin)
 admin.site.register(ScholarshipIndividual, ScholarshipIndividualAdmin)
+admin.site.register(Award)
+admin.site.register(AwardAssignment, AwardAssignmentAdmin)

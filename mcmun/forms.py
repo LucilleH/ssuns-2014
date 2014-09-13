@@ -1,6 +1,6 @@
 import re
 
-from mcmun.models import RegisteredSchool, AddDelegates, ScholarshipSchoolApp, ScholarshipIndividual
+from mcmun.models import *
 
 from django import forms
 
@@ -76,3 +76,5 @@ class CommitteePrefsForm(forms.ModelForm):
 	class Meta:
 		model = RegisteredSchool
 		fields = ('committee_1', 'committee_2', 'committee_3', 'committee_4', )
+
+

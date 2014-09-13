@@ -80,6 +80,53 @@
 	<p>Lost your copy of your invoice PDF? Email <a href="mailto:it@ssuns.org">it@ssuns.org</a>.{% comment %}Eventually I'll make a view to show the PDF to people with the proper permissions. Later.{% endcomment %}</p>
 {% endif %}
 
+
+{% if school.merchandiseapp_set.count %}
+<div id="merchandise">
+<h2>Merchandise Ordering</h2>
+<table class="separated-cells">
+	<thead>
+		<tr>
+			<th>Item</th>
+			<th>XS</th>
+			<th>S</th>
+			<th>M</th>
+			<th>L</th>
+			<th>XL</th>
+			<th>XXL</th>
+			<th>Price</th>
+			<th>Paid</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>{{ merchandise.item }}</td>
+			<td>{{ merchandise.xs }}</td>
+			<td>{{ merchandise.s }}</td>
+			<td>{{ merchandise.m }}</td>
+			<td>{{ merchandise.l }}</td>
+			<td>{{ merchandise.xl }}</td>
+			<td>{{ merchandise.xxl }}</td>
+			<td>{{ merchandise.get_total_price }}</td>
+			<td>
+				{% if merchandise.paid %}
+					<p>Yes</p>
+				{% else %}
+					<p>No</p>
+				{% endif %}
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p><strong>Please pay at the conference. </strong></p>
+
+</div>
+{% endif %}
+
+
+
+
 <h3>Background Guides</h3>
 <p>Background guide will be available in early September. To access the background guides for your committees, please go to <a href="/committees#committees-list" target="_blank">www.ssuns.org/committees</a>, then select the committee you have been assigned to. </p>
 
@@ -202,6 +249,7 @@ IMPORTANT: All position papers and scholarship applications must be submitted on
 			<p>If you want to reupload school scholarship application, please contact <a href="mailto:pr@ssuns.org">pr@ssuns.org</a></p>
 	{% endif %}
 </div>
+
 
 <h2 id="dates">Important dates</h2>
 

@@ -1,4 +1,4 @@
-from committees.models import CommitteeAssignment, ScholarshipIndividual
+from committees.models import *
 
 from django import forms
 
@@ -9,3 +9,6 @@ CommitteeAssignmentFormSet = forms.models.modelformset_factory(CommitteeAssignme
 
 ScholarshipIndividualFormset = forms.models.modelformset_factory(ScholarshipIndividual,
 	fields=('scholarship_individual',), extra=0)
+
+AwardAssignmentFormset = forms.models.modelformset_factory(AwardAssignment,
+    fields=('position',), extra=0)

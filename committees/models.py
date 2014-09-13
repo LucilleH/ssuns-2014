@@ -1,5 +1,6 @@
 import os
 
+from django.contrib.auth.models import User
 from django.db import models
 from django import forms
 from mcmun.constants import COUNTRIES
@@ -41,6 +42,42 @@ class Committee(models.Model):
 	category = models.ForeignKey(Category)
 	assign_type = models.BooleanField(choices=ASSIGN_TYPE, verbose_name="Assignment Type")
 	video_url = models.CharField(max_length=255, null=True, blank=True, verbose_name="video URL")
+
+	# The user (usually [slug]@mcmun.org) who can manage this committee.
+	manager = models.ForeignKey(User, null=True, blank=True)
+
+	class Meta:
+		ordering = ('category', 'id')
+
+	def __unicode__(self):
+		return self.name
+
+	@models.permalink
+	def get_absolute_url(self):
+		return ('committee_view', [self.slug])
+
+	def allow_manager(self, user):
+		return self.manager == user or user.is_staff
+
+	def is_searchable(self):
+		return self.is_visible
+
+	def get_num_delegates(self):
+		return self.countrycharactermatrix_set.aggregate(
+			total_delegates=models.Sum())['total_delegates']
+
+	def allow_manager(self, user):
+		return self.manager == user or user.is_staff
+
+	def get_awards(self):
+		awards = self.awards.order_by('award__name')
+		# Move outstanding delegate to after best delegate
+		# Should be fixed properly in the future (new field on Award)
+		awards = [award for award in awards]
+		outstanding = awards.pop()
+		awards.insert(1, outstanding)
+		return awards
+
 
 	def __unicode__(self):
 		return self.name
@@ -92,7 +129,8 @@ class CountryCharacterMatrix(models.Model):
 	position = models.CharField(max_length=255)
 
 	class Meta:
-    		unique_together = ('committee', 'position',)
+		unique_together = ('committee', 'position',)
+		ordering = ('committee', 'position')
 	
 	def __unicode__(self):
 		return "%s - %s" % (self.committee.name, self.position)
@@ -150,3 +188,37 @@ def create_scholarship_individual(sender, instance, created, **kwargs):
 		instance.scholarshipindividual_set.create()
 
 models.signals.post_save.connect(create_scholarship_individual, sender=CommitteeAssignment)
+
+
+
+class Award(models.Model):
+	name = models.CharField(max_length=50)
+	committees = models.ManyToManyField(Committee)
+
+	def __unicode__(self):
+		return self.name
+
+
+class AwardAssignment(models.Model):
+	award = models.ForeignKey(Award, related_name='assignments')
+	committee = models.ForeignKey(Committee, related_name='awards')
+	position = models.ForeignKey(CountryCharacterMatrix, null=True, blank=True)
+
+	def __unicode__(self):
+		return "%s in %s - %s" % (self.award, self.committee.name, self.position)
+
+def update_award_assignments(sender, instance, action, reverse, *args,
+    **kwargs):
+	"""
+	Defines an m2m_changed hook to create/remove AwardAssignments as necessary
+	when the list valid committees for an Award is updated.
+	"""
+	if not reverse:
+		if action == 'post_add':
+			for committee in instance.committees.all():
+				instance.assignments.get_or_create(committee=committee)
+		elif action == 'pre_clear':
+			instance.assignments.all().delete()
+
+models.signals.m2m_changed.connect(update_award_assignments,
+    sender=Award.committees.through)

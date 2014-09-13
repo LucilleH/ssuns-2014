@@ -183,6 +183,7 @@ EMAIL_HOST_PASSWORD = conf.EMAIL_PASSWORD
 IT_EMAIL = 'it@ssuns.org'
 CHARGE_EMAIL = 'schools@ssuns.org'
 FINANCE_EMAIL = 'finance@ssuns.org'
+STAFF_EMAIL = 'staff@ssuns.org'
 CSRF_COOKIE_DOMAIN = conf.COOKIE_DOMAIN
 DEFAULT_FROM_EMAIL = 'it@ssuns.org'
 logging.getLogger('xhtml2pdf')

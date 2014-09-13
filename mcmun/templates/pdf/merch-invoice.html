@@ -1,0 +1,252 @@
+<html>
+	<head>
+		<title></title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+
+			p {
+				padding: 5px 0;
+				margin: 0;
+			}
+
+			body {
+				font-family: "Helvetica Neue", "Helvetica LT Std", Helvetica;
+				font-size: 13px;
+				background-image: url('/static/img/brochure.png');
+			}
+
+			#wrap {
+				width: 800px;
+			}
+
+			.left-float {
+				float: left;
+			}
+
+			.center-align {
+				text-align: center;
+			}
+
+			.right-align {
+				text-align: right;
+			}
+
+			h1 {
+				font-size: 3.0em;
+				line-height: 1.0em;
+				margin: 0;
+			}
+
+			h2 {
+				font-size: 2.0em;
+				line-height: 1.0em;
+				margin: 0;
+			}
+
+			h3 {
+				font-size: 1.3em;
+				font-weight: normal;
+				padding: 0;
+				margin: 0;
+				line-height: 1.0em;
+			}
+
+			table {
+				width: 100%;
+				border-spacing: 0;
+				margin-bottom: 17px;
+			}
+
+			.bottom-border td, .bottom-border th {
+				border-bottom: 1px solid #AAA;
+			}
+
+			.costs td, .costs th {
+				padding: 10px;
+			}
+
+			tr:last-child td {
+				border-bottom: 0;
+			}
+
+			.left-space {
+				margin-left: 20px;
+			}
+
+			.amount {
+				text-align: center;
+				font-size: 1.3em;
+			}
+
+			#wrap {
+				margin: 10px;
+			}
+
+			.right-border {
+				border-right: 1px solid #CCC;
+			}
+
+			table p {
+				padding: 0;
+				line-height: 14px;
+			}
+
+			table.bordered {
+				border: 1px solid #CCC;
+			}
+
+			.bordered th, .bordered td {
+				padding: 2px;
+			}
+
+			.important {
+				padding: 15px;
+				background: #FFE063;
+				border: 1px solid #FFAE3B;
+			}
+
+			.important p {
+				padding-left: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+			{% comment %}Super silly but xhtml2pdf won't render it properly otherwise. Something to do with line-height perhaps?{% endcomment %}
+			<p>&nbsp;</p>
+			<div class="right-align">
+					Invoice #: {{ invoice_id }}
+					<br />
+					{% now "DATE_FORMAT" %}
+			</div>
+
+			<p>&nbsp;</p>
+
+			<div class="center-align">
+				<h2>Invoice for Secondary Schools' United Nations Symposium 2014</h2>
+				<h3>3480 McTavish, Suite 410 :: Montr&eacute;al, QC H3A 1X9 :: Canada</h3>
+				<p>+1 (514) 398 6816 :: www.ssuns.org</p>
+			</div>
+
+			<div>
+				<br />
+				<h3><strong>Recipient</strong></h3>
+				<p>
+					A/S: {{ school.first_name }} {{ school.last_name }}
+					<br />
+					{{ school.school_name }}
+					<br />
+					{{ school.address }}
+					<br />
+					{{ school.get_country_display }}
+					<br />
+					{{ school.advisor_phone }}
+				</p>
+			</div>
+
+			<table class="costs">
+				<tr class="bottom-border">
+					<th width="45%">Item</th>
+					<th width="17%">Unit price</th>
+					<th width="13%" class="right-border">Quantity</th>
+					<th width="25%">Total</th>
+				</tr>
+				<tr>
+					<td>{{ merch.item }} (XS)</td>
+					<td class="amount">${{ merch.price }}.00</td>
+					<td class="amount right-border">{{ merch.xs }}</td>
+					<td class="amount">${{ merch.get_xs_price }} {{ school.get_currency }}</td>
+				</tr>
+				<tr>
+					<td>{{ merch.item }} (S)</td>
+					<td class="amount">${{ merch.price }}.00</td>
+					<td class="amount right-border">{{ merch.s }}</td>
+					<td class="amount">${{ merch.get_s_price }} {{ school.get_currency }}</td>
+				</tr>
+				<tr>
+					<td>{{ merch.item }} (M)</td>
+					<td class="amount">${{ merch.price }}.00</td>
+					<td class="amount right-border">{{ merch.m }}</td>
+					<td class="amount">${{ merch.get_m_price }} {{ school.get_currency }}</td>
+				</tr>
+				<tr>
+					<td>{{ merch.item }} (L)</td>
+					<td class="amount">${{ merch.price }}.00</td>
+					<td class="amount right-border">{{ merch.l }}</td>
+					<td class="amount">${{ merch.get_l_price }} {{ school.get_currency }}</td>
+				</tr>
+				<tr>
+					<td>{{ merch.item }} (XL)</td>
+					<td class="amount">${{ merch.price }}.00</td>
+					<td class="amount right-border">{{ merch.xl }}</td>
+					<td class="amount">${{ merch.get_xl_price }} {{ school.get_currency }}</td>
+				</tr>
+				<tr>
+					<td>{{ merch.item }} (XXL)</td>
+					<td class="amount">${{ merch.price }}.00</td>
+					<td class="amount right-border">{{ merch.xxl }}</td>
+					<td class="amount">${{ merch.get_xxl_price }} {{ school.get_currency }}</td>
+				</tr>
+				<tr>
+					<td colspan="3" class="right-border">
+						<div class="right-align">
+							<p><strong>TOTAL (due&nbsp;<u>at the conference</u>)</strong></p>
+							<p><em>{% if school.get_currency == 'CAD' %}Canadian delegations must pay in Canadian dollars.{% else %}Delegations located outside of Canada must pay in US dollars.{% endif %}</em></p>
+						</div>
+					</td>
+					<td class="amount">${{ merch.get_total_price }} {{ school.get_currency }}</td>
+				</tr>
+			</table>
+
+			<p>&nbsp;</p>
+			<p>&nbsp;</p>
+
+			<h2>Payment instructions</h2>
+			<p>Please pay the total amount when you pick them up at the day arrival of the conference. Please email staff@ssuns.org if you encounter any problems.</p>
+
+			<p>&nbsp;</p>
+			
+			<h2>Refund policy</h2>
+
+			<p>Once the T-shirt is ordered, there will be no refund.</p>
+
+			<p>&nbsp;</p>
+			<h2>Contacting SSUNS</h2>
+			<p>If you have any questions about your invoice or registration please contact Katie Gilfillan, Chief of Staff, or Hilary Chu, Charg&eacute;e d'Affaires, respectively.</p>
+			<p>&nbsp;</p>
+			<table class="center-align">
+				<tr>
+					<td>
+						<p>
+							Hilary Chu
+							<br />
+							Charg&eacute;e d'Affaires
+							<br />
+							Email: schools@ssuns.org
+							<br />
+							Office: (514) 398-6816
+							<br />
+							Fax: (514) 398-2160
+						</p>
+					</td>
+					<td>
+						<p>
+							Katie Gilfillan
+							<br />
+							Chief of Staff
+							<br />
+							Email: staff@ssuns.org
+							<br />
+							Office: (514) 398-6816
+							<br />
+							Fax: (514) 398-2160
+						</p></td>
+				</tr>
+			</table>
+			<h2>
+		</div>
+	</body>
+</html>

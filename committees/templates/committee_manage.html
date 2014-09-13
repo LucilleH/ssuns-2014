@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="wrapper-no-video">
+
+<div id="content">
+
+<h1>Committee dashboard</h1>
+<h2>{{ committee }}</h2>
+
+<div class="buttons">
+    <div class="button blue">
+        <a href="{% url 'committee_awards' committee.slug %}">
+            Assign awards
+        </a>
+    </div>
+</div>
+
+<br />
+
+<p>
+    This committee has {{ committee.get_num_delegates }} delegates.
+</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Position</th>
+            <th>Delegate name</th>
+            <th>School</th>
+            <th>Position paper</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for ass in assignments %}
+        <tr>
+            <td>{{ ass.position }}</td>
+            <td>{{ ass.committeeassignment.delegate_name }}
+            </td>
+            <td>{{ ass.committeeassignment.school }}</td>
+            <td>
+                {% if ass.committeeassignment.position_paper %}
+                <strong><a href="/{{ ass.position_paper }}">Download</a></strong>
+                {% else %}
+                N/A
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+</div>
+{% endblock %}

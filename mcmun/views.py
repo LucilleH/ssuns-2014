@@ -10,10 +10,10 @@ from django.views.static import serve
 
 from committees.forms import CommitteeAssignmentFormSet, ScholarshipIndividualFormset
 from committees.models import ScholarshipIndividual
-from committees.utils import get_committee_from_email
-from mcmun.forms import RegistrationForm, ScholarshipSchoolForm, CommitteePrefsForm
+from committees.views import manage
+from mcmun.forms import *
 from mcmun.constants import MIN_NUM_DELEGATES, MAX_NUM_DELEGATES
-from mcmun.models import RegisteredSchool, AddDelegates, ScholarshipSchoolApp, scholarshipschool_upload_path
+from mcmun.models import *
 
 
 def home(request):
@@ -60,9 +60,10 @@ def registration(request):
 def dashboard(request):
 	# If it's a dais member, redirect to that committee's position paper listing
 	if request.user.username.endswith('@ssuns.org'):
-		dais_committee = get_committee_from_email(request.user.username)
+		slug = request.user.username[:-10]
+		dais_committee = Committee.objects.get(slug=slug)
 		if dais_committee:
-			return redirect(dais_committee)
+			return redirect(manage, slug)
 
 	form = None
 	school = None
@@ -70,40 +71,46 @@ def dashboard(request):
 	addDelegateList = None
 	additional_pay = None
 
-	if request.user.registeredschool_set.count():
-		# There should only be one anyway (see comment in models.py)
-		school = request.user.registeredschool_set.filter(is_approved=True)[0]
-		
-		additional_pay = AddDelegates.objects.filter(school=school)
-
-		if ScholarshipSchoolApp.objects.filter(school=school).count() == 0:
-			# show scholarship application form 
-			if request.method == 'POST':
-				form = ScholarshipSchoolForm(request.POST, request.FILES)
-
-				if form.is_valid():
-					scholarship_app = form.save(commit=False)
-					scholarship_app.school = school
-					scholarship_app.save()
-
-					form = None
-					scholarshipfile = ScholarshipSchoolApp.objects.get(school=school)
-			else:
-				form = ScholarshipSchoolForm()
-		else:
-			scholarshipfile = ScholarshipSchoolApp.objects.get(school=school)
-
-		# If we haven't passed the committee prefs deadline, show the form
-	elif request.user.is_staff:
+	if request.user.is_staff:
 		# Show a random school (the first one registered)
 		# Admins can see the dashboard, but can't fill out any forms
 		school = RegisteredSchool.objects.get(email="lucille.hua@gmail.com")
 
+	elif request.user.registeredschool_set.count():
+		# There should only be one anyway (see comment in models.py)
+		school = request.user.registeredschool_set.filter(is_approved=True)[0]
+		
+		#additional_pay = AddDelegates.objects.filter(school=school)
+	additional_pay = school.adddelegates_set.all()
+
+	if ScholarshipSchoolApp.objects.filter(school=school).count() == 0:
+		# show scholarship application form 
+		if request.method == 'POST':
+			form = ScholarshipSchoolForm(request.POST, request.FILES)
+
+			if form.is_valid():
+				scholarship_app = form.save(commit=False)
+				scholarship_app.school = school
+				scholarship_app.save()
+
+				form = None
+				scholarshipfile = ScholarshipSchoolApp.objects.get(school=school)
+		else:
+			form = ScholarshipSchoolForm()
+	else:
+		scholarshipfile = ScholarshipSchoolApp.objects.get(school=school)
+		
 	com_assignments = school.committeeassignment_set.all()
 	formset = CommitteeAssignmentFormSet(queryset=com_assignments, prefix='lol')
 	scholar_forms = []
 	for com_assignment in com_assignments:
 		scholar_forms.append(ScholarshipIndividualFormset(queryset=com_assignment.scholarshipindividual_set.all(), prefix='%d' % com_assignment.id))
+
+	# merchandise start
+	merchandise = []
+	if MerchandiseApp.objects.filter(school=school).count() > 0:
+		merchandise = MerchandiseApp.objects.get(school=school)
+
 
 	data = {
 		'management_forms': [formset.management_form] + [f.management_form for f in scholar_forms],
@@ -113,6 +120,7 @@ def dashboard(request):
 		'additional_pay': additional_pay,
 		'scholarshipform': form,
 		'scholarshipfile': scholarshipfile,
+		'merchandise': merchandise,
 		# Needed to show the title (as base.html expects the CMS view)
 		'page': {
 			'long_name': 'Your dashboard',
@@ -140,6 +148,7 @@ def assignments(request):
 			formset.save()
 
 	return redirect(dashboard)
+
 
 
 @login_required

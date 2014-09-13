@@ -1,7 +1,7 @@
 from django.contrib import admin
 
-from mcmun.models import RegisteredSchool, AddDelegates, ScholarshipSchoolApp
-from mcmun.tasks import regenerate_invoice, regenerate_add_invoice
+from mcmun.models import *
+from mcmun.tasks import regenerate_invoice, regenerate_add_invoice, merch_invoice
 from committees.models import CommitteeAssignment
 
 class CommitteeInline(admin.StackedInline):
@@ -33,7 +33,7 @@ class RegisteredSchoolAdmin(admin.ModelAdmin):
 		self.message_user(request, message)
 
 	re_invoice.short_description = "Send invoice to selected schools"
-	actions = ['re_invoice']
+
 
 class AddDelegatesAdmin(admin.ModelAdmin):
 	# Sort reverse chronologically
@@ -55,6 +55,22 @@ class AddDelegatesAdmin(admin.ModelAdmin):
 class ScholarshipSchoolAdmin(admin.ModelAdmin):
 	list_display = ('school', 'application_uploaded', 'is_international')
 
+class MerchandiseAppAdmin(admin.ModelAdmin):
+	list_display = ('school', 'item', 'get_total_price', 'paid')
+	list_filter = ('paid',)
+
+	def invoice(self, request, queryset):
+		for obj in queryset:
+			id = obj.id
+			merch_invoice(id)
+		message = "invoice successfully sent"
+		self.message_user(request, message)
+
+	invoice.short_description = "Send invoice to selected schools"
+	actions = ['invoice']
+
+
 admin.site.register(RegisteredSchool, RegisteredSchoolAdmin)
 admin.site.register(AddDelegates, AddDelegatesAdmin)
 admin.site.register(ScholarshipSchoolApp, ScholarshipSchoolAdmin)
+admin.site.register(MerchandiseApp, MerchandiseAppAdmin)
