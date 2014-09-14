@@ -17,7 +17,7 @@ def view(request, slug):
 	# If the user is a member of the dais, show a link to the uploads page
 	is_dais = get_committee_from_email(request.user.username) == committee
 
-	show_manage_link = (committee.allow_manager(request.user) and committee.is_assignable)
+	show_manage_link = committee.allow_manager(request.user)
 	# If background guide is uploaded
 	bgset = committee.committeebackgroundguide_set.all()
 	bg_uploaded = False
