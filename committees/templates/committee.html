@@ -55,14 +55,12 @@
 {% endfor %}
 </ul>
 </div>
-{% comment %}
 {% if bg_uploaded %}
 	<h2>Background Guide</h2>
 	{% for bg in bgset %}
 		<a href="{{ STATIC_URL }}files/bg/{{ bg.bg_link }}" target="_blank">Download {{ bg.bg_name }}</a><br />
 	{% endfor %}
 {% endif %}
-{% endcomment %}
 
 </div>
 </div>
