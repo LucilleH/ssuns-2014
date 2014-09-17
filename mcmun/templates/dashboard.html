@@ -162,7 +162,7 @@ IMPORTANT: All position papers and scholarship applications must be submitted on
 		{% for f, s_f in formset %}
 		{% with c=f.instance s=s_f.instance %}
 		<tr>
-			<td><a href="{{ c.assignment.committee.get_absolute_url }}" target="_blank">{{ c.assignment.committee.get_name }}</a></td>
+			<td><a href="{{ c.committee.get_absolute_url }}" target="_blank">{{ c.committee.get_name }}</a></td>
 			<td>{{ c.display_assignment }}</td>
 			<td>
 				{% if c.delegate_name %}
