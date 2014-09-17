@@ -48,8 +48,8 @@ $(document).ready(function () {
                         {% for position in positions %}
                             <option value="{{ position.id }}"
                             {% if position == a.position %}selected {% endif %}>
-                                {{ position.committeeassignment }} ({{ position.committeeassignment.school }})
-                                {% if not position.committeeassignment.position_paper %}
+                                {{ position.assignment }} ({{ position.school }})
+                                {% if not position.position_paper %}
                                 &mdash; NO POSITION PAPER
                                 {% endif %}
                             </option>

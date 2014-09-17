@@ -144,22 +144,27 @@ class CommitteeAssignment(models.Model):
 	# Number of delegates is usually 1, except in SOCHUM
 	school = models.ForeignKey('mcmun.RegisteredSchool')
 	# The country or character assignment
-	assignment = models.OneToOneField(CountryCharacterMatrix)
+	committee = models.ForeignKey(Committee)
+	assignment = models.CharField(max_length=255, choices=COUNTRIES_CHARACTER, null=True, blank=True)
 	delegate_name = models.CharField(max_length=255, null=True, blank=True)
 	position_paper = models.FileField(upload_to=get_position_paper_path, blank=True, null=True)
 
 	def __unicode__(self):
-		return "%s" % self.assignment.position
+		return "%s" % self.get_assignment_display()
 
 	def is_filled(self):
 		return self.delegate_name != ""
+
+	def is_valid(self):
+		return CommitteeAssignment.objects.filter(committee=self.committee, assignment=self.assignment).count() == 1
+	is_valid.boolean = True
 
 	def unassigned(self):
 		num = int(self.school.num_delegates) - CommitteeAssignment.objects.filter(school=self.school).count()
 		return "%s" % num
 
 	def display_assignment(self):
-		return "%s" % self.assignment.position
+		return "%s" % self.get_assignment_display()
 
 class ScholarshipIndividual(models.Model):
 	class Meta:
@@ -202,7 +207,7 @@ class Award(models.Model):
 class AwardAssignment(models.Model):
 	award = models.ForeignKey(Award, related_name='assignments')
 	committee = models.ForeignKey(Committee, related_name='awards')
-	position = models.ForeignKey(CountryCharacterMatrix, null=True, blank=True)
+	position = models.ForeignKey(CommitteeAssignment, null=True, blank=True)
 
 	def __unicode__(self):
 		return "%s in %s - %s" % (self.award, self.committee.name, self.position)

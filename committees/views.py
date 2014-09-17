@@ -160,7 +160,7 @@ def manage(request, slug):
 	if not committee.allow_manager(request.user):
 		raise PermissionDenied
 
-	assignments = committee.countrycharactermatrix_set.order_by('position')
+	assignments = committee.committeeassignment_set.order_by('assignment')
 
 	context = {
         'committee': committee,
@@ -189,7 +189,7 @@ def awards(request, slug):
         'committee': committee,
         'title': 'Awards dashboard for %s' % committee.name,
         'formset': formset,
-        'positions': committee.countrycharactermatrix_set.all(),
+        'positions': committee.committeeassignment_set.all(),
 	}
 
 	return render(request, 'committee_awards.html', context)

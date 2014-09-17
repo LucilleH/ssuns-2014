@@ -8,7 +8,7 @@ class CommitteeAdmin(admin.ModelAdmin):
 
 
 class CommitteeAssignmentAdmin(admin.ModelAdmin):
-	list_display = ('school', 'assignment','delegate_name', 'unassigned')
+	list_display = ('school', 'committee', 'assignment','delegate_name','is_valid', 'unassigned')
 	ordering = ['school', 'assignment',]
 
 class ScholarshipIndividualAdmin(admin.ModelAdmin):
@@ -37,7 +37,7 @@ class AwardAssignmentAdmin(admin.ModelAdmin):
 
 	def school(self, obj):
 		if obj.position:
-			return "%s" % obj.position.committeeassignment.school
+			return "%s" % obj.school
 		else:
 			return "(None)"
 	school.short_description = 'School'

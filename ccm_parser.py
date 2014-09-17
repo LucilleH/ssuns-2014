@@ -2,16 +2,11 @@ import csv
 import json
 
 
-assignment_list = []
+assignment_list = {'Countries':[], 'AMAZON':[],'DEGAULLE':[],'CAP':[],'FIFA':[],'RFE':[],'AD HOC':[],'IRAN':[],'IRAQ':[],'1984':[],'BNW':[],'Orange 1':[],'Orange 2':[],'Mughal':[],'UNSC':[]}
 ionic_list = []
 num_assignments = 0
 total_num_delegates = 0
-committees = json.load(open('committees/committees.json'))
 committees_ionic = {}
-
-for key in committees:
-	committees_ionic[key] = { "positions": [], "messages": [] }
-
 
 def create_assignment(committee_name, assignment):
 	#print "Creating assignment for %s, %s, %s" % (school_name, committee_name, assignment)
@@ -20,17 +15,19 @@ def create_assignment(committee_name, assignment):
 
 	# Only SOCHUM and WHS are double-delegate committees
 	# add the specific side to the assignment
-	committee_id = committees[committee_name]
-	print committee_name + " - " + assignment
-	assignment_list.append({
-		"pk": num_assignments,
-		"model": "committees.countrycharactermatrix", 
-		"fields": {
-			"position": assignment, 
-			"committee": committee_id,
-		}
-	})
-	committees_ionic[committee_name]["positions"].append(assignment)
+	assignment_list[committee_name].append(assignment)
+
+
+# Write out the assignments to some file
+def printassignment(assignment_list):
+	for key in assignment_list:
+		assignment_list[key].sort()
+		print '("' + key + '", ('
+		for item in assignment_list[key]:
+			print '		("' + item + '", u"' + item + '"), '
+		print "		)"
+		print "),"
+
 
 
 reader = csv.reader(open('tmp/ccm/ccm-country.csv', 'rU'))
@@ -38,15 +35,10 @@ reader = csv.reader(open('tmp/ccm/ccm-country.csv', 'rU'))
 
 for i, row in enumerate(reader):
 	# read header row and get all committees
-	if i == 0:
-		committee_header = row[1:]
-		print committee_header
-	else:
+	if i != 0:
 		country = row[0]
-		flag = row[1:]
-		for j in range(0, len(flag)):
-			if flag[j] == '1':
-				create_assignment(committee_header[j], country)
+		if country != "":
+			create_assignment('Countries', country)
 
 
 reader = csv.reader(open('tmp/ccm/ccm-character.csv', 'rU'))
@@ -61,9 +53,4 @@ for i, row in enumerate(reader):
 			if row[j]:
 				create_assignment(committee_header[j], row[j].strip('"').strip())
 
-
-# Write out the assignments to some file
-json.dump(assignment_list, open('tmp/ccm/matrix.json', 'w'),
-    indent=4)
-json.dump(committees_ionic, open('tmp/ccm/matrix_ionic.json', 'w'),
-	indent=4)
+printassignment(assignment_list)

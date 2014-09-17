@@ -35,12 +35,12 @@
     <tbody>
         {% for ass in assignments %}
         <tr>
-            <td>{{ ass.position }}</td>
-            <td>{{ ass.committeeassignment.delegate_name }}
+            <td>{{ ass.assignment }}</td>
+            <td>{{ ass.delegate_name }}
             </td>
-            <td>{{ ass.committeeassignment.school }}</td>
+            <td>{{ ass.school }}</td>
             <td>
-                {% if ass.committeeassignment.position_paper %}
+                {% if ass.position_paper %}
                 <strong><a href="/{{ ass.position_paper }}">Download</a></strong>
                 {% else %}
                 N/A

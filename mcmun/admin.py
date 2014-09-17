@@ -14,7 +14,7 @@ class RegisteredSchoolAdmin(admin.ModelAdmin):
 	list_display = ('school_name', 'email', 'is_approved', 'num_delegates', 'amount_owed', 'get_amount_paid')
 	list_filter = ('is_approved', 'use_online_payment', 'merchandise')
 	exclude = ('account',)
-	#inlines = [CommitteeInline]
+	inlines = [CommitteeInline]
 	readonly_fields = (
 		'school_name', 'first_time', 'how_you_hear', 'another_school',
 		'other_method', 'first_name', 'last_name',
