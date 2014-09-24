@@ -457,11 +457,28 @@ COUNTRIES_CHARACTER = (
 		("William B. (Bing) Gordon", u"William B. (Bing) Gordon"), 
 		)
 ),
+("Orange 1", (
+		("CEO of Ukrinform - state-run news agency", u"CEO of Ukrinform - state-run news agency"), 
+		("Chief of General Staff - Sergiy Kirichenko", u"Chief of General Staff - Sergiy Kirichenko"), 
+		("Foreign Intelligence Service of Ukraine - Oleh HryhorovychSyniansy", u"Foreign Intelligence Service of Ukraine - Oleh HryhorovychSyniansy"), 
+		("Gennadiy Bogolyubov", u"Gennadiy Bogolyubov"), 
+		("Military Advisor - Igor Nirieych", u"Military Advisor - Igor Nirieych"), 
+		("Military Advisor - Sergiy Kirichenko", u"Military Advisor - Sergiy Kirichenko"), 
+		("Minister of Defence - Anatoliy Hrytsenko", u"Minister of Defence - Anatoliy Hrytsenko"), 
+		("Minister of Economy - Arseniy Yatsenyuk", u"Minister of Economy - Arseniy Yatsenyuk"), 
+		("Minister of European Integration - Valeriy Khoroshkovskyi", u"Minister of European Integration - Valeriy Khoroshkovskyi"), 
+		("Minister of Foreign Affairs - Borys Tarasyuk", u"Minister of Foreign Affairs - Borys Tarasyuk"), 
+		("Minister of Internal Affairs - Yuriy Vitaliyovych Lutsenko", u"Minister of Internal Affairs - Yuriy Vitaliyovych Lutsenko"), 
+		("Minister of Justice - Yuriy Yekhanurov", u"Minister of Justice - Yuriy Yekhanurov"), 
+		("Minister of Social Policy - Vyacheslav Kyrylenko", u"Minister of Social Policy - Vyacheslav Kyrylenko"), 
+		("Prime Minister - Yulia Tymoshenko", u"Prime Minister - Yulia Tymoshenko"), 
+		)
+),
 ("Orange 2", (
 		("Anatoliy Zlenko - Foreign Affairs", u"Anatoliy Zlenko - Foreign Affairs"), 
-		("General Vitali Govrachych - Military Advisor (Ukrainian)", u"General Vitali Govrachych - Military Advisor (Ukrainian)"), 
+		("General Aleksandr Vitko - Military Advisor (Ukrainian)", u"General Aleksandr Vitko - Military Advisor (Ukrainian)"), 
 		("General Volodymyr Shkidchenko - Defence", u"General Volodymyr Shkidchenko - Defence"), 
-		("General Yuri Oriov - Military Advisor (Russian)", u"General Yuri Oriov - Military Advisor (Russian)"), 
+		("Sergei Lebedev - Military Advisor (Russian)", u"Sergei Lebedev - Military Advisor (Russian)"), 
 		("Ivan Kyrylenko - Deputy Prime Minister", u"Ivan Kyrylenko - Deputy Prime Minister"), 
 		("Mykola Azarov - Chairman of the Party", u"Mykola Azarov - Chairman of the Party"), 
 		("Olehsandr Lavrynobych - Justice", u"Olehsandr Lavrynobych - Justice"), 
@@ -471,7 +488,7 @@ COUNTRIES_CHARACTER = (
 		("Vadim Novinsky - Ukrainian Business Man", u"Vadim Novinsky - Ukrainian Business Man"), 
 		("Valery Khoroshkovsky - Economy and European Integrations", u"Valery Khoroshkovsky - Economy and European Integrations"), 
 		("Yevhen Petrovych - Political Advisor to Yanikovitch", u"Yevhen Petrovych - Political Advisor to Yanikovitch"), 
-		("Yury Smimov - Interior Affairs", u"Yury Smimov - Interior Affairs"), 
+		("Vasyl Dzharty - Interior Affairs", u"Vasyl Dzharty - Interior Affairs"), 
 		)
 ),
 ("RFE", (
@@ -506,23 +523,6 @@ COUNTRIES_CHARACTER = (
 		("Willam E. Griffith", u"Willam E. Griffith"), 
 		("Zbigniew Brzezinski", u"Zbigniew Brzezinski"), 
 		("Zoltan Szabo", u"Zoltan Szabo"), 
-		)
-),
-("Orange 1", (
-		("CEO of Ukrinform - state-run news agency", u"CEO of Ukrinform - state-run news agency"), 
-		("Chief of General Staff - Sergiy Kirichenko", u"Chief of General Staff - Sergiy Kirichenko"), 
-		("Foreign Intelligence Service of Ukraine - Oleh HryhorovychSyniansy", u"Foreign Intelligence Service of Ukraine - Oleh HryhorovychSyniansy"), 
-		("Gennadiy Bogolyubov", u"Gennadiy Bogolyubov"), 
-		("Military Advisor - Igor Nirieych", u"Military Advisor - Igor Nirieych"), 
-		("Military Advisor - Sergiy Kirichenko", u"Military Advisor - Sergiy Kirichenko"), 
-		("Minister of Defence - Anatoliy Hrytsenko", u"Minister of Defence - Anatoliy Hrytsenko"), 
-		("Minister of Economy - Arseniy Yatsenyuk", u"Minister of Economy - Arseniy Yatsenyuk"), 
-		("Minister of European Integration - Hukejk Ravigja", u"Minister of European Integration - Hukejk Ravigja"), 
-		("Minister of Foreign Affairs - Nasemu Ujisycka", u"Minister of Foreign Affairs - Nasemu Ujisycka"), 
-		("Minister of Internal Affairs - Yuriy Vitaliyovych Lutsenko", u"Minister of Internal Affairs - Yuriy Vitaliyovych Lutsenko"), 
-		("Minister of Justice - Yuriy Yekhanurov", u"Minister of Justice - Yuriy Yekhanurov"), 
-		("Minister of Social Policy - Vyacheslav Kyrylenko", u"Minister of Social Policy - Vyacheslav Kyrylenko"), 
-		("Prime Minister - Yulia Tymoshenko", u"Prime Minister - Yulia Tymoshenko"), 
 		)
 ),
 ("IRAQ", (
