@@ -33,6 +33,7 @@ class RegisteredSchoolAdmin(admin.ModelAdmin):
 		self.message_user(request, message)
 
 	re_invoice.short_description = "Send invoice to selected schools"
+	actions = ['re_invoice']
 
 
 class AddDelegatesAdmin(admin.ModelAdmin):

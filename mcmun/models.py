@@ -15,7 +15,7 @@ from committees.models import Committee, ScholarshipIndividual
 scholarshipschool_upload_path = 'scholarship/school/'
 
 def get_scholarshipschool_upload_path(instance, filename):
-	return os.path.join(scholarshipschool_upload_path, str(instance.id) + os.path.splitext(filename)[1])
+	return os.path.join(scholarshipschool_upload_path, str(instance.school) + os.path.splitext(filename)[1])
 
 
 # test
