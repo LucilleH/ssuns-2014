@@ -30,18 +30,18 @@ def printassignment(assignment_list):
 
 
 
-reader = csv.reader(open('tmp/ccm/ccm-country.csv', 'rU'))
+reader = csv.reader(open('tmp/ccm/UpdatedCCM.csv', 'rU'))
 
 
 for i, row in enumerate(reader):
 	# read header row and get all committees
-	if i != 0:
-		country = row[0]
-		if country != "":
-			create_assignment('Countries', country)
+	country = row[0]
+	print country
+	if country != "":
+		create_assignment('Countries', country)
 
 
-reader = csv.reader(open('tmp/ccm/ccm-character.csv', 'rU'))
+reader = csv.reader(open('tmp/ccm/UpdatedCCM_Characters.csv', 'rU'))
 
 for i, row in enumerate(reader):
 	# read header row and get all committees
@@ -51,6 +51,7 @@ for i, row in enumerate(reader):
 	else:
 		for j in range(0, len(row)):
 			if row[j]:
+				print row[j]
 				create_assignment(committee_header[j], row[j].strip('"').strip())
 
 printassignment(assignment_list)
