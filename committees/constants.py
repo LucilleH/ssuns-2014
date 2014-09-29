@@ -463,7 +463,7 @@ COUNTRIES_CHARACTER = (
 		("Foreign Intelligence Service of Ukraine - Oleh HryhorovychSyniansy", u"Foreign Intelligence Service of Ukraine - Oleh HryhorovychSyniansy"), 
 		("Gennadiy Bogolyubov", u"Gennadiy Bogolyubov"), 
 		("Military Advisor - Igor Nirieych", u"Military Advisor - Igor Nirieych"), 
-		("Military Advisor - Sergiy Kirichenko", u"Military Advisor - Sergiy Kirichenko"), 
+		("Military Advisor - Oleksandr Zatynayko", u"Military Advisor - Oleksandr Zatynayko"), 
 		("Minister of Defence - Anatoliy Hrytsenko", u"Minister of Defence - Anatoliy Hrytsenko"), 
 		("Minister of Economy - Arseniy Yatsenyuk", u"Minister of Economy - Arseniy Yatsenyuk"), 
 		("Minister of European Integration - Valeriy Khoroshkovskyi", u"Minister of European Integration - Valeriy Khoroshkovskyi"), 
