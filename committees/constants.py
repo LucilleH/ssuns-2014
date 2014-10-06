@@ -466,8 +466,8 @@ COUNTRIES_CHARACTER = (
 		("Military Advisor - Oleksandr Zatynayko", u"Military Advisor - Oleksandr Zatynayko"), 
 		("Minister of Defence - Anatoliy Hrytsenko", u"Minister of Defence - Anatoliy Hrytsenko"), 
 		("Minister of Economy - Arseniy Yatsenyuk", u"Minister of Economy - Arseniy Yatsenyuk"), 
-		("Minister of European Integration - Valeriy Khoroshkovskyi", u"Minister of European Integration - Valeriy Khoroshkovskyi"), 
-		("Minister of Foreign Affairs - Borys Tarasyuk", u"Minister of Foreign Affairs - Borys Tarasyuk"), 
+		("Minister of European Integration - Hukejk Ravigja", u"Minister of European Integration - Hukejk Ravigja"), 
+		("Minister of Foreign Affairs - Nasemu Ujisycka", u"Minister of Foreign Affairs - Nasemu Ujisycka"), 
 		("Minister of Internal Affairs - Yuriy Vitaliyovych Lutsenko", u"Minister of Internal Affairs - Yuriy Vitaliyovych Lutsenko"), 
 		("Minister of Justice - Yuriy Yekhanurov", u"Minister of Justice - Yuriy Yekhanurov"), 
 		("Minister of Social Policy - Vyacheslav Kyrylenko", u"Minister of Social Policy - Vyacheslav Kyrylenko"), 
@@ -476,7 +476,8 @@ COUNTRIES_CHARACTER = (
 ),
 ("Orange 2", (
 		("Anatoliy Zlenko - Foreign Affairs", u"Anatoliy Zlenko - Foreign Affairs"), 
-		("General Aleksandr Vitko - Military Advisor (Ukrainian)", u"General Aleksandr Vitko - Military Advisor (Ukrainian)"), 
+		("General Yuri Oriov - Military Advisor (Russian)", u"General Yuri Oriov - Military Advisor (Russian)"),
+		("General Vitali Govrachych - Military Advisor (Ukrainian)", u"General Vitali Govrachych - Military Advisor (Ukrainian)"), 
 		("General Volodymyr Shkidchenko - Defence", u"General Volodymyr Shkidchenko - Defence"), 
 		("Sergei Lebedev - Military Advisor (Russian)", u"Sergei Lebedev - Military Advisor (Russian)"), 
 		("Ivan Kyrylenko - Deputy Prime Minister", u"Ivan Kyrylenko - Deputy Prime Minister"), 
@@ -488,6 +489,7 @@ COUNTRIES_CHARACTER = (
 		("Vadim Novinsky - Ukrainian Business Man", u"Vadim Novinsky - Ukrainian Business Man"), 
 		("Valery Khoroshkovsky - Economy and European Integrations", u"Valery Khoroshkovsky - Economy and European Integrations"), 
 		("Yevhen Petrovych - Political Advisor to Yanikovitch", u"Yevhen Petrovych - Political Advisor to Yanikovitch"), 
+		("Yury Smimov - Interior Affairs", u"Yury Smimov - Interior Affairs"),
 		("Vasyl Dzharty - Interior Affairs", u"Vasyl Dzharty - Interior Affairs"), 
 		)
 ),
