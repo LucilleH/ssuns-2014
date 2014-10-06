@@ -15,13 +15,13 @@ class RegisteredSchoolAdmin(admin.ModelAdmin):
 	list_filter = ('is_approved', 'use_online_payment', 'merchandise')
 	exclude = ('account',)
 	inlines = [CommitteeInline]
-	readonly_fields = (
-		'school_name', 'first_time', 'how_you_hear', 'another_school',
-		'other_method', 'first_name', 'last_name',
-		'address', 'mail_address', 'city', 'province_state','postal_code',
-		'advisor_phone', 'fax', 'experience',
-		'merchandise', 'disclaimer',
-	)
+	#readonly_fields = (
+	#	'school_name', 'first_time', 'how_you_hear', 'another_school',
+	#	'other_method', 'first_name', 'last_name',
+	#	'address', 'mail_address', 'city', 'province_state','postal_code',
+	#	'advisor_phone', 'fax', 'experience',
+	#	'merchandise', 'disclaimer',
+	#)
 
 	def re_invoice(self, request, queryset):
 		for obj in queryset:
