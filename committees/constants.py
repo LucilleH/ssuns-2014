@@ -223,7 +223,7 @@ COUNTRIES_CHARACTER = (
 		("Palau", u"Palau"), 
 		("Palestine", u"Palestine"), 
 		("Panama", u"Panama"), 
-		("Papa New Guinea", u"Papa New Guinea"), 
+		("Papua New Guinea", u"Papua New Guinea"), 
 		("Paraguay", u"Paraguay"), 
 		("Partners in Population Development", u"Partners in Population Development"), 
 		("Peru", u"Peru"), 
