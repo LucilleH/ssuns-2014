@@ -118,7 +118,11 @@
 			{% comment %}Super silly but xhtml2pdf won't render it properly otherwise. Something to do with line-height perhaps?{% endcomment %}
 			<p>&nbsp;</p>
 			<div class="right-align">
-					Invoice #: {{ invoice_id }}
+					Invoice #: {{ invoice_id }}<br />
+					Business number: 889341327RC0001<br />
+					GST: 889341327RP0001<br />
+					ID Number: 1086649311IC<br />
+					QST: 1086649311TQ0001<br />
 					<br />
 					{% now "DATE_FORMAT" %}
 			</div>
