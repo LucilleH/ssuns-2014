@@ -10,11 +10,12 @@
 		<div class="item item-text-wrap"><center><b>{{ dais.name }}</b> - {{ dais.title }}</center> </div>
 		
 	</div>
+	<br />
 	{% endfor %}
 	{% if bg_uploaded %}
-		<h2>Background Guide</h2>
+		<h3>Background Guide</h3>
 		{% for bg in bgset %}
-			<a href="http://ssuns.org{{ STATIC_URL }}files/bg/{{ bg.bg_link }}.pdf" target="_blank">Download {{ bg.bg_name }}</a><br />
+			<a class="item button button-block button-light" href="http://ssuns.org{{ STATIC_URL }}files/bg/{{ bg.bg_link }}" target="_blank">Download {{ bg.bg_name }}</a><br />
 		{% endfor %}
 	{% endif %}
 
