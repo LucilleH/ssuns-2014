@@ -299,7 +299,7 @@ COUNTRIES_CHARACTER = (
 		("Togo", u"Togo"), 
 		("Tonga", u"Tonga"), 
 		("Trinidad and Tobago", u"Trinidad and Tobago"), 
-		("Tulavu", u"Tulavu"), 
+		("Tuvalu", u"Tuvalu"), 
 		("Tunisia", u"Tunisia"), 
 		("Turkey", u"Turkey"), 
 		("Turkish Confederation of Employer Associations", u"Turkish Confederation of Employer Associations"), 
