@@ -15,7 +15,7 @@
 	{% if bg_uploaded %}
 		<h3>Background Guide</h3>
 		{% for bg in bgset %}
-			<a class="item button button-block button-light" href="http://ssuns.org{{ STATIC_URL }}files/bg/{{ bg.bg_link }}" target="_blank">Download {{ bg.bg_name }}</a><br />
+			<a class="item button button-block button-light" href='http://ssuns.org{{ STATIC_URL }}files/bg/{{ bg.bg_link }}' target='_blank'>Download {{ bg.bg_name }}</a><br />
 		{% endfor %}
 	{% endif %}
 

@@ -10,10 +10,10 @@ position_paper_upload_path = 'position-papers/'
 scholarship_upload_path = 'scholarship/individual/'
 
 def get_position_paper_path(instance, filename):
-	return os.path.join(position_paper_upload_path, str(instance.id) + filename)
+	return os.path.join(position_paper_upload_path, str(instance.id) + os.path.splitext(filename)[1])
 
 def get_scholarship_upload_path(instance, filename):
-	return os.path.join(scholarship_upload_path, str(instance.id) + filename)
+	return os.path.join(scholarship_upload_path, str(instance.id) + os.path.splitext(filename)[1])
 
 
 

@@ -183,7 +183,7 @@ class RegisteredSchool(models.Model):
 
 
 class AddDelegates(models.Model):
-	school = models.ForeignKey(RegisteredSchool, null=False)
+	school = models.ForeignKey(RegisteredSchool, limit_choices_to=(Q(is_approved=True)), null=False)
 	add_num_delegates = models.IntegerField(default=1, choices=[(n, n) for n in xrange(MIN_NUM_DELEGATES, MAX_NUM_DELEGATES)], verbose_name="additional number of delegates")
 	add_mcgill_tours = models.IntegerField(default=0, choices=[(n, n) for n in xrange(MIN_NUM_DELEGATES, MAX_NUM_DELEGATES)], verbose_name="mcgill tours")
 	add_use_online_payment = models.BooleanField(choices=YESNO)
