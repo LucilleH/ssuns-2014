@@ -56,6 +56,9 @@ class AddDelegatesAdmin(admin.ModelAdmin):
 class ScholarshipSchoolAdmin(admin.ModelAdmin):
 	list_display = ('school', 'application_uploaded', 'is_international')
 
+class FacAdNameAdmin(admin.ModelAdmin):
+	list_display = ('school',)
+
 class MerchandiseAppAdmin(admin.ModelAdmin):
 	list_display = ('school', 'item', 'get_total_price', 'paid')
 	list_filter = ('paid',)
@@ -74,4 +77,5 @@ class MerchandiseAppAdmin(admin.ModelAdmin):
 admin.site.register(RegisteredSchool, RegisteredSchoolAdmin)
 admin.site.register(AddDelegates, AddDelegatesAdmin)
 admin.site.register(ScholarshipSchoolApp, ScholarshipSchoolAdmin)
+admin.site.register(FacAdNameApp, FacAdNameAdmin)
 admin.site.register(MerchandiseApp, MerchandiseAppAdmin)
