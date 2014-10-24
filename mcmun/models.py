@@ -261,6 +261,26 @@ class ScholarshipSchoolApp(models.Model):
 		return False
 	is_international.boolean = True
 
+
+class FacAdNameApp(models.Model):
+
+	school = models.OneToOneField(RegisteredSchool, primary_key=True)
+	name_1 = models.CharField(max_length=255, verbose_name="full name 1")
+	name_2 = models.CharField(max_length=255, verbose_name="full name 2")
+	name_3 = models.CharField(max_length=255, verbose_name="full name 3")
+	name_4 = models.CharField(max_length=255, verbose_name="full name 4")
+	name_5 = models.CharField(max_length=255, verbose_name="full name 5")
+	name_6 = models.CharField(max_length=255, verbose_name="full name 6")
+	name_7 = models.CharField(max_length=255, verbose_name="full name 7")
+	name_8 = models.CharField(max_length=255, verbose_name="full name 8")
+	name_9 = models.CharField(max_length=255, verbose_name="full name 9")
+	name_10 = models.CharField(max_length=255, verbose_name="full name 10")
+
+	def __unicode__(self):
+		return self.school.school_name
+
+
+
 class MerchandiseApp(models.Model):
 	class Meta:
 		ordering = ('school', 'item')

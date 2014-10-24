@@ -71,6 +71,10 @@ class ScholarshipIndividualForm(forms.ModelForm):
 	class Meta:
 		model = ScholarshipIndividual
 
+class FacAdNameForm(forms.ModelForm):
+	class Meta:
+		model = FacAdNameApp
+		exclude = ('school',)
 	
 class CommitteePrefsForm(forms.ModelForm):
 	class Meta:

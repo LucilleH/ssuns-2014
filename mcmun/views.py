@@ -68,6 +68,8 @@ def dashboard(request):
 	form = None
 	school = None
 	scholarshipfile = None
+	facadform = None
+	facadfile = None
 	addDelegateList = None
 	additional_pay = None
 
@@ -99,6 +101,23 @@ def dashboard(request):
 			form = ScholarshipSchoolForm()
 	else:
 		scholarshipfile = ScholarshipSchoolApp.objects.get(school=school)
+
+	if FacAdNameApp.objects.filter(school=school).count() == 0:
+		# show scholarship application form 
+		if request.method == 'POST':
+			facadform = FacAdNameForm(request.POST, request.FILES)
+
+			if facadform.is_valid():
+				facad_app = facadform.save(commit=False)
+				facad_app.school = school
+				facad_app.save()
+
+				facadform = None
+				facadfile = FacAdNameApp.objects.get(school=school)
+		else:
+			facadform = FacAdNameForm()
+	else:
+		facadfile = FacAdNameApp.objects.get(school=school)
 		
 	com_assignments = school.committeeassignment_set.all()
 	formset = CommitteeAssignmentFormSet(queryset=com_assignments, prefix='lol')
@@ -120,6 +139,8 @@ def dashboard(request):
 		'additional_pay': additional_pay,
 		'scholarshipform': form,
 		'scholarshipfile': scholarshipfile,
+		'facadform': facadform,
+		'facadfile': facadfile,
 		'merchandise': merchandise,
 		# Needed to show the title (as base.html expects the CMS view)
 		'page': {

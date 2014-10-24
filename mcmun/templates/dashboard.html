@@ -251,6 +251,39 @@ IMPORTANT: All position papers and scholarship applications must be submitted on
 </div>
 
 
+<div id="facadname">
+	<h2>Faculty Advisor Names</h2>
+	
+	{% if facadform %}
+		<p><strong>Please enter the names of faculty advisors/teachers for your delegation. Note that you can only submit it once.</strong></p>
+		
+		<form action="{% url 'dashboard' %}" method="post" enctype="multipart/form-data">
+			<fieldset class="hidden">
+				{% csrf_token %}
+			</fieldset>
+
+			{{ facadform.as_p }}
+			<fieldset class="submit">
+				<input type="submit" name="submit" value="Submit" />
+			</fieldset>
+		</form>
+	{% else %}
+		<p>Names: 
+		{{ facadfile.name_1 }}, 
+		{{ facadfile.name_2 }}, 
+		{{ facadfile.name_3 }}, 
+		{{ facadfile.name_4 }}, 
+		{{ facadfile.name_5 }}, 
+		{{ facadfile.name_6 }}, 
+		{{ facadfile.name_7 }}, 
+		{{ facadfile.name_8 }}, 
+		{{ facadfile.name_9 }}, 
+		{{ facadfile.name_10 }}</p>
+		<p>If you wish to resubmit, please contact <a href="mailto:schools@ssuns.org">schools@ssuns.org</a></p>
+	{% endif %}
+</div>
+
+
 <h2 id="dates">Important dates</h2>
 
 <table>
@@ -261,9 +294,9 @@ IMPORTANT: All position papers and scholarship applications must be submitted on
 	<tr><td><b>October 6th:</b> Deadline for 50% Refund of Delegate Fees</td></tr>
 	<tr><td><b>October 6th:</b> Regular Registration Closes and Waiting List Opens</td></tr>
 	<tr><td><b>October 6th:</b> Hotel Room Bookings at Hilton Bonaventure Due</td></tr>
-	<tr><td><b>October 20th:</b> Delegate name assignments Due</td></tr>
-	<tr><td><b>October 20th:</b> Position Paper Feedback Deadline</td></tr>
-	<tr><td><b>October 20th:</b> Scholarship Applications Deadline</td></tr>
+	<tr><td><b>October 24th:</b> Delegate name assignments Due</td></tr>
+	<tr><td><b>October 24th:</b> Position Paper Feedback Deadline</td></tr>
+	<tr><td><b>October 30th:</b> Scholarship Applications Deadline</td></tr>
 	<tr><td><b>November 5th:</b> Final Position Paper Deadline</td></tr>
 	<tr><td><b>November 6-9:</b> SSUNS 2014</td></tr>
 </table>
