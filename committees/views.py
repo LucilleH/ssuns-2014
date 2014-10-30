@@ -189,7 +189,7 @@ def awards(request, slug):
         'committee': committee,
         'title': 'Awards dashboard for %s' % committee.name,
         'formset': formset,
-        'positions': committee.committeeassignment_set.all(),
+        'positions': committee.committeeassignment_set.filter(committee=committee),
 	}
 
 	return render(request, 'committee_awards.html', context)
