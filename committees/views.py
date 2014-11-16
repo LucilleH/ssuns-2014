@@ -182,6 +182,7 @@ def awards(request, slug):
 		formset = AwardAssignmentFormset(request.POST, queryset=awards)
 		if formset.is_valid():
 			formset.save()
+#			return render(request, 'committee_awards_success.html', context)
 	else:
 		formset = AwardAssignmentFormset(queryset=awards)
 

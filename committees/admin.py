@@ -33,11 +33,11 @@ class CommitteeDaisAdmin(admin.ModelAdmin):
 
 class AwardAssignmentAdmin(admin.ModelAdmin):
 	list_display = ('position', 'award', 'committee', 'school')
-	list_per_page = 112  # show all the awards on one page
+	list_per_page = 150  # show all the awards on one page
 
 	def school(self, obj):
 		if obj.position:
-			return "%s" % obj.school
+			return "%s" % obj.position.school
 		else:
 			return "(None)"
 	school.short_description = 'School'

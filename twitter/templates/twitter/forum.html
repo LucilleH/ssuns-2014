@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+    <head>
+        <title>McMUN 2015 Global Leadership Forum :: Twitter feed</title>
+        <link href="http://fonts.googleapis.com/css?family=Cinzel|Open+Sans" rel="stylesheet" type="text/css" />
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    </head>
+    <style type="text/css">
+    body {
+        background: #111;
+        font-family: "Open Sans";
+        color: #eee;
+    }
+
+    #main {
+        width: 800px;
+        margin: 30px auto;
+        text-align: center;
+    }
+
+    h1, h2 {
+        font-family: Cinzel;
+        font-weight: normal;
+    }
+
+    h1 {
+        margin-bottom: 0;
+        font-size: 2.7em;
+    }
+
+    h2 {
+        margin-top: 0;
+        color: #ddd;
+    }
+
+    #tweets {
+        padding-top: 10px;
+    }
+
+    .tweet {
+        background: #333;
+        padding: 10px 20px;
+        margin: 5px 0;
+        font-size: 1.5em;
+    }
+
+    .tweet span {
+        padding: 5px 0;
+        display: block;
+        font-size: 0.7em;
+        color: #ccc;
+    }
+    </style>
+    <body>
+        <script type="text/javascript">
+        var updateTweets = function() {
+            $.get('/twitter/forum/json', function(data) {
+                var tweet;
+                var tweets = [];
+
+                for (var i = 0; i < data.length; i++) {
+                    tweet = data[i];
+                    tweets.push('<div class="tweet">' + tweet.text +
+                        '<span>' + tweet.timestamp + '</span></div>');
+                }
+
+                $('#tweets').html(tweets.join(''));
+
+            });
+
+            setTimeout(updateTweets, 1000);
+        };
+
+        $(document).ready(function() {
+            updateTweets();
+        });
+        </script>
+        <div id="main">
+            <img src="{{ STATIC_URL }}img/header.png" />
+            <h1>McMUN Global Leadership Forum</h1>
+            <h2>Twitter Feed</h2>
+
+            <div id="tweets">
+            </div>
+        </div>
+    </body>
+</html>

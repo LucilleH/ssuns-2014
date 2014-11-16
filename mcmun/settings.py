@@ -142,6 +142,7 @@ INSTALLED_APPS = (
     'committees',
     'cms',
     'signups',
+    'twitter',
 )
 
 # A sample logging configuration. The only tangible logging
